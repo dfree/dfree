@@ -439,9 +439,12 @@
 				if(anim_root.open){
 					anim_root.open(num);
 				}else{
-					$.delay(1, anim_root.open, [num]);
+					$.delay(1, openAnimHelper, [num]);
 				}
 			}
+		}
+		function openAnimHelper(num){
+			anim_root.open(num);
 		}
 		function playAnim(){
 			
