@@ -301,7 +301,7 @@
 		var menu_time = 0.6;
 
 		function newMenuHelper(num){
-			if(anim_root && anim_root.setNext){
+			if(anim_root && anim_root.setNext && anim_root.open){
 				newMenu(num);
 			}else{
 				wait_for_root = num;
@@ -609,7 +609,7 @@
 		var ticker = 0;
 		var mask_stepper = 4;
 		function tick_helper(){
-			if(wait_for_root != -1 && anim_root && anim_root.setNext){
+			if(wait_for_root != -1 && anim_root && anim_root.setNext && anim_root.open){
 				newMenu(wait_for_root);
 				wait_for_root = -1;
 			}
