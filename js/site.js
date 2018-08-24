@@ -436,7 +436,11 @@
 		function openAnim(num){
 			if(num == act){
 				masks["m_"+num].animated = true;
-				anim_root.open(num);
+				if(anim_root.open){
+					anim_root.open(num);
+				}else{
+					$.delay(1, anim_root.open, [num]);
+				}
 			}
 		}
 		function playAnim(){
