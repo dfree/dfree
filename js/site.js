@@ -62,7 +62,7 @@
 		masks = {};
 		mask_dot_area = 16;
 		mask_size = {width:1280, height:700};
-
+		//mask_size = {width:300, height:300};
 		menu_alpha_off = 0.3;
 
 		optimizedResize = (function() {
@@ -218,7 +218,7 @@
 		function resize(){
 			W = document.documentElement.clientWidth;
 			H = document.documentElement.clientHeight;
-			//TweenMax.set("body html", {width:W, height:H});
+			$.set("body", {width:W, height:H});
 			$.set("grid", {width:W, height:H});
 			if(W/H < 0.85){
 				act_size = "mobile";
