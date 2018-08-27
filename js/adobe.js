@@ -1,7 +1,10 @@
+
 (function () {
 	
-	var adobe = function(e) {
+	var adobe = function() {
 		var init, canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+		
+
 		var init = function() {
 			canvas = document.getElementById("canvas");
 			var comp=AdobeAn.getComposition("CA4233849EDF43388EB4FE3E317AF7AE");
@@ -17,7 +20,8 @@
 				exportRoot.toggle();
 			});*/
 
-		}();
+		};
+		
 		function handleFileLoad(evt, comp) {
 			var img=comp.getImages();	
 			if (evt && (evt.item.type == "image")) { img[evt.item.id] = evt.result; }	
@@ -43,9 +47,14 @@
 			}	    
 			AdobeAn.compositionLoaded(lib.properties.id);
 			fnStartAnimation();
-			registerAnimRoot(exportRoot);
+			registerAnimRoot(exportRoot, init);
 		}
+
+		var register = function(){
+			registerAnimInit(init);
+		}();
 	}();
+
 	/*if (window.addEventListener) // W3C standard
 	{
 	  window.addEventListener('load', adobe, false); // NB **not** 'onload'

@@ -7,7 +7,7 @@
 		menu_alpha_off, anim_max_size, anim_size, anim_x, anim_y, anim_delay,
 		master_mask, masks, mask_dot_area, text_width, mobile_footer_pos,
 		menu_num,
-		loaded_script_num;
+		loaded_script_num, anim_inited, anim_ready;
 
 		loaded_script_num = 0;
 
@@ -196,13 +196,14 @@
 
 		function intro(){
 			$.from("anim", 1, {alpha:0, ease:Sine.easeIn});
-			$.from("anim", 0.8, {delay:1.4, left:-($.id("anim")._gsTransform.x-W/2)-anim_size/2, top:-($.id("anim")._gsTransform.y-H/2)-anim_size/2, ease:Power1.easeInOut});
-
-			$.from("menu", 0.8, {delay:2, alpha:0, ease:Sine.easeOut});
-
-			$.from("name", 1, {delay:act_size =="desktop" ? 0.4 : 2, alpha:0, ease:Sine.easeIn});
-			$.from("title", 1, {delay:act_size =="desktop" ? 0.6 : 2.2, alpha:0, ease:Sine.easeIn});
-			
+			$.from("name", 1, {delay:0.4, alpha:0, ease:Sine.easeIn});
+			$.from("title", 1, {delay:0.6, alpha:0, ease:Sine.easeIn});
+			$.set("anim", {left:-($.id("anim")._gsTransform.x-W/2)-anim_size/2, top:-($.id("anim")._gsTransform.y-H/2)-anim_size/2});
+			$.set("menu", {alpha:0});
+		}
+		function intro_outro(){
+			$.tween("anim", 0.8, {delay:0.4, left:0, top:0, ease:Power1.easeInOut});
+			$.tween("menu", 0.8, {delay:0.8, alpha:1, ease:Sine.easeOut});
 		}
 
 		/*
@@ -337,19 +338,15 @@
 		var menu_time = 0.6;
 
 		function newMenuHelper(num){
-			if(anim_root && anim_root.setNext && anim_root.open){
-				newMenu(num);
-			}else{
-				wait_for_root = num;
-			}
+			anim_ready = true;
+			wait_for_root = num;
+			console.log("newMenuHelper "+num);
 		}
-
 		function newMenu(num){
+
 			anim_root.setNext(nextMenu);
 
 			if(num != act){
-				var move_delay = 0.6;
-
 				if(act >= 0){
 					$.tween("menu_"+act, menu_time, {alpha:menu_alpha_off});
 					if(!isMaskClosing()){
@@ -357,7 +354,8 @@
 						closeAnim(act);
 					}
 				}else{
-					openStage(num);
+					intro_outro();
+					$.delay(0.6, openStage, [num]);
 				}
 				var move_delay = 0;
 				if(act == 7){
@@ -648,10 +646,15 @@
 		var ticker = 0;
 		var mask_stepper = 4;
 		function tick_helper(){
+			if(anim_ready && !anim_inited && anim_init){
+				anim_inited = true;
+				anim_init();
+			}
 			if(wait_for_root != -1 && anim_root && anim_root.setNext && anim_root.open){
 				newMenu(wait_for_root);
 				wait_for_root = -1;
 			}
+
 			tick();
 			window.requestAnimationFrame(tick_helper);
 		}
