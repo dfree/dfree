@@ -218,7 +218,8 @@
 		function resize(){
 			W = document.documentElement.clientWidth;
 			H = document.documentElement.clientHeight;
-			$.set("body", {width:W, height:H});
+			TweenMax.set("body html", {width:W, height:H});
+
 			if(W/H < 0.85){
 				act_size = "mobile";
 			}else{
