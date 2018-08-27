@@ -392,12 +392,11 @@
 			if(!skip_fist_adjust){
 				console.log("here 2");
 				if(act_size == "mobile"){
-					console.log($.id("anim_move")._gsTransform.y+ "  "+font_ratio*mobile_adjust[act]);
 					if($.id("anim_move")._gsTransform.y != font_ratio*mobile_adjust[act]){
 						$.tween("anim_move", 1.2, {delay:0.033, y:font_ratio*mobile_adjust[act], ease:Quint.easeInOut});
 					}
 				}else{
-					if($.id("anim_move").gsTransform.y != 0){
+					if($.id("anim_move")._gsTransform.y != 0){
 						$.tween("anim_move", 1.2, {delay:0.033, y:0, ease:Quint.easeInOut});
 					}
 				}
