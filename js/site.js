@@ -19,7 +19,7 @@
 		font_sizes_max = {desktop: {sml:16, mm:18, mid:22, lrg:96}, mobile: {sml:9, mm:10, mid:14, lrg:45}};
 		font_sizes_min = {desktop: {sml:16, mm:18, mid:20, lrg:80}, mobile: {sml:9, mm:10, mid:14, lrg:45}};
 		
-		window_max = {desktop:1050, mobile:736};
+		window_max = {desktop:1050, mobile:436};
 		window_min = -120;
 
 		anim_max_size = 1050;
