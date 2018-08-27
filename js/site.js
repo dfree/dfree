@@ -15,11 +15,11 @@
 		act = -1;
 
 		font_ratio = 1;
-		font_sizes = {desktop: {sml:16, mm:18, mid:22, lrg:96}, mobile: {sml:9, mm:10, mid:14, lrg:45}};
+		font_sizes = {desktop: {sml:16, mm:18, mid:22, lrg:96}, mobile: {sml:9, mm:10, mid:14, lrg:45}}; // this is changing
 		font_sizes_max = {desktop: {sml:16, mm:18, mid:22, lrg:96}, mobile: {sml:9, mm:10, mid:14, lrg:45}};
 		font_sizes_min = {desktop: {sml:16, mm:18, mid:20, lrg:80}, mobile: {sml:9, mm:10, mid:14, lrg:45}};
 		
-		window_max = {desktop:930, mobile:0};
+		window_max = {desktop:1050, mobile:736};
 		window_min = -120;
 
 		anim_max_size = 1050;
@@ -176,17 +176,16 @@
 			H = document.documentElement.clientHeight;//window.innerHeight;//document.body.clientHeight ? document.body.clientHeight : window.innerHeight;
 
 
-			if(W/H < 0.75){
+			if(W/H < 0.85){
 				act_size = "mobile";
 			}else{
 				act_size = "desktop";
 			}
 			//mobile_width = 
 			//$.set("body", {width:W, height:H});
-			// TODO: Check aspect ratio and define act_size
 
 			var font_ratio = (H-window_min)/(window_max[act_size]-window_min);
-			font_ratio = font_ratio > 1 ? 1 : font_ratio < 0 ? 0 : font_ratio;
+			//font_ratio = font_ratio > 1 ? 1 : font_ratio < 0 ? 0 : font_ratio;
 
 			for(let platform in font_sizes){
 				for(let type in font_sizes[platform]){
