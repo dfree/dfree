@@ -19,7 +19,7 @@
 		font_sizes_max = {desktop: {sml:16, mm:18, mid:22, lrg:96}, mobile: {sml:9, mm:10, mid:14, lrg:45}};
 		font_sizes_min = {desktop: {sml:16, mm:18, mid:20, lrg:80}, mobile: {sml:9, mm:10, mid:14, lrg:45}};
 		
-		window_max = {desktop:1050, mobile:600};
+		window_max = {desktop:1050, mobile:580};
 		window_min = -120;
 
 		anim_max_size = 1050;
@@ -45,7 +45,7 @@
 				grid_size:{width:0.3789, height:0.0885},
 				grid_gap:{width:0.0463, height:0.0268},
 				anim_pos:{x:0, y:0.4545, width:1, height:0.3854, scale:1},//y:0.6145
-				menu:{x:0.9437, y:0.934}, //y:0.90
+				menu:{x:0.9437, y:0.9275}, //y:0.90
 				logo:{x:0.9437, y:0.92, width:120, height:30}
 			}
 		};
