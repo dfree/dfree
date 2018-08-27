@@ -49,6 +49,11 @@
 				logo:{x:0.9437, y:0.92, width:120, height:30}
 			}
 		};
+
+		var mobile_adjust = [false, true, true, true, true, true, true, false];
+		var mobile_slide;
+		var mobile_slide_max = 100;
+
 		mobile_footer_pos = 0.836;
 
 		masks = {};
@@ -198,6 +203,11 @@
 			anim_size = anim_size*grid[act_size].anim_pos.scale > anim_max_size ? anim_max_size : anim_size*grid[act_size].anim_pos.scale;
 			anim_x = grid[act_size].anim_pos.x*W+grid[act_size].anim_pos.width*W/2-anim_size/2;
 			anim_y = grid[act_size].anim_pos.y*H+grid[act_size].anim_pos.height*H/2-anim_size/2;
+
+			if(act_size == "mobile"){
+
+			}
+
 			$.set("anim", {	zIndex:10,
 							x:anim_x, 
 							y:anim_y
