@@ -206,9 +206,9 @@
 			$.set("menu", {alpha:0});
 		}
 		function intro_outro(){
-			$.tween("anim", 0.8, {delay:0.4, left:0, top:0, ease:Power1.easeInOut});
-			$.tween("anim_move", 0.8, {delay:0.4+0.06, y:font_ratio*mobile_adjust[act], ease:Power1.easeInOut});
-			$.tween("menu", 0.8, {delay:0.8, alpha:1, ease:Sine.easeOut});
+			$.tween("anim", 0.8, {delay:0.6, left:0, top:0, ease:Power1.easeInOut});
+			$.tween("anim_move", 0.8, {delay:0.6+0.06, y:font_ratio*mobile_adjust[act], ease:Power1.easeInOut});
+			$.tween("menu", 0.8, {delay:1, alpha:1, ease:Sine.easeOut});
 
 		}
 
