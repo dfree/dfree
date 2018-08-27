@@ -81,8 +81,6 @@
 			resize();
 			intro();
 			$.delay(1.5, newMenuHelper, [0]);
-			/*//$.delay(1.5, newMenu, [4]);
-			$.delay(1, newMenu, [4]);*/
 
 			optimizedResize.add(resize);
 			$.set("cover", {autoAlpha:0});
@@ -101,7 +99,7 @@
 			openInNewTab("https://www.linkedin.com/in/davidszucs/");
 		}
 		function gotoMail(){
-			openInNewTab("mailto:d@dfree.co.uk");
+			openInNewTab("mailto:d"+String.fromCharCode(64)+"dfree.co.uk");
 		}
 		function openInNewTab(url) {
 		 	window.open(url, '_blank');		
@@ -172,20 +170,15 @@
 
 
 		function resize(){
-			W = document.documentElement.clientWidth;//window.innerWidth;//document.body.clientWidth ? document.body.clientWidth : window.innerWidth;
-			H = document.documentElement.clientHeight;//window.innerHeight;//document.body.clientHeight ? document.body.clientHeight : window.innerHeight;
-
+			W = document.documentElement.clientWidth;
+			H = document.documentElement.clientHeight;
 
 			if(W/H < 0.85){
 				act_size = "mobile";
 			}else{
 				act_size = "desktop";
 			}
-			//mobile_width = 
-			//$.set("body", {width:W, height:H});
-
 			var font_ratio = (H-window_min)/(window_max[act_size]-window_min);
-			//font_ratio = font_ratio > 1 ? 1 : font_ratio < 0 ? 0 : font_ratio;
 
 			for(let platform in font_sizes){
 				for(let type in font_sizes[platform]){
@@ -209,9 +202,7 @@
 							x:anim_x, 
 							y:anim_y
 						});
-			
-			//text_width = W-anim_width;
-
+		
 			$.set("canvas", {width:anim_size, height:anim_size});
 
 			var row;
@@ -227,7 +218,6 @@
 					_y = act_size == "mobile" && r == 4 ? mobile_footer_pos*H : _y;
 					$.set(row[e], {y:_y, 
 								height:_height
-								/*background:"rgba(255, 255, 255, 0.2)"*/
 					});
 				}
 			}
@@ -283,8 +273,7 @@
 			$.set("menu", {zIndex:10, width:grid[act_size].menu.x*W, y:grid[act_size].menu.y*H, fontSize:font_sizes[act_size].mm*font_ratio});
 			$.set("logo", {zIndex:10, x:grid[act_size].logo.x*W, y:grid[act_size].logo.y*H});
 			$.set("logo_img", {alpha:0.3, x:-grid[act_size].logo.width*font_ratio, y:-grid[act_size].logo.height*font_ratio, width:grid[act_size].logo.width*font_ratio, height:grid[act_size].logo.height*font_ratio});
-			//console.log("check "+grid[act_size].grid_start.y*H);
-			console.log("resized "+W+" "+H);
+			//console.log("resized "+W+" "+H);
 
 
 		}
@@ -320,8 +309,6 @@
 						closeAnim(act);
 					}
 				}else{
-					//$.delay(1, openStage, [num]);
-
 					openStage(num);
 				}
 				var move_delay = 0;
@@ -330,7 +317,7 @@
 				}
 
 				act = num;
-				console.log("menu_"+act);
+				//console.log("menu_"+act);
 				//anim_root.move(act);
 				$.tween("menu_"+act, 0, {delay:move_delay, onComplete:moveHelper, onCompleteParams:[act]});
 				$.tween("menu_"+act, menu_time, {alpha:1});
@@ -358,7 +345,7 @@
 			next_allowed = true;
 		}
 		function nextMenu(swipe){
-			console.log("next menu "+act+" targ: ");
+			//console.log("next menu "+act+" targ: ");
 			if(next_allowed){
 				if(act < menu_num-1){
 					next_allowed = false;
@@ -418,7 +405,7 @@
 						var d = anim_delay;
 						if(closing_anim == 7){
 							d = 1;
-							console.log("LONGG DELAY");
+							//console.log("LONGG DELAY");
 						}
 						$.delay(d, openAnim, [num]);
 					}
@@ -454,14 +441,12 @@
 		function closeAnim(num){
 
 			if(masks["m_"+num].animated){
-				console.log("close anim "+num);
+				//console.log("close anim "+num);
 				masks["m_"+num].animated = false;
 				anim_root.close(num);
 				closing_anim = num;
 			}
 		}
-
-
 
 
 		/*
@@ -560,7 +545,7 @@
 
 		function openMask(num, from){
 
-			console.log("openMask "+num);
+			//console.log("openMask "+num);
 
 			$.set(masks["m_"+num].wrap, {x:0, y:0});
 			masks["m_"+num].from = from;
@@ -572,7 +557,7 @@
 			
 		}
 		function positionMask(m){
-			console.log(m);
+			//console.log(m);
 			switch(m.from){
 				case "top":
 					$.set(m.img, {y:H, transformOrigin:"0 0"});
@@ -729,7 +714,7 @@
 			date = new Date();
 			var new_time = date.getTime();
 			var del = new_time-touch_start_time;
-			console.log("del "+del);
+			//console.log("del "+del);
 			if(del < 400){
 			    if ( ! xDown || ! yDown ) {
 			        return;
@@ -739,20 +724,11 @@
 
 			    if ( Math.abs( xDiff ) > Math.abs( yDiff ) &&  Math.abs( xDiff ) > W*0.2) {
 			        if ( xDiff > 0 ) {
-			            /* left swipe */ 
 			            nextMenu("left");
 			        } else {
-			            /* right swipe */
 			            prevMenu("right");
 			        }                       
-			    } else {
-			        if ( yDiff > 0 ) {
-			            /* up swipe */ 
-			        } else { 
-			            /* down swipe */
-			        }                                                                 
 			    }
-			    /* reset values */
 			    xDown = null;
 			    yDown = null;   
 		    }                                          

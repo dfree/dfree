@@ -4806,7 +4806,7 @@ p.nominalBounds = new cjs.Rectangle(-28.6,-78.5,28.7,78.5);
 			//this.gotoAndPlay("open");
 			//this.left.gotoAndPlay("open");
 			
-			console.log("start welcome");
+			//console.log("start welcome");
 			
 			stopped = false;
 			
@@ -4832,8 +4832,8 @@ p.nominalBounds = new cjs.Rectangle(-28.6,-78.5,28.7,78.5);
 			TweenMax.to(this.welcome_2, 0, {delay:second_delay, y:-target_y, ease:Power2.easeInOut});
 			TweenMax.to(this.arrow_2, 0, {delay:second_delay-0.6, alpha:1, onComplete:this.startArrow.bind(this), onCompleteParams:[2]});
 			
-			console.log("start welcome:");
-			console.log(this.welcome_2);
+			//console.log("start welcome:");
+			//console.log(this.welcome_2);
 			
 			createjs.Ticker.addEventListener("tick", handleTick);
 		}
@@ -4850,7 +4850,7 @@ p.nominalBounds = new cjs.Rectangle(-28.6,-78.5,28.7,78.5);
 			close_time = this.parent.close_time;
 			half_time = this.parent.half_time;
 			//this.gotoAndPlay("close");
-			console.log("stop welcome");
+			//console.log("stop welcome");
 			this.stop();
 			this.parent.recur(this, true);
 			TweenMax.to(this, half_time, {alpha:0, ease:Power2.easeInOut});
@@ -4864,7 +4864,7 @@ p.nominalBounds = new cjs.Rectangle(-28.6,-78.5,28.7,78.5);
 		
 		function handleTick(event) { 
 			if(!stopped){
-				console.log("tick");
+				//console.log("tick");
 				if(Math.random() < 0.1){
 					_this.arrow_1.x = _this.arrow_1.x+rand(_this.rand_pos.x);
 					if(_this.arrow_1.x < _this.arrow_1_pos.x-a_gap || _this.arrow_1.x > _this.arrow_1_pos.x+a_gap){
@@ -5365,7 +5365,7 @@ p.nominalBounds = new cjs.Rectangle(-28.6,-78.5,28.7,78.5);
 		}
 		this.stopBurst = function(){
 			fire = false;
-			console.log("stopBurst()");
+			//console.log("stopBurst()");
 			this.glow.alpha = 0;
 			this.glow.visible = false;
 		}
@@ -5577,7 +5577,7 @@ p.nominalBounds = new cjs.Rectangle(-37.1,0,74.2,102.5);
 				this["flame_"+m].alpha = 0;
 				this.burst(m, Math.random()*0.3);
 			}
-			console.log("I IN T FLAMES");
+			//console.log("I IN T FLAMES");
 		};
 		this.burst = function(num, del){
 			if(this.parent && this.parent.parent && this.parent.parent.on_fire){
@@ -5592,7 +5592,7 @@ p.nominalBounds = new cjs.Rectangle(-37.1,0,74.2,102.5);
 				TweenMax.to(_this["flame_"+num], b2, {delay:del+b1, alpha:0, ease:Power4.easeIn});
 				TweenMax.to(_this["flame_"+num], b2+b1, {delay:del, scaleX:target_scal, scaleY:target_scal*2, y:30,ease:Power4.easeOut, onComplete:_this.burst.bind(_this), onCompleteParams:[num, 0]});
 				
-				console.log("burst");
+				//console.log("burst");
 			}		
 		}
 	}
@@ -9269,7 +9269,7 @@ p.nominalBounds = new cjs.Rectangle(-11,-11,22,22);
 		
 		// called from the endframe of closed ending
 		this.closed = function (){
-			console.log("game over");
+			//console.log("game over");
 			this.parent.switchBack();
 		}
 	}
@@ -10092,7 +10092,7 @@ p.nominalBounds = new cjs.Rectangle(-227.6,-44.2,442,106.5);
 			height:270
 		}
 		this.closed = function (){
-			console.log("cont over");
+			//console.log("cont over");
 			this.parent.switchBack();
 			
 		}
@@ -11200,7 +11200,7 @@ p.nominalBounds = new cjs.Rectangle(-38.8,-103.3,72.1,113.3);
 		}
 		this.stopBurst = function(){
 			fire = false;
-			console.log("stopBurst()");
+			//console.log("stopBurst()");
 		}
 		function sendBurst(){
 			self_kill++;
@@ -11396,7 +11396,7 @@ p.nominalBounds = new cjs.Rectangle(-27.9,-171.4,97.9,182.4);
 		}
 		this.close = function () {
 			this.is_open = false;
-			console.log("close_4");
+			//console.log("close_4");
 			close_time = this.parent.close_time;
 			half_time = this.parent.half_time;
 			this.stop();
@@ -11543,7 +11543,7 @@ p.nominalBounds = new cjs.Rectangle(-27.9,-171.4,97.9,182.4);
 				if(ready_to_anim){
 					robots[0].active = true;
 					TweenMax.to(robots[0].head, robo_time, {x:robots[0].start.x, y:robots[0].start.y, rotation:robots[0].start.rotation, ease:Power2.easeInOut});
-					console.log("_this.startAnim()");
+					//console.log("_this.startAnim()");
 					if(this.is_open){
 						this.startAnim();
 					}
@@ -11607,7 +11607,7 @@ p.nominalBounds = new cjs.Rectangle(-27.9,-171.4,97.9,182.4);
 		
 		/*this.update = function(){
 			if (robot) {
-				console.log("_this.robot_arm "+_this.robot_arm);
+				//console.log("_this.robot_arm "+_this.robot_arm);
 				_this.resolveRotations(_this.robot_base, _this.robot_arm, _this.robot_base, _this.robot_arm.graphic);
 			}
 		}
@@ -11762,7 +11762,7 @@ p.nominalBounds = new cjs.Rectangle(-27.9,-171.4,97.9,182.4);
 		
 		this.goto_nomanland = function(){
 			this.game_anim.gotoAndStop("nomanland");
-			console.log("nomanland");
+			//console.log("nomanland");
 		}
 		
 		this.close = function(){
@@ -11775,7 +11775,7 @@ p.nominalBounds = new cjs.Rectangle(-27.9,-171.4,97.9,182.4);
 				
 				this.parent.recur(this);
 				
-				console.log("this.vr "+this.vr);
+				//console.log("this.vr "+this.vr);
 				if(this.vr){
 					closer = this.game_anim.game_close_vr;
 				}else{
@@ -11789,12 +11789,12 @@ p.nominalBounds = new cjs.Rectangle(-27.9,-171.4,97.9,182.4);
 				TweenMax.to(this.game_anim.cross, 1.2, {x:0, y:0, rotation:0, ease:Quint.easeInOut});
 				TweenMax.to(this.game_anim.game_close_cross, 1.2, {x:0, y:0, rotation:0, ease:Quint.easeInOut});
 			}
-			console.log("this.close vr:"+this.vr+" "+this.endgame+" "+this.no_end_call);
+			//console.log("this.close vr:"+this.vr+" "+this.endgame+" "+this.no_end_call);
 		}
 		
 		/// called from this.game_anim.gotoAndStop("nomanland");
 		this.finish = function(){
-			console.log("finish");
+			//console.log("finish");
 			closer.gotoAndPlay("start");
 		}
 		
@@ -11881,7 +11881,7 @@ p.nominalBounds = new cjs.Rectangle(-30.1,-29.6,61,61.5);
 			close_time = this.parent.close_time;
 			half_time = this.parent.half_time;
 			//this.gotoAndPlay("close");
-			console.log("stop design");
+			//console.log("stop design");
 			this.stop();
 			this.parent.recur(this, true);
 			TweenMax.to(this.palette_1, close_time, {delay:0.1, rotation:0, ease:Power2.easeIn});
@@ -12346,7 +12346,7 @@ p.nominalBounds = new cjs.Rectangle(-43.9,-154.8,87.9,154.9);
 		}
 		this.stopBurst = function(){
 			fire = false;
-			console.log("stopBurst()");
+			//console.log("stopBurst()");
 		}
 		function sendBurst(){
 			
@@ -12550,7 +12550,7 @@ p.nominalBounds = new cjs.Rectangle(-134.1,-14.7,134.1,29.5);
 			close_time = this.parent.close_time;
 			half_time = this.parent.half_time;
 			//this.gotoAndPlay("close");
-			console.log("stop");
+			//console.log("stop");
 			this.stop();
 			this.parent.recur(this);
 			if(this.arm_1){
@@ -12762,7 +12762,7 @@ p.nominalBounds = new cjs.Rectangle(-17.1,-17.1,34.2,34.2);
 		}
 		this.close = function () {
 			this.is_open = false;
-			console.log("close_4");
+			//console.log("close_4");
 			close_time = this.parent.close_time;
 			half_time = this.parent.half_time;
 			this.stop();
@@ -12834,7 +12834,7 @@ p.nominalBounds = new cjs.Rectangle(-17.1,-17.1,34.2,34.2);
 			}
 			
 			this.resolveMobiles(true);
-			console.log("mobiles.inited");
+			//console.log("mobiles.inited");
 		}
 		
 		
@@ -12878,10 +12878,10 @@ p.nominalBounds = new cjs.Rectangle(-17.1,-17.1,34.2,34.2);
 		
 		this.stage3 = function(){
 			var del = 0.7;
-			console.log("stage_3");
+			//console.log("stage_3");
 			for(var i = 0; i < mobiles.length; i++){
 				var _i = i == 1 ? 2 : i == 2 ? 1 : i;
-				console.log(_i);
+				//console.log(_i);
 				TweenMax.to(mobiles[_i].obj, 1.3, {delay:del*i, rotation:mobiles[_i].start.rotation, ease:i != 3 ? Back.easeIn : Power2.easeInOut});
 				TweenMax.to(mobiles[_i].obj, 1.1, {delay:del*i+0.4, x:mobiles[_i].start.x, y:mobiles[_i].start.y, ease:Power2.easeInOut, onComplete:_this.disable.bind(_this), onCompleteParams:[_i]});
 			}
@@ -13111,7 +13111,7 @@ p.nominalBounds = new cjs.Rectangle(-17.1,-17.1,34.2,34.2);
 			this.parent.recur(this, true);
 			this.stop();
 			
-			console.log("CLOSE");
+			//console.log("CLOSE");
 			switch(status){
 				
 				case "scanner":
@@ -13148,7 +13148,7 @@ p.nominalBounds = new cjs.Rectangle(-17.1,-17.1,34.2,34.2);
 		}
 		
 		this.regMask = function (m) {
-			//console.log("maskee "+m);
+			////console.log("maskee "+m);
 		}
 		this.createMask = function () {
 			maskee = new createjs.Shape();
@@ -13431,7 +13431,7 @@ p.nominalBounds = new cjs.Rectangle(-17.1,-17.1,34.2,34.2);
 		}
 		
 		this.reset = function(){
-			console.log("reset");
+			//console.log("reset");
 			//_this.robot_arm.stopBurst();
 			this.resetBooleans();
 			this.mona_holder_top.y = -70.5;
@@ -13896,7 +13896,7 @@ p.nominalBounds = new cjs.Rectangle(-493.1,-447.3,985.2,641.5);
 			rotated = false;
 			bg_pos.bottom.ease = Quint.easeInOut;
 			TweenMax.to(this.swiss.bg, 1.2, bg_pos.bottom);
-			console.log("rotateBgBottom: exception "+exception+" == act "+act);
+			//console.log("rotateBgBottom: exception "+exception+" == act "+act);
 			if(!exception || exception == act){
 				this.swiss.bg.gotoAndPlay("bottom");
 			}
@@ -13979,14 +13979,14 @@ p.nominalBounds = new cjs.Rectangle(-493.1,-447.3,985.2,641.5);
 		
 		this.setNext = function(func){
 			next_callback = func;
-			console.log("Callback set");
+			//console.log("Callback set");
 		}
 		
 		this.nextMenu = function(e){
 			if(next_callback){
 				next_callback();
 			}
-			console.log("NEXT!!!");
+			//console.log("NEXT!!!");
 		}
 	}
 	this.frame_1 = function() {
