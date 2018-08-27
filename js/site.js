@@ -132,7 +132,6 @@
 		}
 
 		function scriptReady(){
-			console.log("wtf");
 			loaded_script_num++;
 			if(loaded_script_num == 1){
 				loadScript("anim/anim.js?1530707933021", scriptReady);
@@ -343,11 +342,11 @@
 		function newMenuHelper(num){
 			anim_ready = true;
 			wait_for_root = num;
-			console.log("newMenuHelper "+num);
 		}
 		function newMenu(num){
 
 			anim_root.setNext(nextMenu);
+			var move_delay = 0;
 
 			if(num != act){
 				if(act >= 0){
@@ -359,8 +358,9 @@
 				}else{
 					intro_outro();
 					$.delay(0.6, openStage, [num]);
+					move_delay = 0.62;
 				}
-				var move_delay = 0;
+				
 				if(act == 7){
 					move_delay = 0.8;
 				}

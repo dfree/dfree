@@ -13148,7 +13148,7 @@ p.nominalBounds = new cjs.Rectangle(-17.1,-17.1,34.2,34.2);
 		}
 		
 		this.regMask = function (m) {
-			////console.log("maskee "+m);
+			//console.log("maskee "+m);
 		}
 		this.createMask = function () {
 			maskee = new createjs.Shape();
@@ -13811,7 +13811,7 @@ p.nominalBounds = new cjs.Rectangle(-493.1,-447.3,985.2,641.5);
 		var stage_1_y = 747;
 		var stage_pos = [{
 			x: 525,
-			y: 582,
+			y: 564,
 			rotation: 0
 		}, {
 			x: 525,
@@ -14033,23 +14033,23 @@ lib.properties = {
 	color: "#A21212",
 	opacity: 1.00,
 	manifest: [
-		{src:"img/banners.jpg?1535375390994", id:"banners"},
-		{src:"img/landscape.png?1535375390994", id:"landscape"},
-		{src:"img/letter.jpg?1535375390994", id:"letter"},
-		{src:"img/letter_2.jpg?1535375390994", id:"letter_2"},
-		{src:"img/letter_3.jpg?1535375390994", id:"letter_3"},
-		{src:"img/map.jpg?1535375390994", id:"map"},
-		{src:"img/mobile_bg.png?1535375390994", id:"mobile_bg"},
-		{src:"img/mobile_cover.jpg?1535375390994", id:"mobile_cover"},
-		{src:"img/mobile_cover_vasarelly.jpg?1535375390994", id:"mobile_cover_vasarelly"},
-		{src:"img/monalisa.jpg?1535375390994", id:"monalisa"},
-		{src:"img/monalisa_scetch.jpg?1535375390994", id:"monalisa_scetch"},
-		{src:"img/monalisa_wink.jpg?1535375390994", id:"monalisa_wink"},
-		{src:"img/proto_fire_0.png?1535375390994", id:"proto_fire_0"},
-		{src:"img/proto_fire_1.png?1535375390994", id:"proto_fire_1"},
-		{src:"img/proto_fire_2.png?1535375390994", id:"proto_fire_2"},
-		{src:"img/proto_fire_3.png?1535375390994", id:"proto_fire_3"},
-		{src:"img/proto_fire_4.png?1535375390994", id:"proto_fire_4"}
+		{src:"img/banners.jpg?1535393505018", id:"banners"},
+		{src:"img/landscape.png?1535393505018", id:"landscape"},
+		{src:"img/letter.jpg?1535393505018", id:"letter"},
+		{src:"img/letter_2.jpg?1535393505018", id:"letter_2"},
+		{src:"img/letter_3.jpg?1535393505018", id:"letter_3"},
+		{src:"img/map.jpg?1535393505018", id:"map"},
+		{src:"img/mobile_bg.png?1535393505018", id:"mobile_bg"},
+		{src:"img/mobile_cover.jpg?1535393505018", id:"mobile_cover"},
+		{src:"img/mobile_cover_vasarelly.jpg?1535393505018", id:"mobile_cover_vasarelly"},
+		{src:"img/monalisa.jpg?1535393505018", id:"monalisa"},
+		{src:"img/monalisa_scetch.jpg?1535393505018", id:"monalisa_scetch"},
+		{src:"img/monalisa_wink.jpg?1535393505018", id:"monalisa_wink"},
+		{src:"img/proto_fire_0.png?1535393505018", id:"proto_fire_0"},
+		{src:"img/proto_fire_1.png?1535393505018", id:"proto_fire_1"},
+		{src:"img/proto_fire_2.png?1535393505018", id:"proto_fire_2"},
+		{src:"img/proto_fire_3.png?1535393505018", id:"proto_fire_3"},
+		{src:"img/proto_fire_4.png?1535393505018", id:"proto_fire_4"}
 	],
 	preloads: []
 };
