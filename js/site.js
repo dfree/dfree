@@ -238,7 +238,6 @@
 			}
 
 			if(act_size == "mobile"){
-				console.log("here");
 				$.set("anim_move", {y:font_ratio*mobile_adjust[act]});
 			}else{
 				$.set("anim_move", {y:0});
@@ -390,7 +389,6 @@
 		function moveHelper(num){
 			anim_root.move(act);
 			if(!skip_fist_adjust){
-				console.log("here 2");
 				if(act_size == "mobile"){
 					if($.id("anim_move")._gsTransform.y != font_ratio*mobile_adjust[act]){
 						$.tween("anim_move", 1.2, {delay:0.033, y:font_ratio*mobile_adjust[act], ease:Quint.easeInOut});
