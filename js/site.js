@@ -106,7 +106,7 @@
 			$.id("linkedin").addEventListener('click', gotoLink, false);
 
 			loadScript("src/create.js", scriptReady);
-			loadScript("anim/anim.js?1530707933021", scriptReady);
+			
 		}();
 		function loadScript(url, callback){
 
@@ -134,6 +134,9 @@
 		function scriptReady(){
 			console.log("wtf");
 			loaded_script_num++;
+			if(loaded_script_num == 1){
+				loadScript("anim/anim.js?1530707933021", scriptReady);
+			}
 			if(loaded_script_num == 2){
 				loadScript("js/adobe.js", scriptReady);
 			}
