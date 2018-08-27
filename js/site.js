@@ -53,8 +53,8 @@
 				logo:{x:0.9437, y:0.92, width:120, height:30}
 			}
 		};
-		var mobile_mid = -20;
-		var mobile_adjust = [0, mobile_mid, mobile_mid, mobile_mid, mobile_mid, mobile_mid, mobile_mid, 0];
+		var mobile_mid = -24;
+		var mobile_adjust = [10, mobile_mid, mobile_mid, mobile_mid, mobile_mid, mobile_mid, mobile_mid, 0];
 		var mobile_slide;
 		var mobile_slide_max = 100;
 
@@ -94,6 +94,7 @@
 			var ctx = $.id("canvas").getContext('2d');
 			ctx.drawImage($.id("anim_cover"),0,0);
 			$.set("anim_cover", {autoAlpha:0});
+			$.set("anim_move", {x:0, y:0});
 			optimizedResize.add(resize);
 			$.set("cover", {autoAlpha:0});
 
@@ -206,7 +207,9 @@
 		}
 		function intro_outro(){
 			$.tween("anim", 0.8, {delay:0.4, left:0, top:0, ease:Power1.easeInOut});
+			$.tween("anim_move", 0.8, {delay:0.4+0.06, y:font_ratio*mobile_adjust[act], ease:Power1.easeInOut});
 			$.tween("menu", 0.8, {delay:0.8, alpha:1, ease:Sine.easeOut});
+
 		}
 
 		/*
@@ -235,9 +238,10 @@
 			}
 
 			if(act_size == "mobile"){
-				$.set("anim", {top:font_ratio*mobile_adjust[act]});
+				console.log("here");
+				$.set("anim_move", {y:font_ratio*mobile_adjust[act]});
 			}else{
-				$.set("anim", {top:0});
+				$.set("anim_move", {y:0});
 			}
 			
 
@@ -386,11 +390,16 @@
 		function moveHelper(num){
 			anim_root.move(act);
 			if(!skip_fist_adjust){
-				
+				console.log("here 2");
 				if(act_size == "mobile"){
-					$.tween("anim", 1.2, {top:font_ratio*mobile_adjust[act], ease:Quint.easeInOut});
+					console.log($.id("anim_move")._gsTransform.y+ "  "+font_ratio*mobile_adjust[act]);
+					if($.id("anim_move")._gsTransform.y != font_ratio*mobile_adjust[act]){
+						$.tween("anim_move", 1.2, {delay:0.033, y:font_ratio*mobile_adjust[act], ease:Quint.easeInOut});
+					}
 				}else{
-					$.tween("anim", 1.2, {top:0, ease:Quint.easeInOut});
+					if($.id("anim_move").gsTransform.y != 0){
+						$.tween("anim_move", 1.2, {delay:0.033, y:0, ease:Quint.easeInOut});
+					}
 				}
 				
 			}else{
