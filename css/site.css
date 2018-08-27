@@ -1,4 +1,6 @@
 body, html {
+    width:100%;
+    height:100%;
     font-family: 'NeueHaasRoman';
     background: #A21212;
     color: #FFFFFF;
