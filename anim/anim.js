@@ -4778,9 +4778,9 @@ p.nominalBounds = new cjs.Rectangle(-28.6,-78.5,28.7,78.5);
 		this.arrow_1_pos = {};
 		this.arrow_2_pos = {};
 		this.rand_pos = {
-			x:[-1.3, 1.3],
-			y:[-1.3, 1.3],
-			rotation:[-1.6, 1.6]
+			x:[-2, 2],
+			y:[-2, 2],
+			rotation:[-1, 1]
 		};
 		if(!this.inited){
 			this.inited = true;
@@ -4860,46 +4860,64 @@ p.nominalBounds = new cjs.Rectangle(-28.6,-78.5,28.7,78.5);
 		this.startArrow = function(a){
 			_this["arrow_"+a].gotoAndPlay("open");
 		}
-		var a_gap = 6;
+		var a_gap = 8;
 		
 		function handleTick(event) { 
 			if(!stopped){
 				//console.log("tick");
 				if(Math.random() < 0.1){
 					_this.arrow_1.x = _this.arrow_1.x+rand(_this.rand_pos.x);
-					if(_this.arrow_1.x < _this.arrow_1_pos.x-a_gap || _this.arrow_1.x > _this.arrow_1_pos.x+a_gap){
-						_this.arrow_1.x = _this.arrow_1_pos.x;
+					if(_this.arrow_1.x < _this.arrow_1_pos.x-a_gap){
+						//_this.arrow_1.x = _this.arrow_1_pos.x-a_gap + _this.arrow_1.x;
+					}
+					if(_this.arrow_1.x > _this.arrow_1_pos.x+a_gap){
+						//_this.arrow_1.x = _this.arrow_1_pos.x+a_gap - _this.arrow_1.x;
 					}
 				}
 				if(Math.random() < 0.15){
 					_this.arrow_1.y = _this.arrow_1.y+rand(_this.rand_pos.y);
-					if(_this.arrow_1.y < _this.arrow_1_pos.y-a_gap || _this.arrow_1.y > _this.arrow_1_pos.y+a_gap){
-						_this.arrow_1.y = _this.arrow_1_pos.y;
+					if(_this.arrow_1.y < _this.arrow_1_pos.y-a_gap){
+						//_this.arrow_1.y = _this.arrow_1_pos.y-a_gap + _this.arrow_1.y;
+					}
+					if(_this.arrow_1.y > _this.arrow_1_pos.y+a_gap){
+						//_this.arrow_1.y = _this.arrow_1_pos.y+a_gap - _this.arrow_1.y;
 					}
 				}
 				if(Math.random() < 0.2){
 					_this.arrow_1.rotation = _this.arrow_1.rotation+rand(_this.rand_pos.rotation);
-					if(_this.arrow_1.rotation < _this.arrow_1_pos.rotation-a_gap || _this.arrow_1.rotation > _this.arrow_1_pos.rotation+a_gap){
-						_this.arrow_1.rotation = _this.arrow_1_pos.rotation;
+					if(_this.arrow_1.rotation < _this.arrow_1_pos.rotation-a_gap){
+						//_this.arrow_1.rotation = _this.arrow_1_pos.rotation-a_gap + _this.arrow_1.rotation;
+					}
+					if(_this.arrow_1.rotation > _this.arrow_1_pos.rotation+a_gap){
+						//_this.arrow_1.rotation = _this.arrow_1_pos.rotation+a_gap - _this.arrow_1.rotation;
 					}
 				}
 				
 				if(Math.random() < 0.1){
 					_this.arrow_2.x = _this.arrow_2.x+rand(_this.rand_pos.x);
-					if(_this.arrow_2.x < _this.arrow_2_pos.x-a_gap || _this.arrow_2.x > _this.arrow_2_pos.x+a_gap){
-						_this.arrow_2.x = _this.arrow_2_pos.x;
+					if(_this.arrow_2.x < _this.arrow_2_pos.x-a_gap){
+						//_this.arrow_2.x = _this.arrow_2_pos.x-a_gap + _this.arrow_2.x;
+					}
+					if(_this.arrow_2.x > _this.arrow_2_pos.x+a_gap){
+						_this.arrow_2.x = _this.arrow_2_pos.x+a_gap - _this.arrow_2.x;
 					}
 				}
 				if(Math.random() < 0.15){
 					_this.arrow_2.y = _this.arrow_2.y+rand(_this.rand_pos.y);
-					if(_this.arrow_2.y < _this.arrow_2_pos.y-a_gap || _this.arrow_2.y > _this.arrow_2_pos.y+a_gap){
-						_this.arrow_2.y = _this.arrow_2_pos.y;
+					if(_this.arrow_2.y < _this.arrow_2_pos.y-a_gap){
+						//_this.arrow_2.y = _this.arrow_2_pos.y-a_gap + _this.arrow_2.y;
+					}
+					if(_this.arrow_2.y > _this.arrow_2_pos.y+a_gap){
+						//_this.arrow_2.y = _this.arrow_2_pos.y+a_gap - _this.arrow_2.y;
 					}
 				}
-				if(Math.random() < 0.4){
+				if(Math.random() < 0.2){
 					_this.arrow_2.rotation = _this.arrow_2.rotation+rand(_this.rand_pos.rotation);
-					if(_this.arrow_2.rotation < _this.arrow_2_pos.rotation-a_gap || _this.arrow_2.rotation > _this.arrow_2_pos.rotation+a_gap){
-						_this.arrow_2.rotation = _this.arrow_2_pos.rotation;
+					if(_this.arrow_2.rotation < _this.arrow_2_pos.rotation-a_gap){
+						//_this.arrow_2.rotation = _this.arrow_2_pos.rotation-a_gap + _this.arrow_2.rotation;
+					}
+					if(_this.arrow_2.rotation > _this.arrow_2_pos.rotation+a_gap){
+						//_this.arrow_2.rotation = _this.arrow_2_pos.rotation+a_gap - _this.arrow_2.rotation;
 					}
 				}
 			}
@@ -13847,7 +13865,7 @@ p.nominalBounds = new cjs.Rectangle(-493.1,-447.3,985.2,641.5);
 		var center_pos = {
 			delay: 0.81,
 			x: 525,
-			y: 525,
+			y: 564,
 			rotation: 0,
 			ease: Power4.easeInOut
 		};
@@ -14033,23 +14051,23 @@ lib.properties = {
 	color: "#A21212",
 	opacity: 1.00,
 	manifest: [
-		{src:"img/banners.jpg?1535393505018", id:"banners"},
-		{src:"img/landscape.png?1535393505018", id:"landscape"},
-		{src:"img/letter.jpg?1535393505018", id:"letter"},
-		{src:"img/letter_2.jpg?1535393505018", id:"letter_2"},
-		{src:"img/letter_3.jpg?1535393505018", id:"letter_3"},
-		{src:"img/map.jpg?1535393505018", id:"map"},
-		{src:"img/mobile_bg.png?1535393505018", id:"mobile_bg"},
-		{src:"img/mobile_cover.jpg?1535393505018", id:"mobile_cover"},
-		{src:"img/mobile_cover_vasarelly.jpg?1535393505018", id:"mobile_cover_vasarelly"},
-		{src:"img/monalisa.jpg?1535393505018", id:"monalisa"},
-		{src:"img/monalisa_scetch.jpg?1535393505018", id:"monalisa_scetch"},
-		{src:"img/monalisa_wink.jpg?1535393505018", id:"monalisa_wink"},
-		{src:"img/proto_fire_0.png?1535393505018", id:"proto_fire_0"},
-		{src:"img/proto_fire_1.png?1535393505018", id:"proto_fire_1"},
-		{src:"img/proto_fire_2.png?1535393505018", id:"proto_fire_2"},
-		{src:"img/proto_fire_3.png?1535393505018", id:"proto_fire_3"},
-		{src:"img/proto_fire_4.png?1535393505018", id:"proto_fire_4"}
+		{src:"img/banners.jpg?1535402462529", id:"banners"},
+		{src:"img/landscape.png?1535402462529", id:"landscape"},
+		{src:"img/letter.jpg?1535402462529", id:"letter"},
+		{src:"img/letter_2.jpg?1535402462529", id:"letter_2"},
+		{src:"img/letter_3.jpg?1535402462529", id:"letter_3"},
+		{src:"img/map.jpg?1535402462529", id:"map"},
+		{src:"img/mobile_bg.png?1535402462529", id:"mobile_bg"},
+		{src:"img/mobile_cover.jpg?1535402462529", id:"mobile_cover"},
+		{src:"img/mobile_cover_vasarelly.jpg?1535402462529", id:"mobile_cover_vasarelly"},
+		{src:"img/monalisa.jpg?1535402462529", id:"monalisa"},
+		{src:"img/monalisa_scetch.jpg?1535402462529", id:"monalisa_scetch"},
+		{src:"img/monalisa_wink.jpg?1535402462529", id:"monalisa_wink"},
+		{src:"img/proto_fire_0.png?1535402462529", id:"proto_fire_0"},
+		{src:"img/proto_fire_1.png?1535402462529", id:"proto_fire_1"},
+		{src:"img/proto_fire_2.png?1535402462529", id:"proto_fire_2"},
+		{src:"img/proto_fire_3.png?1535402462529", id:"proto_fire_3"},
+		{src:"img/proto_fire_4.png?1535402462529", id:"proto_fire_4"}
 	],
 	preloads: []
 };

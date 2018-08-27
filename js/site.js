@@ -7,9 +7,10 @@
 		menu_alpha_off, anim_max_size, anim_size, anim_x, anim_y, anim_delay,
 		master_mask, masks, mask_dot_area, text_width, mobile_footer_pos,
 		menu_num,
-		loaded_script_num, anim_inited, anim_ready;
+		loaded_script_num, anim_inited, anim_ready, skip_fist_adjust;
 
 		loaded_script_num = 0;
+		skip_fist_adjust = true;
 
 		W = 300;
 		H = 300;
@@ -52,8 +53,8 @@
 				logo:{x:0.9437, y:0.92, width:120, height:30}
 			}
 		};
-
-		var mobile_adjust = [false, true, true, true, true, true, true, false];
+		var mobile_mid = -20;
+		var mobile_adjust = [0, mobile_mid, mobile_mid, mobile_mid, mobile_mid, mobile_mid, mobile_mid, 0];
 		var mobile_slide;
 		var mobile_slide_max = 100;
 
@@ -233,6 +234,13 @@
 				}
 			}
 
+			if(act_size == "mobile"){
+				$.set("anim", {top:font_ratio*mobile_adjust[act]});
+			}else{
+				$.set("anim", {top:0});
+			}
+			
+
 			var grid_x = grid[act_size].grid_start.x*W;
 			var grid_y = grid[act_size].grid_start.y*H;
 
@@ -377,6 +385,17 @@
 		}
 		function moveHelper(num){
 			anim_root.move(act);
+			if(!skip_fist_adjust){
+				
+				if(act_size == "mobile"){
+					$.tween("anim", 1.2, {top:font_ratio*mobile_adjust[act], ease:Quint.easeInOut});
+				}else{
+					$.tween("anim", 1.2, {top:0, ease:Quint.easeInOut});
+				}
+				
+			}else{
+				skip_fist_adjust = false;
+			}
 		}
 
 		function createMenu(){
