@@ -358,7 +358,7 @@
 				}else{
 					intro_outro();
 					$.delay(0.6, openStage, [num]);
-					move_delay = 0.62;
+					move_delay = 0.64;
 				}
 				
 				if(act == 7){
