@@ -6,7 +6,10 @@
 		act, act_size, font_sizes, font_ratio, max_font_sizes, min_font_sizes, window_max, window_min,
 		menu_alpha_off, anim_max_size, anim_size, anim_x, anim_y, anim_delay,
 		master_mask, masks, mask_dot_area, text_width, mobile_footer_pos,
-		menu_num;
+		menu_num,
+		loaded_script_num;
+
+		loaded_script_num = 0;
 
 		W = 300;
 		H = 300;
@@ -87,6 +90,9 @@
 			intro();
 			$.delay(1.5, newMenuHelper, [0]);
 
+			var ctx = $.id("canvas").getContext('2d');
+			ctx.drawImage($.id("anim_cover"),0,0);
+			$.set("anim_cover", {autoAlpha:0});
 			optimizedResize.add(resize);
 			$.set("cover", {autoAlpha:0});
 
@@ -98,8 +104,40 @@
 			$.id("mail").innerHTML = "d"+String.fromCharCode(64)+"dfree.co.uk";
 			$.id("mail").addEventListener('click', gotoMail, false);
 			$.id("linkedin").addEventListener('click', gotoLink, false);
-		}();
 
+			loadScript("src/create.js", scriptReady);
+			loadScript("anim/anim.js?1530707933021", scriptReady);
+		}();
+		function loadScript(url, callback){
+
+		    var script = document.createElement("script")
+		    script.type = "text/javascript";
+
+		    if (script.readyState){  //IE
+		        script.onreadystatechange = function(){
+		            if (script.readyState == "loaded" ||
+		                    script.readyState == "complete"){
+		                script.onreadystatechange = null;
+		                callback();
+		            }
+		        };
+		    } else {  //Others
+		        script.onload = function(){
+		            callback();
+		        };
+		    }
+
+		    script.src = url;
+		    document.getElementsByTagName("head")[0].appendChild(script);
+		}
+
+		function scriptReady(){
+			console.log("wtf");
+			loaded_script_num++;
+			if(loaded_script_num == 2){
+				loadScript("js/adobe.js", scriptReady);
+			}
+		}
 		function gotoLink(){
 			openInNewTab("https://www.linkedin.com/in/davidszucs/");
 		}
@@ -281,8 +319,8 @@
 			}
 
 			$.set("menu", {zIndex:10, width:grid[act_size].menu.x*W, y:grid[act_size].menu.y*H, fontSize:font_sizes[act_size].mm*font_ratio});
-			$.set("logo", {zIndex:10, x:grid[act_size].logo.x*W, y:grid[act_size].logo.y*H});
-			$.set("logo_img", {alpha:0.3, x:-grid[act_size].logo.width*font_ratio, y:-grid[act_size].logo.height*font_ratio, width:grid[act_size].logo.width*font_ratio, height:grid[act_size].logo.height*font_ratio});
+			/*$.set("logo", {zIndex:10, x:grid[act_size].logo.x*W, y:grid[act_size].logo.y*H});
+			$.set("logo_img", {alpha:0.3, x:-grid[act_size].logo.width*font_ratio, y:-grid[act_size].logo.height*font_ratio, width:grid[act_size].logo.width*font_ratio, height:grid[act_size].logo.height*font_ratio});*/
 			//console.log("resized "+W+" "+H);
 
 

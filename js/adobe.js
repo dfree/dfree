@@ -45,13 +45,13 @@
 			fnStartAnimation();
 			registerAnimRoot(exportRoot);
 		}
-	};
-	if (window.addEventListener) // W3C standard
+	}();
+	/*if (window.addEventListener) // W3C standard
 	{
 	  window.addEventListener('load', adobe, false); // NB **not** 'onload'
 	} 
 	else if (window.attachEvent) // Microsoft
 	{
 	  window.attachEvent('onload', adobe);
-	}
+	}*/
 })();

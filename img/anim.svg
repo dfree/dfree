@@ -1,0 +1,58 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="1050px" height="1050px" viewBox="0 0 1050 1050">
+<defs>
+<linearGradient id="Gradient_1" gradientUnits="userSpaceOnUse" x1="-316.75" y1="-238.4" x2="-198.95000000000002" y2="-288.6" spreadMethod="pad">
+<stop  offset="0%" stop-color="#343B52"/>
+
+<stop  offset="9.411764705882353%" stop-color="#656888"/>
+
+<stop  offset="100%" stop-color="#343B52"/>
+</linearGradient>
+
+<linearGradient id="Gradient_2" gradientUnits="userSpaceOnUse" x1="3.1" y1="-56.0375" x2="3.1" y2="51.8375" spreadMethod="pad">
+<stop  offset="0%" stop-color="#C90000"/>
+
+<stop  offset="100%" stop-color="#A21212"/>
+</linearGradient>
+
+<g id="swiss_bg_0_Layer1_0_FILL">
+<path fill="url(#Gradient_1)" stroke="none" d="
+M -167.75 -53.25
+Q -168.2 -53.25 -168.6 -53.25 -190.15 -52.9 -205.35 -37.6 -221 -22.05 -221 0 -221 21.95 -205.35 37.6 -190.15 52.9 -168.6 53.25 -168.2 53.25 -167.75 53.25
+L 167.75 53.25
+Q 189.75 53.25 205.35 37.6 221 21.95 221 0 221 -22.05 205.35 -37.6 189.75 -53.25 167.75 -53.25
+L -167.75 -53.25 Z"/>
+</g>
+
+<g id="swiss_cover_0_Layer1_0_FILL">
+<path fill="url(#Gradient_2)" stroke="none" d="
+M -167.75 -53.25
+Q -168.2 -53.25 -168.6 -53.25 -190.15 -52.9 -205.35 -37.6 -221 -22.05 -221 0 -221 21.95 -205.35 37.6 -190.15 52.9 -168.6 53.25 -168.2 53.25 -167.75 53.25
+L 167.75 53.25
+Q 189.75 53.25 205.35 37.6 221 21.95 221 0 221 -22.05 205.35 -37.6 189.75 -53.25 167.75 -53.25
+L -167.75 -53.25 Z"/>
+</g>
+
+<g id="swiss_cover_0_Layer0_0_FILL">
+<path fill="#F7F7F7" stroke="none" d="
+M -11 -32.95
+L -11 -11 -32.95 -11 -32.95 11 -11 11 -11 32.95 11 32.95 11 11 32.95 11 32.95 -11 11 -11 11 -32.95 -11 -32.95 Z"/>
+</g>
+</defs>
+
+<g id="bg" transform="matrix( 1.8998870849609375, 0, 0, 1.8998870849609375, 533.4,542.05) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#swiss_bg_0_Layer1_0_FILL"/>
+</g>
+</g>
+
+<g id="cover" transform="matrix( 1.8998870849609375, 0, 0, 1.8998870849609375, 524.9,525) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#swiss_cover_0_Layer1_0_FILL"/>
+</g>
+
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#swiss_cover_0_Layer0_0_FILL"/>
+</g>
+</g>
+</svg>
