@@ -205,14 +205,32 @@
 			$.from("title", 1, {delay:0.6, alpha:0, ease:Sine.easeIn});
 			$.set("anim", {left:-($.id("anim")._gsTransform.x-W/2)-anim_size/2, top:-($.id("anim")._gsTransform.y-H/2)-anim_size/2});
 			$.set("menu", {alpha:0});
-			$.tween("loader", 1, {delay:1.3, autoAlpha:1, ease:Sine.easeInOut});
+			$.tween("loader", 2, {delay:1, autoAlpha:0.3, ease:Sine.easeInOut});
 			loader_on = true;
 		}
+
+		var loader_prop = {num_0:10, num_1:10, act_num_0:0, act_num_1:0};
+
 		function loaderTick(){
-			document.getElementById("loader").innerHTML = " "+dec2bin(Math.random()*10000);
-		}
-		function dec2bin(dec){
-		    return (dec >>> 0).toString(2);
+			var str = "";
+			loader_prop.act_num_0 = loader_prop.act_num_1 = 0;
+			for(var i = 0; i < loader_prop.num_0 + loader_prop.num_1; i++){
+				var add;
+				if(loader_prop.act_num_0 >= loader_prop.num_0){
+					add = 1;
+				}else if(loader_prop.act_num_1 >= loader_prop.num_1){
+					add = 0;
+				}else{
+					add = Math.random() < 0.5 ? 0 : 1;
+				}
+				if(add){
+					loader_prop.act_num_1++;
+				}else{
+					loader_prop.act_num_0++;
+				}
+				str += add;
+			}
+			document.getElementById("loader").innerHTML = str;
 		}
 		function intro_outro(){
 			$.tween("anim", 0.8, {delay:0.4, left:0, top:0, ease:Power1.easeInOut});
@@ -236,8 +254,7 @@
 			H = document.documentElement.clientHeight;
 			$.set("body", {width:W, height:H});
 			$.set("grid", {width:W, height:H});
-			var loader_size = 80;
-			$.set("loader", {x:W/2-loader_size/2, y:H*0.7-loader_size/2, width:loader_size, height:loader_size/10});
+			
 
 			if(W/H < 0.85){
 				act_size = "mobile";
@@ -349,6 +366,10 @@
 			}
 
 			$.set("menu", {zIndex:10, width:grid[act_size].menu.x*W, y:grid[act_size].menu.y*H, fontSize:font_sizes[act_size].mm*font_ratio});
+			
+			var loader_size = 600;
+			$.set("loader", {fontSize:font_sizes[act_size].sml*font_ratio, x:W/2-loader_size/2, y:H*0.68, width:loader_size, height:0});
+
 			/*$.set("logo", {zIndex:10, x:grid[act_size].logo.x*W, y:grid[act_size].logo.y*H});
 			$.set("logo_img", {alpha:0.3, x:-grid[act_size].logo.width*font_ratio, y:-grid[act_size].logo.height*font_ratio, width:grid[act_size].logo.width*font_ratio, height:grid[act_size].logo.height*font_ratio});*/
 			//console.log("resized "+W+" "+H);
