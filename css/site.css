@@ -115,5 +115,7 @@ canvas {
 #grid {
     overflow: hidden;
 }
-
+#loader{
+    letter-spacing: 2px;
+}
 

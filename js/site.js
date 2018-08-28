@@ -7,7 +7,7 @@
 		menu_alpha_off, anim_max_size, anim_size, anim_x, anim_y, anim_delay,
 		master_mask, masks, mask_dot_area, text_width, mobile_footer_pos,
 		menu_num,
-		loaded_script_num, anim_inited, anim_ready, skip_fist_adjust;
+		loaded_script_num, anim_inited, anim_ready, skip_fist_adjust, loader_on;
 
 		loaded_script_num = 0;
 		skip_fist_adjust = true;
@@ -94,6 +94,7 @@
 			var ctx = $.id("canvas").getContext('2d');
 			ctx.drawImage($.id("anim_cover"),0,0);
 			$.set("anim_cover", {autoAlpha:0});
+			$.set("loader", {autoAlpha:0});
 			$.set("anim_move", {x:0, y:0});
 			optimizedResize.add(resize);
 			$.set("cover", {autoAlpha:0});
@@ -198,11 +199,20 @@
 		}
 
 		function intro(){
+
 			$.from("anim", 1, {alpha:0, ease:Sine.easeIn});
 			$.from("name", 1, {delay:0.4, alpha:0, ease:Sine.easeIn});
 			$.from("title", 1, {delay:0.6, alpha:0, ease:Sine.easeIn});
 			$.set("anim", {left:-($.id("anim")._gsTransform.x-W/2)-anim_size/2, top:-($.id("anim")._gsTransform.y-H/2)-anim_size/2});
 			$.set("menu", {alpha:0});
+			$.tween("loader", 1, {delay:1.3, autoAlpha:1, ease:Sine.easeInOut});
+			loader_on = true;
+		}
+		function loaderTick(){
+			document.getElementById("loader").innerHTML = " "+dec2bin(Math.random()*10000);
+		}
+		function dec2bin(dec){
+		    return (dec >>> 0).toString(2);
 		}
 		function intro_outro(){
 			$.tween("anim", 0.8, {delay:0.4, left:0, top:0, ease:Power1.easeInOut});
@@ -210,6 +220,7 @@
 				$.tween("anim_move", 0.8, {delay:0.4+0.06, y:font_ratio*mobile_adjust[act], ease:Power1.easeInOut});
 			}
 			$.tween("menu", 0.8, {delay:0.8, alpha:1, ease:Sine.easeOut});
+			$.tween("loader", 0.6, {delay:0.4, autoAlpha:0, ease:Sine.easeInOut, onComplete:function(){loader_on = false}});
 
 		}
 
@@ -225,6 +236,9 @@
 			H = document.documentElement.clientHeight;
 			$.set("body", {width:W, height:H});
 			$.set("grid", {width:W, height:H});
+			var loader_size = 80;
+			$.set("loader", {x:W/2-loader_size/2, y:H*0.7-loader_size/2, width:loader_size, height:loader_size/10});
+
 			if(W/H < 0.85){
 				act_size = "mobile";
 			}else{
@@ -687,6 +701,9 @@
 			// anim.js increase firstframe in the root twice with registerAnimFrame(); (first anim loaded, second when images loaded)
 			if(firstframe == 2 && act < 0){
 				newMenu(0);
+			}
+			if(loader_on){
+				loaderTick();
 			}
 			tick();
 			window.requestAnimationFrame(tick_helper);
