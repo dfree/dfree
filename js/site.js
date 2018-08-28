@@ -205,7 +205,7 @@
 			$.from("title", 1, {delay:0.6, alpha:0, ease:Sine.easeIn});
 			$.set("anim", {left:-($.id("anim")._gsTransform.x-W/2)-anim_size/2, top:-($.id("anim")._gsTransform.y-H/2)-anim_size/2});
 			$.set("menu", {alpha:0});
-			$.tween("loader", 2, {delay:1, autoAlpha:0.3, ease:Sine.easeInOut});
+			$.tween("loader", 2, {delay:0.8, autoAlpha:0.3, ease:Sine.easeInOut});
 			loader_on = true;
 		}
 
@@ -242,7 +242,7 @@
 				$.tween("anim_move", 0.8, {delay:0.4+0.06, y:font_ratio*mobile_adjust[act], ease:Power1.easeInOut});
 			}
 			$.tween("menu", 0.8, {delay:0.8, alpha:1, ease:Sine.easeOut});
-			$.tween("loader", 0.6, {delay:0.4, autoAlpha:0, ease:Sine.easeInOut, onComplete:function(){loader_on = false}});
+			$.tween("loader", 0.8, {delay:0, autoAlpha:0, ease:Sine.easeInOut, onComplete:function(){loader_on = false}});
 
 		}
 

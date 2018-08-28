@@ -119,5 +119,6 @@ canvas {
     letter-spacing: 2px;
     display:table;
     text-align: center;
+    z-index:10;
 }
 
