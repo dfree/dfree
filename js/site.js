@@ -195,7 +195,6 @@
 
 			window.requestAnimationFrame(tick_helper);
 
-
 		}
 
 		function intro(){
@@ -682,10 +681,13 @@
 				anim_init();
 			}
 			if(wait_for_root != -1 && anim_root && anim_root.setNext && anim_root.open){
-				newMenu(wait_for_root);
+				anim_root.open(0);
 				wait_for_root = -1;
 			}
-
+			// anim.js increase firstframe in the root twice with registerAnimFrame(); (first anim loaded, second when images loaded)
+			if(firstframe == 2){
+				newMenu(0);
+			}
 			tick();
 			window.requestAnimationFrame(tick_helper);
 		}

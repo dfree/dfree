@@ -15,7 +15,7 @@
     
     <link rel="stylesheet" type="text/css" href="css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="css/site.css"/>
-    <script>var anim_root;var anim_init;var registerAnimRoot = function(r){anim_root = r;};var registerAnimInit = function(f){anim_init = f;}</script>
+    <script>var anim_root, anim_init, firstframe = 0;var registerAnimRoot = function(r){anim_root = r;};var registerAnimInit = function(f){anim_init = f;};var registerAnimFrame = function(){firstframe++;}</script>
 </head>
 
 
