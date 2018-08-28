@@ -721,7 +721,7 @@
 				anim_init();
 			}
 			if(wait_for_root != -1 && anim_root && anim_root.setNext && anim_root.open){
-				anim_root.open(0);
+				anim_root.open(-1);
 				wait_for_root = -1;
 			}
 			// anim.js increase firstframe in the root twice with registerAnimFrame(); (first anim loaded, second when images loaded)
