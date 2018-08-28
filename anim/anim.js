@@ -593,18 +593,6 @@ p.nominalBounds = new cjs.Rectangle(-88.4,-88.4,176.9,176.9);
 p.nominalBounds = new cjs.Rectangle(-221,-53.2,442,106.5);
 
 
-(lib.stage_scroll_holder = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// Layer 1
-	this.shape = new cjs.Shape();
-	this.shape.graphics.f("#58595B").s().p("AmPFRIAAqhIMfAAIAAKhg");
-
-	this.timeline.addTween(cjs.Tween.get(this.shape).wait(1));
-
-}).prototype = getMCSymbolPrototype(lib.stage_scroll_holder, new cjs.Rectangle(-40,-33.7,80.1,67.4), null);
-
-
 (lib.screw = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
 
@@ -4778,9 +4766,9 @@ p.nominalBounds = new cjs.Rectangle(-28.6,-78.5,28.7,78.5);
 		this.arrow_1_pos = {};
 		this.arrow_2_pos = {};
 		this.rand_pos = {
-			x:[-2, 2],
-			y:[-2, 2],
-			rotation:[-1, 1]
+			x:[-1.4, 1.4],
+			y:[-1.4, 1.4],
+			rotation:[-0.8, 0.8]
 		};
 		if(!this.inited){
 			this.inited = true;
@@ -4866,59 +4854,23 @@ p.nominalBounds = new cjs.Rectangle(-28.6,-78.5,28.7,78.5);
 			if(!stopped){
 				//console.log("tick");
 				if(Math.random() < 0.1){
-					_this.arrow_1.x = _this.arrow_1.x+rand(_this.rand_pos.x);
-					if(_this.arrow_1.x < _this.arrow_1_pos.x-a_gap){
-						//_this.arrow_1.x = _this.arrow_1_pos.x-a_gap + _this.arrow_1.x;
-					}
-					if(_this.arrow_1.x > _this.arrow_1_pos.x+a_gap){
-						//_this.arrow_1.x = _this.arrow_1_pos.x+a_gap - _this.arrow_1.x;
-					}
+					_this.arrow_1.x = _this.arrow_1_pos.x+rand(_this.rand_pos.x);
 				}
 				if(Math.random() < 0.15){
-					_this.arrow_1.y = _this.arrow_1.y+rand(_this.rand_pos.y);
-					if(_this.arrow_1.y < _this.arrow_1_pos.y-a_gap){
-						//_this.arrow_1.y = _this.arrow_1_pos.y-a_gap + _this.arrow_1.y;
-					}
-					if(_this.arrow_1.y > _this.arrow_1_pos.y+a_gap){
-						//_this.arrow_1.y = _this.arrow_1_pos.y+a_gap - _this.arrow_1.y;
-					}
+					_this.arrow_1.y = _this.arrow_1_pos.y+rand(_this.rand_pos.y);
 				}
 				if(Math.random() < 0.2){
-					_this.arrow_1.rotation = _this.arrow_1.rotation+rand(_this.rand_pos.rotation);
-					if(_this.arrow_1.rotation < _this.arrow_1_pos.rotation-a_gap){
-						//_this.arrow_1.rotation = _this.arrow_1_pos.rotation-a_gap + _this.arrow_1.rotation;
-					}
-					if(_this.arrow_1.rotation > _this.arrow_1_pos.rotation+a_gap){
-						//_this.arrow_1.rotation = _this.arrow_1_pos.rotation+a_gap - _this.arrow_1.rotation;
-					}
+					_this.arrow_1.rotation = _this.arrow_1_pos.rotation+rand(_this.rand_pos.rotation);
 				}
 				
 				if(Math.random() < 0.1){
-					_this.arrow_2.x = _this.arrow_2.x+rand(_this.rand_pos.x);
-					if(_this.arrow_2.x < _this.arrow_2_pos.x-a_gap){
-						//_this.arrow_2.x = _this.arrow_2_pos.x-a_gap + _this.arrow_2.x;
-					}
-					if(_this.arrow_2.x > _this.arrow_2_pos.x+a_gap){
-						_this.arrow_2.x = _this.arrow_2_pos.x+a_gap - _this.arrow_2.x;
-					}
+					_this.arrow_2.x = _this.arrow_2_pos.x+rand(_this.rand_pos.x);
 				}
 				if(Math.random() < 0.15){
-					_this.arrow_2.y = _this.arrow_2.y+rand(_this.rand_pos.y);
-					if(_this.arrow_2.y < _this.arrow_2_pos.y-a_gap){
-						//_this.arrow_2.y = _this.arrow_2_pos.y-a_gap + _this.arrow_2.y;
-					}
-					if(_this.arrow_2.y > _this.arrow_2_pos.y+a_gap){
-						//_this.arrow_2.y = _this.arrow_2_pos.y+a_gap - _this.arrow_2.y;
-					}
+					_this.arrow_2.y = _this.arrow_2_pos.y+rand(_this.rand_pos.y);
 				}
 				if(Math.random() < 0.2){
-					_this.arrow_2.rotation = _this.arrow_2.rotation+rand(_this.rand_pos.rotation);
-					if(_this.arrow_2.rotation < _this.arrow_2_pos.rotation-a_gap){
-						//_this.arrow_2.rotation = _this.arrow_2_pos.rotation-a_gap + _this.arrow_2.rotation;
-					}
-					if(_this.arrow_2.rotation > _this.arrow_2_pos.rotation+a_gap){
-						//_this.arrow_2.rotation = _this.arrow_2_pos.rotation+a_gap - _this.arrow_2.rotation;
-					}
+					_this.arrow_2.rotation = _this.arrow_2_pos.rotation+rand(_this.rand_pos.rotation);
 				}
 			}
 			//frame_skipper = !frame_skipper;
@@ -13894,6 +13846,11 @@ p.nominalBounds = new cjs.Rectangle(-493.1,-447.3,985.2,641.5);
 			}
 		}
 		this.move = function (num) {
+			/*if(this.loader.alpha){
+				TweenMax.to(this.loader, 0.6, {alpha:0, ease:Power2.easeInOut});
+			}else{
+				this.loader.visible = false;
+			}*/
 			stage_pos[num].ease = Quint.easeInOut;
 			TweenMax.killTweensOf(this.swiss);
 			
@@ -14027,13 +13984,6 @@ p.nominalBounds = new cjs.Rectangle(-493.1,-447.3,985.2,641.5);
 	// actions tween:
 	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1).call(this.frame_1).wait(1).call(this.frame_2).wait(1).call(this.frame_3).wait(1));
 
-	// Layer 3
-	this.instance = new lib.stage_scroll_holder();
-	this.instance.parent = this;
-	this.instance.setTransform(3709.8,956.9);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(4));
-
 	// swiss
 	this.swiss = new lib.swiss();
 	this.swiss.parent = this;
@@ -14052,23 +14002,23 @@ lib.properties = {
 	color: "#A21212",
 	opacity: 1.00,
 	manifest: [
-		{src:"img/banners.jpg?1535451447698", id:"banners"},
-		{src:"img/landscape.png?1535451447698", id:"landscape"},
-		{src:"img/letter.jpg?1535451447698", id:"letter"},
-		{src:"img/letter_2.jpg?1535451447698", id:"letter_2"},
-		{src:"img/letter_3.jpg?1535451447698", id:"letter_3"},
-		{src:"img/map.jpg?1535451447698", id:"map"},
-		{src:"img/mobile_bg.png?1535451447698", id:"mobile_bg"},
-		{src:"img/mobile_cover.jpg?1535451447698", id:"mobile_cover"},
-		{src:"img/mobile_cover_vasarelly.jpg?1535451447698", id:"mobile_cover_vasarelly"},
-		{src:"img/monalisa.jpg?1535451447698", id:"monalisa"},
-		{src:"img/monalisa_scetch.jpg?1535451447698", id:"monalisa_scetch"},
-		{src:"img/monalisa_wink.jpg?1535451447698", id:"monalisa_wink"},
-		{src:"img/proto_fire_0.png?1535451447698", id:"proto_fire_0"},
-		{src:"img/proto_fire_1.png?1535451447698", id:"proto_fire_1"},
-		{src:"img/proto_fire_2.png?1535451447698", id:"proto_fire_2"},
-		{src:"img/proto_fire_3.png?1535451447698", id:"proto_fire_3"},
-		{src:"img/proto_fire_4.png?1535451447698", id:"proto_fire_4"}
+		{src:"img/banners.jpg?1535456264737", id:"banners"},
+		{src:"img/landscape.png?1535456264737", id:"landscape"},
+		{src:"img/letter.jpg?1535456264738", id:"letter"},
+		{src:"img/letter_2.jpg?1535456264738", id:"letter_2"},
+		{src:"img/letter_3.jpg?1535456264738", id:"letter_3"},
+		{src:"img/map.jpg?1535456264738", id:"map"},
+		{src:"img/mobile_bg.png?1535456264738", id:"mobile_bg"},
+		{src:"img/mobile_cover.jpg?1535456264738", id:"mobile_cover"},
+		{src:"img/mobile_cover_vasarelly.jpg?1535456264738", id:"mobile_cover_vasarelly"},
+		{src:"img/monalisa.jpg?1535456264738", id:"monalisa"},
+		{src:"img/monalisa_scetch.jpg?1535456264738", id:"monalisa_scetch"},
+		{src:"img/monalisa_wink.jpg?1535456264738", id:"monalisa_wink"},
+		{src:"img/proto_fire_0.png?1535456264738", id:"proto_fire_0"},
+		{src:"img/proto_fire_1.png?1535456264738", id:"proto_fire_1"},
+		{src:"img/proto_fire_2.png?1535456264738", id:"proto_fire_2"},
+		{src:"img/proto_fire_3.png?1535456264738", id:"proto_fire_3"},
+		{src:"img/proto_fire_4.png?1535456264738", id:"proto_fire_4"}
 	],
 	preloads: []
 };
