@@ -685,7 +685,7 @@
 				wait_for_root = -1;
 			}
 			// anim.js increase firstframe in the root twice with registerAnimFrame(); (first anim loaded, second when images loaded)
-			if(firstframe == 2){
+			if(firstframe == 2 && act < 0){
 				newMenu(0);
 			}
 			tick();
