@@ -210,7 +210,7 @@
 		}
 
 		var loader_prop = {num_0:10, num_1:10, act_num_0:0, act_num_1:0};
-
+		var loader_frame_skipper = false;
 		function loaderTick(){
 			var str = "";
 			loader_prop.act_num_0 = loader_prop.act_num_1 = 0;
@@ -230,7 +230,11 @@
 				}
 				str += add;
 			}
-			document.getElementById("loader").innerHTML = str;
+			if(!loader_frame_skipper){
+				document.getElementById("loader").innerHTML = str;
+			}
+			loader_frame_skipper = !loader_frame_skipper;
+			
 		}
 		function intro_outro(){
 			$.tween("anim", 0.8, {delay:0.4, left:0, top:0, ease:Power1.easeInOut});
