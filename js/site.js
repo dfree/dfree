@@ -106,6 +106,8 @@
 
 			$.id("mail").innerHTML = "d"+String.fromCharCode(64)+"dfree.co.uk";
 			$.id("mail").addEventListener('click', gotoMail, false);
+			$.id("name").addEventListener('click', gotoMail, false);
+			$.set("name", {cursor:"pointer"});
 			$.id("linkedin").addEventListener('click', gotoLink, false);
 
 			loadScript("src/create.js", scriptReady);
