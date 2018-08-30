@@ -4710,10 +4710,10 @@ p.nominalBounds = new cjs.Rectangle(-28.6,-78.5,28.7,78.5);
 			TweenMax.set(this.txt_1, txt_1_off);
 			TweenMax.set(this.txt_2, txt_2_off);
 			
-			TweenMax.to(this.cross, 0.3, {delay:first_delay-0.2, scaleX:0.73, scaleY:0.73, ease:Power2.easeOut});
-			TweenMax.to(this.cross, 0.25, {delay:first_delay+0.1, scaleX:1, scaleY:1, ease:Power2.easeInOut});	
-			TweenMax.to(this.txt_1, 1.1, {delay:first_delay, x:txt_1_pos.x, y:txt_1_pos.y, rotation:txt_1_pos.rotation, ease:Power4.easeInOut});
-			TweenMax.to(this.txt_2, 1.1, {delay:first_delay+0.2, x:txt_2_pos.x, y:txt_2_pos.y, rotation:txt_2_pos.rotation, ease:Power4.easeInOut});
+			TweenMax.to(this.cross, 0.3, {delay:first_delay-0.15, scaleX:0.73, scaleY:0.73, ease:Power2.easeOut});
+			TweenMax.to(this.cross, 0.25, {delay:first_delay+0.15, scaleX:1, scaleY:1, ease:Power2.easeInOut});	
+			TweenMax.to(this.txt_1, 0.9, {delay:first_delay, x:txt_1_pos.x, y:txt_1_pos.y, rotation:txt_1_pos.rotation, ease:Quint.easeInOut});
+			TweenMax.to(this.txt_2, 0.9, {delay:first_delay+0.2, x:txt_2_pos.x, y:txt_2_pos.y, rotation:txt_2_pos.rotation, ease:Quint.easeInOut});
 			
 		}
 		/*this.close = function(){
@@ -4788,7 +4788,7 @@ p.nominalBounds = new cjs.Rectangle(-28.6,-78.5,28.7,78.5);
 	// welcome_1
 	this.txt_1 = new lib.welcome_text();
 	this.txt_1.parent = this;
-	this.txt_1.setTransform(186.6,-40.7,0.997,0.997,15.6,0,0,-0.1,-0.5);
+	this.txt_1.setTransform(186.6,-40.6,0.996,0.996,15.7,0,0,0,-0.6);
 
 	var maskedShapeInstanceList = [this.txt_1];
 
@@ -4798,7 +4798,7 @@ p.nominalBounds = new cjs.Rectangle(-28.6,-78.5,28.7,78.5);
 
 	this.timeline.addTween(cjs.Tween.get(this.txt_1).wait(1));
 
-}).prototype = getMCSymbolPrototype(lib.stage_welcome, new cjs.Rectangle(-221,-167.6,442,360.8), null);
+}).prototype = getMCSymbolPrototype(lib.stage_welcome, new cjs.Rectangle(-221,-168.1,442,361.3), null);
 
 
 (lib.scanner_head = function(mode,startPosition,loop) {
@@ -13874,23 +13874,23 @@ lib.properties = {
 	color: "#A21212",
 	opacity: 1.00,
 	manifest: [
-		{src:"img/banners.jpg?1535634392889", id:"banners"},
-		{src:"img/landscape.png?1535634392889", id:"landscape"},
-		{src:"img/letter.jpg?1535634392889", id:"letter"},
-		{src:"img/letter_2.jpg?1535634392889", id:"letter_2"},
-		{src:"img/letter_3.jpg?1535634392889", id:"letter_3"},
-		{src:"img/map.jpg?1535634392889", id:"map"},
-		{src:"img/mobile_bg.png?1535634392889", id:"mobile_bg"},
-		{src:"img/mobile_cover.jpg?1535634392889", id:"mobile_cover"},
-		{src:"img/mobile_cover_vasarelly.jpg?1535634392889", id:"mobile_cover_vasarelly"},
-		{src:"img/monalisa.jpg?1535634392889", id:"monalisa"},
-		{src:"img/monalisa_scetch.jpg?1535634392889", id:"monalisa_scetch"},
-		{src:"img/monalisa_wink.jpg?1535634392889", id:"monalisa_wink"},
-		{src:"img/proto_fire_0.png?1535634392889", id:"proto_fire_0"},
-		{src:"img/proto_fire_1.png?1535634392889", id:"proto_fire_1"},
-		{src:"img/proto_fire_2.png?1535634392889", id:"proto_fire_2"},
-		{src:"img/proto_fire_3.png?1535634392889", id:"proto_fire_3"},
-		{src:"img/proto_fire_4.png?1535634392889", id:"proto_fire_4"}
+		{src:"img/banners.jpg?1535635058245", id:"banners"},
+		{src:"img/landscape.png?1535635058245", id:"landscape"},
+		{src:"img/letter.jpg?1535635058245", id:"letter"},
+		{src:"img/letter_2.jpg?1535635058245", id:"letter_2"},
+		{src:"img/letter_3.jpg?1535635058245", id:"letter_3"},
+		{src:"img/map.jpg?1535635058245", id:"map"},
+		{src:"img/mobile_bg.png?1535635058245", id:"mobile_bg"},
+		{src:"img/mobile_cover.jpg?1535635058245", id:"mobile_cover"},
+		{src:"img/mobile_cover_vasarelly.jpg?1535635058245", id:"mobile_cover_vasarelly"},
+		{src:"img/monalisa.jpg?1535635058245", id:"monalisa"},
+		{src:"img/monalisa_scetch.jpg?1535635058245", id:"monalisa_scetch"},
+		{src:"img/monalisa_wink.jpg?1535635058245", id:"monalisa_wink"},
+		{src:"img/proto_fire_0.png?1535635058245", id:"proto_fire_0"},
+		{src:"img/proto_fire_1.png?1535635058245", id:"proto_fire_1"},
+		{src:"img/proto_fire_2.png?1535635058245", id:"proto_fire_2"},
+		{src:"img/proto_fire_3.png?1535635058245", id:"proto_fire_3"},
+		{src:"img/proto_fire_4.png?1535635058245", id:"proto_fire_4"}
 	],
 	preloads: []
 };
