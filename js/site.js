@@ -149,7 +149,7 @@
 			openInNewTab("https://www.linkedin.com/in/davidszucs/");
 		}
 		function gotoMail(){
-			openInNewTab("mailto:d"+String.fromCharCode(64)+"dfree.co.uk");
+			openInNewTab("mailto:d"+String.fromCharCode(64)+"dfree.co.uk?subject=Hello%20there!");
 		}
 		function openInNewTab(url) {
 		 	window.open(url, '_blank');		
