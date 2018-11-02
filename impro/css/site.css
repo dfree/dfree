@@ -1,0 +1,80 @@
+body, html {/*
+    width:100%;
+    height:100%;*/
+    font-family: 'NeueHaasRoman';
+    background: #000000;
+    color: #FFFFFF;
+    overflow: hidden;
+}
+body {
+    top:0;
+    left:0;
+    position: fixed;
+}
+#cover {
+    background: #A21212;
+    width:100%;
+    height:100%;
+}
+@font-face {
+    font-family: 'NeueHaasBold';
+    src: 
+    url('../font/NeueHaasGroteskText75Bold.woff') format('woff'),
+    url('../font/NeueHaasGroteskText75Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'NeueHaasRoman';
+    src: 
+    url('../font/NeueHaasGroteskText55Roman.woff') format('woff'),
+    url('../font/NeueHaasGroteskText55Roman.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'NeueHaasLight';
+    src: 
+    url('../font/NeueHaasGroteskText35Light.woff') format('woff'),
+    url('../font/NeueHaasGroteskText35Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* IMPRO */
+
+#hole {
+    background: #333333;
+    overflow: hidden;
+    width:100%;
+    height:100%;
+}
+.wrap {
+    overflow: hidden;
+    //background: #A2FFFFFF;
+}
+.content {
+
+}
+
+#back{
+    color:#444;
+    background: #f3bd01;
+}
+#front {
+    color:#f3bd01;
+    background:#444;
+}
+#rota_counter {
+    //background: #EEE;
+}
+.logo{
+    width:230px;
+    height:auto;
+}
+.icon{
+    width:324px;
+    height:auto;
+}
+
