@@ -75,6 +75,10 @@
 			width:324,
 			height:531,
 		}
+		var logos = {
+			width:230,
+			height:144,
+		}
 		init = function() {
 			TweenPlugin.activate([CSSPlugin]);
 			act_size = "desktop";
@@ -182,7 +186,9 @@
 
 			elements = $.class("logo");
 			for (var i=0; i < elements.length; i++) {
-			     $.set(elements[i], {x:W/2-115, y:H/2-72});
+				var h = logos.height*(H/860);
+				var w = logos.width*(h/logos.height);
+			     $.set(elements[i], {x:W/2-w/2, y:H/2-h/2, width:w,});// height:"auto"
 			}
 
 			elements = $.class("icon");
