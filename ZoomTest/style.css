@@ -3,13 +3,10 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 img{width:auto;height:auto;}div,img,a{position:absolute;}
 /* structure */
 
-#content{
-	transform: matrix(0.2, 0, 0, 0.2, 0, 0);
-}
 .poly{
 	position:absolute;
-	width:100px;
-	height:100px;
+	width:50px;
+	height:50px;
 	background-color: red;
 	border-radius: 50%;
 }
