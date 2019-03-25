@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Inspekto</title>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.0/plugins/CSSPlugin.min.js"></script>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.0/easing/EasePack.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.0/TweenLite.min.js"></script>
+    <script type="text/javascript" src="dist/perspective-transform.js"></script>
+
+    <script src="bounding.js"></script>
+    
+   
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <style type="text/css">
+        
+        /*---- FOR PRESENTATION ----*/
+        body{
+            background-color: #222222;
+        }
+        #wrapper {
+            margin-left: calc(50% - 150px);
+            margin-top: 160px;
+        }
+        /*---- FOR ANIMATION ----*/
+        #wrapper {
+            background: #EEEEEE;
+            cursor: pointer;
+            width: 300px;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            display: none;
+        }
+        .corner {
+            width: 7px;
+            height: 7px;
+            background: #444444;
+            user-select: none;
+        }
+        .poly {
+            width: 5px;
+            height: 5px;
+            background: #FF4444;
+            user-select: none;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="wrapper">
+        <div id="box">
+        </div>
+    </div>
+</body>
+
+</html>
