@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>FFVIII</title>
+    
+    <style type="text/css">
+        
+        body{
+            background-color: #FFF;
+        }
+        #root {
+            position: absolute;
+            top: 60px;
+            left: 120px;
+            display: flex;
+        }
+        .button {
+            position: relative;
+            width: 32px;
+            height: 32px;
+            margin-right: 32px;
+            cursor: pointer;
+        }
+        .button_img {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            top: 0;
+            right: 0;
+        }
+        .bin > .top {
+            transform-origin: 4px 5px;
+            transition: top 0.35s cubic-bezier(0.4, 0.0, 0.8, 1), transform 0.35s cubic-bezier(0.4, 0.0, 0.6, 1);/*cubic-bezier(0.6,0,0.8,1)*/
+        }
+        .bin:hover > .top {
+            transform: rotate( -30deg );
+            top: -3px;
+        }
+        .cog:hover {
+            transform: rotate( 90deg );
+            transition: transform 0.35s cubic-bezier(0.3, 0.0, 0.3, 1);
+        }
+        .load > .arrow {
+            transition: top 0.35s cubic-bezier(0.3, 0.2, 0.1, 1);
+        }
+        .load:hover > .arrow {
+            top: -5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <div class="button bin">
+            <img class="button_img" src="img/bin_bottom.svg"/>
+            <img class="button_img top" src="img/bin_top.svg"/>
+        </div>
+        <img class="button cog" src="img/cog.svg"/>
+        <div class="button load">
+            <img class="button_img" src="img/load_bottom.svg"/>
+            <img class="button_img arrow" src="img/load_arrow.svg"/>
+        </div>
+    </div>
+</body>
+
+</html>
