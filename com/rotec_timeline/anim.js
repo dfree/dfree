@@ -32,6 +32,8 @@
 			$.create("canvas", "body");
 			$.create("container", "canvas");
 			$.id("canvas").style.display = "block";
+			$.set("canvas", {alpha:0})
+			$.tween("canvas", 0.6, {alpha:1, ease: setInterval.easeOut});
 			build();
 			resize();
 			window.onresize = resize;
