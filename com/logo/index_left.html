@@ -38,6 +38,10 @@
         	left: 0;
         	position: absolute;
         }
+        @keyframes fadeIn {
+          0%   {opacity: 0; }
+          100% {opacity: 1; }
+        }
         @keyframes fromRight {
 		  0%   {transform: translateX(100%); }
 		  100% {transform: translateX(0); }
@@ -48,7 +52,7 @@
 		}
 
 		.container_top {
-			animation: fromLeft 0.8s cubic-bezier(.68,.01,.65,.82);
+			animation: fromLeft 0.8s cubic-bezier(.68,.01,.65,.82), fadeIn 0.67s cubic-bezier(.53,.01,.42,.99);
 		}
 		.img_top {
 			animation: fromRight 0.8s cubic-bezier(.68,.01,.65,.82);
