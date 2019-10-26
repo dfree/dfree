@@ -106,14 +106,14 @@
 
 			var mile_start = 0;
 			var details_start = 0;
-			var details_width = W/setup.length-10;
+			var details_width = W/setup.length;
 
 			for(var i = 0; i < setup.length; i++){
 				var width = W/full_months*setup[i].months;
 				
 				$.set(setup[i].obj, {x:mile_start, width:width});
 				
-				$.set(setup[i].details, {x:details_start, width:details_width});
+				$.set(setup[i].details, {x:details_start, width:details_width-50});
 				$.set(setup[i].fin, { width:width-3});
 				$.set(setup[i].end_line, {x:width});
 
