@@ -22,8 +22,8 @@ var setup = [
 	]},
 	{name:"Phase 3", finish:"CONSTANT<br/>UPDATES", time:"agile development", months:5, lines:[
 		{start:0, end:14, arrow:true, color:6, name:"Applying the final design to the prototype or start to build an enterprise solution"},
-		{start:14, end:28, arrow:true, color:8, name:"Save or send the whole report as html email (on alarm events too)"},
-		{start:28, end:42, arrow:true, color:10, name:"Advanced user handling and notifications"},
+		{start:14, end:28, arrow:true, color:8, name:"Save or send the whole report as html email (on alarm events too) with custom layouts"},
+		{start:28, end:42, arrow:true, color:10, name:"Advanced user handling, notifications and alarms"},
 		{start:42, end:56, arrow:true, color:15, name:"Interactive graph grids and layers."},
 		{start:56, end:70, arrow:true, color:14, name:"File management"},
 		{start:70, end:84, arrow:true, color:0, name:"Logging"},
