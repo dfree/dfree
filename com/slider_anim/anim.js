@@ -11,11 +11,11 @@
 		var targetOrigin = [110.5, 124.2];
 
 		var layers =[
-			{name:"outside", fade:0},
-			{name:"inside", fade:0.2},
-			{name:"mecha", fade:0.4},
-			{name:"piston", fade:0.6},
-			{name:"screw", fade:0.8},
+			{name:"layer_0", fade:0},
+			{name:"layer_1", fade:0.2},
+			{name:"layer_2", fade:0.4},
+			{name:"layer_3", fade:0.6},
+			{name:"layer_4", fade:0.8},
 		];
 		var originOffset = 10;
 		var fade_amount = 0.2;
@@ -38,27 +38,26 @@
 
 		function scaleGraphics() {
 			var ratio = slider.value / 100;
+			var t_time = 0.6;
 			layers.forEach((curr, i) => {
-
 				if(i === layers.length - 1){
 					if(ratio >= layers[i].fade && !layers[i].on){
 
 						layers[i].on = true;
-						$.tween(layers[i].name, 0.8, {alpha:1, ease:Power2.easeInOut});
+						$.tween(layers[i].name, t_time, {alpha:1, ease:Power2.easeInOut});
 					}
 					if(ratio < layers[i].fade && layers[i].on){
-						console.log('yeeeee')
 						layers[i].on = false;
-						$.tween(layers[i].name, 0.8, {alpha:fade_amount, ease:Power2.easeInOut});
+						$.tween(layers[i].name, t_time, {alpha:fade_amount, ease:Power2.easeInOut});
 					}
 				}else{
 					if(ratio >= layers[i].fade && ratio < layers[i + 1].fade && !layers[i].on){
 						layers[i].on = true;
-						$.tween(layers[i].name, 0.8, {alpha:1, ease:Power2.easeInOut});
+						$.tween(layers[i].name, t_time, {alpha:1, ease:Power2.easeInOut});
 					}
 					if((ratio < layers[i].fade || ratio > layers[i + 1].fade) && layers[i].on){
 						layers[i].on = false;
-						$.tween(layers[i].name, 0.8, {alpha:fade_amount, ease:Power2.easeInOut});
+						$.tween(layers[i].name, t_time, {alpha:fade_amount, ease:Power2.easeInOut});
 					}
 				}
 				
