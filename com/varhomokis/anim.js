@@ -20,17 +20,18 @@
 			$.set('cta', {alpha:0});
 		};
 		function anim() {
-			$.tween('grad', 3.6, {x:document.documentElement.clientWidth, ease:Power2.easeOut, onComplete:function(){
+			$.tween('grad', 4.6, {x:document.documentElement.clientWidth, ease:Power1.easeOut, onComplete:function(){
 				$.set('grad', {autoAlpha:0});
 			}});
+			$.delay(0.6, delayed);
+		}
+		function delayed() {
 			$.tween('slogan', 1, {delay: 0.5, alpha:1, ease:Power1.easeInOut});
 			$.tween('separator', 1, {delay: 0.9, alpha:1, ease:Power1.easeInOut});
 			$.tween('cta', 2, {delay: 1.6, alpha:1, ease:Power1.easeInOut});
-			$.tween('grad_2', 10, {delay:1.4, x:document.documentElement.clientWidth, ease:Power2.easeOut, onComplete:function(){
+			$.tween('grad_2', 8, {delay:1.3, x:document.documentElement.clientWidth, ease:Power1.easeOut, onComplete:function(){
 				$.set('grad_2', {autoAlpha:0});
 			}});
-			/*$.tween('separator', 3, {alpha:0, ease:Power1.easeInOut}); 
-			$.tween('cta', 3, {alpha:0, ease:Power1.easeInOut}); */
 		}
 		
 		function random(a,b){
