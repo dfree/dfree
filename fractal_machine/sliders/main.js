@@ -1,23 +1,36 @@
 (function ($) {
 	window.onload = function(e) {
 		const anim1 = animatedImage({width:100, height: 70, parent:'stage', autofill: true});// 
+		const anim2 = animatedImage({width:100, height: 70, parent:'stage'});
+
 		const windowData = {
 			width: document.body.clientWidth,
 			height: document.body.clientHeight,
 		}
-		const stripData = {
+		const stripData1 = {
 			image: 'img/castilo.png',
 			x: 0,
-			y: windowData.height/2 - 300, // TODO: 300 to dynamyc vertical pos
+			y: windowData.height/2 - 260, // TODO: 300 to dynamyc vertical pos
 			width: windowData.width,
 			height: 300,
 		}
+
+		const stripData2 = {
+			image: 'img/shirt.png',
+			x: windowData.width/2-340,
+			y: windowData.height/2 - 390, // TODO: 300 to dynamyc vertical pos
+			width: 680,
+			height: 640,
+		}
 		
 		setTimeout(() => {
-			anim1.setImage(stripData.image);
-			anim1.resize(stripData)
+			anim1.setImage(stripData1.image);
+			anim1.resize(stripData1);
+			anim2.setImage(stripData2.image, 550);
+			anim2.resize(stripData2);
+			console.log(anim1.imageURL);
+			console.log(anim2.imageURL);
 		}, 20);
-		console.log(anim1);
 	};
 })({
 	id: function(name){
@@ -86,5 +99,8 @@
 	},
 	kill: function(name){
 		return TweenLite.killTweensOf(typeof name === "string" ? this.id(name) : name);
+	},
+	random(a,b){
+		return Math.random()*(b-a)+a;
 	}
 });
