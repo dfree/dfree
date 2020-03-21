@@ -49,7 +49,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             overflow: hidden;
         }
         .animate {
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         #cover {
             position: relative;
@@ -91,7 +91,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             };
 
             function stopAnimation(e) {
-                zoomImage.classList.remove("animate");
+                vectorCover.classList.remove("animate");
             };
 
             function zoomIn(){
@@ -103,7 +103,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             }
 
             function startZoom(direction){ // direction is 1 or -1
-                zoomImage.classList.add("animate");
+                //vectorCover.classList.add("animate");
                 var zoom = pinchZoom.scale + zoomFactor * pinchZoom.scale * direction;
                 pinchZoom.scaleTo(zoom, {
                     originX: W/2,
@@ -467,7 +467,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                     },
                 });
                 this.addEventListener('wheel', event => this._onWheel(event));
-                console.log('constructor')
+                console.log('constructor');
             }
             static get observedAttributes() { return [minScaleAttr]; }
             attributeChangedCallback(name, oldValue, newValue) {
