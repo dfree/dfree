@@ -126,19 +126,19 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                     {
                         id: 'human',
                         title: 'The Human Touch',
-                        pos: {x:200, y:200},
+                        pos: {x:0, y:0},
                         desc: lorem,
                     },
                     {
                         id: 'robot',
                         title: 'The Robot Platform',
-                        pos: {x:210, y:210},
+                        pos: {x:200, y:200},
                         desc: lorem,
                     },
                     {
                         id: 'desk',
                         title: 'Workbench',
-                        pos: {x:202, y:202},
+                        pos: {x:400, y:400},
                         desc: lorem,
                     },
                 ]
@@ -278,7 +278,12 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 if(dots){
                     dots.forEach((dot, i) => {
                         const element = document.querySelector('#'+dot.id);
-                        const transform =  'matrix(1, 0, 0, 1, '+(pos.x+dot.pos.x*scale)+', '+(pos.y+dot.pos.y*scale)+')';
+                        console.log(imageWidth, imageHeight)
+                        const transform =  'matrix(1, 0, 0, 1, '
+                            +(pos.x + (dot.pos.x+imageWidth/2)*scale)
+                            +', '
+                            +(pos.y + (dot.pos.y+imageHeight/2+topGap)*scale)
+                            +')';
                         element.style.transform = null;
                         element.style.transform = transform;
                     });
@@ -313,8 +318,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             function checkHit(target, points, radius){
                 points.forEach((point, i) => {
                     var pos = {
-                        x: point.pos.x * pinchZoom.scale + pinchZoom.x + dotRadius,
-                        y: point.pos.y * pinchZoom.scale + pinchZoom.y + dotRadius,
+                        x: (point.pos.x+imageWidth/2) * pinchZoom.scale + pinchZoom.x + dotRadius,
+                        y: (point.pos.y+imageHeight/2+topGap) * pinchZoom.scale + pinchZoom.y + dotRadius,
                     }
                     if(distance(target, pos) < dotRadius ){
                         dotClick(i);
