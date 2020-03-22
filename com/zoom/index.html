@@ -494,7 +494,6 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 print.innerHTML = elements[step].name;
                 home.style.opacity = 0;
                 home.style.pointerEvents = 'none';
-                console.log(home.opacity)
             }
             homeNext.addEventListener('click', hideHome);
 
@@ -555,7 +554,6 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                     allowChangeEvent: false,
                 });
                 resetTopGap();
-                console.log('resize');
                 onChange(e, reset);
             };
 
@@ -635,7 +633,6 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             };
 
             function onChange(e, reset){
-                console.log('onChange',e,  reset)
                 vectorCover.style.transform = 'translate('+pinchZoom.x+'px, '+pinchZoom.y+'px)';
                 vectorCover.style.width = pinchZoom.scale * imageWidth+'px';
                 vectorCover.style.height = pinchZoom.scale * H/W*imageWidth+'px';
