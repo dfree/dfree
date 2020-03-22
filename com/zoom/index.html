@@ -150,12 +150,14 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
         .smallDot {
             width: 6px;
             height: 6px;
+            color: rgba(0,0,0,0);
         }
         .animateDot {
             transition: 
                 background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
                 width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                height 0.4s cubic-bezier(0.4, 0, 0.2, 1)
+                height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
                 ;
         }
         #print {
@@ -333,7 +335,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
         var lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec molestie maximus nunc, a convallis enim hendrerit id. Aliquam in ipsum nec dui vehicula rhoncus in at ligula. Maecenas sed gravida erat. Morbi non urna ut enim sodales porttitor tincidunt eu sapien. \n\n\nNunc condimentum erat non lacus semper accumsan. Praesent consequat enim sed felis eleifend porttitor. Ut eget ex ut erat pulvinar dictum. Nullam ullamcorper tempor massa, vitae suscipit est efficitur ac.';
         var elements = [
             {
-                name:'Floor plan',
+                name:'Alaprajz',
                 src:'floor_plan.svg',
                 dotStart: 0.65,
                 points: [
@@ -358,7 +360,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 ]
             },
             {
-                name:'Screwdriver',
+                name:'Digitalis Csavarkulcs',
                 src:'screwdriver.svg',
                 dotStart: 0.2,
                 points: [
@@ -383,8 +385,12 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 ]
             },
             {
-                name:'Robot',
+                name:'Robot platform',
                 src:'big_robot.svg',
+            },
+            {
+                name:'Dokkoló',
+                src:'docker.svg',
             },
         ];
         
@@ -407,7 +413,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
         var showDots = false;
 
         var lastTap = 0;
-
+        
+        var isHome = true;
         const mouseDownCallback = (e) => {
             mouseBuffer = {x:e.pageX, y:e.pageY};
         };
@@ -459,7 +466,9 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 
 
                 print.style.opacity = 1;
-                print.innerHTML = elements[step].name;
+                if(!isHome){
+                    print.innerHTML = elements[step].name;
+                }
 
                 zoomImage.style.display = 'none';
                 resetDots(elements[step].points);
@@ -475,12 +484,14 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 vectorCover.classList.remove("animate");
             }
             function showHome(){
+                isHome = true;
                 print.innerHTML = homeTitle;
                 home.style.opacity = 1;
                 home.style.pointerEvents = 'auto';
                 homeCard.style.opacity = 1;
             }
             function hideHome(){
+                isHome = false;
                 print.innerHTML = elements[step].name;
                 home.style.opacity = 0;
                 home.style.pointerEvents = 'none';
