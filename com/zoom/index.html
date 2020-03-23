@@ -151,6 +151,9 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             height: 6px;
             color: rgba(0,0,0,0);
         }
+        .activeDot {
+            background: #1de2ae;
+        }
         .animateDot {
             transition: 
                 background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
@@ -497,7 +500,10 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             }
             homeNext.addEventListener('click', hideHome);
 
-            function showDetails(title, text) {
+            function showDetails(i) {
+                var title = elements[step].points[i].title;
+                var text = elements[step].points[i].desc;
+                document.getElementById(elements[step].points[i].id).classList.add('activeDot');
                 desc.style.opacity = 1;
                 desc.style.transform = 'translateY(0)';
                 desc.style.pointerEvents = 'auto';
@@ -507,6 +513,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             };
 
             function hideDetails() {
+                clearActiveDot();
                 desc.style.opacity = 0;
                 desc.style.transform = 'translateY(16px)';
                 desc.style.pointerEvents = 'none';
@@ -631,7 +638,11 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                     }
                 }
             };
-
+            function clearActiveDot(){
+                elements[step].points.forEach(dot => {
+                    document.getElementById(dot.id).classList.remove('activeDot');
+                });
+            }
             function onChange(e, reset){
                 vectorCover.style.transform = 'translate('+pinchZoom.x+'px, '+pinchZoom.y+'px)';
                 vectorCover.style.width = pinchZoom.scale * imageWidth+'px';
@@ -668,7 +679,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             }
 
             function dotClick(i){
-                showDetails(elements[step].points[i].title, elements[step].points[i].desc);
+                clearActiveDot()
+                showDetails(i);
             }
 
             function checkHit(target, points, radius){
