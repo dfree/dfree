@@ -683,7 +683,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
             function onClick(e){
                 var minDist = 3;
-                if(distance(mouseBuffer, {x:e.pageX, y:e.pageY}) < minDist){
+                if(!mouseBuffer || distance(mouseBuffer, {x:e.pageX, y:e.pageY}) < minDist){
                     checkHit({x:e.pageX, y:e.pageY}, elements[step].points, dotRadius);
                     traceClickPosition(e);
                     checkDoubleTap(e);
@@ -736,6 +736,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             
             pinchZoom.addEventListener('change', onChange);
             pinchZoom.addEventListener('click', onClick);
+            pinchZoom.addEventListener('touchstart' , onClick);
             document.getElementById('plus').addEventListener('click', zoomIn);
             document.getElementById('minus').addEventListener('click', zoomOut);
             document.getElementById('load').addEventListener('click', loadImage);
