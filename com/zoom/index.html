@@ -660,7 +660,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 updateDots(elements[step].points, pinchZoom.scale, {x:pinchZoom.x, y:pinchZoom.y}, reset);
             };
 
-            function loadImage(initialise){
+            function loadImage(e, initialise){
                 if(!initialise){
                     step++;
                     if(step >= elements.length){
@@ -742,7 +742,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             document.getElementById('menu').addEventListener('click', showHome);
             window.addEventListener('resize', onResize);
 
-            loadImage(true);
+            loadImage(null, true);
             //start with home
             showHome();
         }
