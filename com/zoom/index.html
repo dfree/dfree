@@ -641,7 +641,10 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             function clearActiveDot(){
                 if(elements[step] && elements[step].points){
                     elements[step].points.forEach(dot => {
-                        document.getElementById(dot.id).classList.remove('activeDot');
+                        var element = document.getElementById(dot.id)
+                        if(element){
+                            element.classList.remove('activeDot');
+                        }
                     });
                 }
             }
