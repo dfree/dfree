@@ -689,7 +689,9 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                     checkDoubleTap(e);
                 }
             }
-
+            function onTap(e){
+                checkHit({x:e.pageX, y:e.pageY}, elements[step].points, dotRadius);
+            }
             function dotClick(i){
                 clearActiveDot()
                 showDetails(i);
@@ -736,7 +738,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             
             pinchZoom.addEventListener('change', onChange);
             pinchZoom.addEventListener('click', onClick);
-            pinchZoom.addEventListener('touchstart' , onClick);
+            pinchZoom.addEventListener('touchstart' , onTap);
             document.getElementById('plus').addEventListener('click', zoomIn);
             document.getElementById('minus').addEventListener('click', zoomOut);
             document.getElementById('load').addEventListener('click', loadImage);
