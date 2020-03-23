@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, width=device-width, user-scalable=no/>
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no"/>
     <meta name="HandheldFriendly" content="true">
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=es6"></script>
     <title>Audi VR Plans</title>
@@ -460,7 +460,6 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             homeNext = document.getElementById("home_next");
             
             zoomImage.style.display = 'none';
-            vectorImage.src = elements[step].src;
             vectorImage.style.width = imageWidth;
 
             function imageLoaded(e) {
@@ -602,26 +601,27 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
                     dots.forEach((dot, i) => {
                         const element = document.querySelector('#'+dot.id);
-                        if(element){
-                            const transform =  'matrix(1, 0, 0, 1, '
-                                +(pos.x + (dot.pos.x+imageWidth/2)*scale)
-                                +', '
-                                +(pos.y + (dot.pos.y+imageHeight/2+topGap)*scale)
-                                +')';
-                            element.style.transform = null;
+                        
+                        const transform =  'matrix(1, 0, 0, 1, '
+                            +(pos.x + (dot.pos.x+imageWidth/2)*scale)
+                            +', '
+                            +(pos.y + (dot.pos.y+imageHeight/2+topGap)*scale)
+                            +')';
+                        element.style.transform = null;
+                        if(element && element.style){
                             element.style.transform = transform;
-                            if(showDots !== show){
-                                if(reset){
-                                    element.classList.remove('animateDot');
-                                }
-                                if(show){
-                                    element.classList.remove('smallDot');
-                                }else{
-                                    element.classList.add('smallDot');
-                                }
-                                if(reset){
-                                    setTimeout(element => element.classList.add('animateDot'), 20, element);
-                                }
+                        }
+                        if(showDots !== show){
+                            if(reset){
+                                element.classList.remove('animateDot');
+                            }
+                            if(show){
+                                element.classList.remove('smallDot');
+                            }else{
+                                element.classList.add('smallDot');
+                            }
+                            if(reset){
+                                setTimeout(element => element.classList.add('animateDot'), 20, element);
                             }
                         }
                     });
@@ -660,10 +660,12 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 updateDots(elements[step].points, pinchZoom.scale, {x:pinchZoom.x, y:pinchZoom.y}, reset);
             };
 
-            function loadImage(){
-                step++;
-                if(step >= elements.length){
-                    step = 0;
+            function loadImage(initialise){
+                if(!initialise){
+                    step++;
+                    if(step >= elements.length){
+                        step = 0;
+                    }
                 }
                 vectorImage.src = elements[step].src;
                 hideDetails();
@@ -731,6 +733,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 }
             }
 
+            
             pinchZoom.addEventListener('change', onChange);
             pinchZoom.addEventListener('click', onClick);
             document.getElementById('plus').addEventListener('click', zoomIn);
@@ -739,6 +742,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             document.getElementById('menu').addEventListener('click', showHome);
             window.addEventListener('resize', onResize);
 
+            loadImage(true);
             //start with home
             showHome();
         }
@@ -760,12 +764,12 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 <body id="body">
     <div id="zoom_container">
         <div id="vector_cover">
-            <img id="vector_image" src="floor_plan.svg"/>
+            <img id="vector_image"/>
         </div>
         <pinch-zoom>
             <div id="slider">
                 <div id="cover"></div>
-                <img id="zoom_image" src="floor_plan.svg"/>
+                <img id="zoom_image"/>
             </div>
         </pinch-zoom>
     </div>
