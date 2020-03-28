@@ -5,7 +5,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no"/>
     <meta name="HandheldFriendly" content="true">
-    <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7"></script>
     <title>Audi VR Plans</title>
 
 <!--
@@ -164,7 +163,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 ;
         }
         #print {
-            opacity: 0;
+            opacity: 1;
             position: absolute;
             top: 18px;
             right: 28px;
@@ -248,11 +247,11 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         #home_card {
-            opacity:0;
+            opacity: 1;
             position: relative;
             width: 80%;
             max-width: 900px;
-            height: calc(100% - 100px - 30px);
+            height: calc(100% - 100px - 30px - 50px);
             margin-top: 100px;
             margin-left: 50%;
             transform: translateX(-50%);
@@ -290,6 +289,30 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             position: absolute;
             bottom: 8px;
             right: 8px;
+            border-radius: 21px;
+            width: 460px;
+            opacity: 0;
+            overflow: hidden;
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #home_next_arrow{
+            position: absolute;
+            right:0;
+            top: 0;
+            width: 42px;
+        }
+        #home_next_text{
+            width: calc(100% - 22px);
+            text-align: center;
+        }
+        #home_browser_text{
+            font-family: 'Audi Type Screen', Helvetica, Arial, sans-serif;
+            padding-bottom: 30px;
+            position: absolute;
+            width: calc(100%);
+            bottom: 0px;
+            left:0;
+            text-align: center;
         }
         .text_image {
             position: relative;
@@ -420,6 +443,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
         var lastTap = 0;
         
         var isHome = true;
+        var homeTimeout = 0;
         const mouseDownCallback = (e) => {
             mouseBuffer = {x:e.pageX, y:e.pageY};
         };
@@ -441,6 +465,12 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
         }
 
         window.onload = function(e) {
+            try{
+                const ie6test = () => {};
+                return;
+            }catch(e){
+                return;
+            }
             document.getElementById("logo").addEventListener('click', toggleFullScreen);
             pinchZoom = document.querySelector('pinch-zoom');
             zoomImage = document.getElementById("zoom_image");
@@ -458,7 +488,6 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             home = document.getElementById("home");
             homeCard = document.getElementById("home_card");
             homeNext = document.getElementById("home_next");
-            
             zoomImage.style.display = 'none';
             vectorImage.style.width = imageWidth;
 
@@ -493,6 +522,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 home.style.opacity = 1;
                 home.style.pointerEvents = 'auto';
                 homeCard.style.opacity = 1;
+                homeNext.style.opacity = 1;
             }
             function hideHome(){
                 isHome = false;
@@ -826,11 +856,12 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             </div>
             <div id="gradient"></div>
         </div>
-        <div class="button" id="home_next">→</div>
+        <div class="button" id="home_next"><div id="home_next_text">Tovább az interaktív tervrajzokhoz </div><div id="home_next_arrow">→</div></div>
+        <div id="home_browser_text">Az interaktív tervrajzok megtekintéséhez hasznaljon tabletet, okos telefont vagy bármilyen modern böngészőt</div>
     </div>
     <div id="header">
         <img id="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH4AAAAsCAYAAACjZQx0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjIwQzM2MUU2MjIwMTFFQTlCQ0ZCNkFCMTg0REQ0OTAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjIwQzM2MUY2MjIwMTFFQTlCQ0ZCNkFCMTg0REQ0OTAiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2MjBDMzYxQzYyMjAxMUVBOUJDRkI2QUIxODRERDQ5MCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2MjBDMzYxRDYyMjAxMUVBOUJDRkI2QUIxODRERDQ5MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PjsHrCUAAAnOSURBVHja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">
-        <div id="print"></div>
+        <div id="print">Audi VR koncepció</div>
     </div>
 </body>
 
