@@ -364,8 +364,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             height: auto;
             bottom: 18px;
             right: 144px;
-            padding-top: 10px;
-            padding-bottom: 10px;
+            padding-top: 8px;
+            padding-bottom: 18px;
             overflow: hidden;
             border-radius: 21px;
             box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.10);
@@ -381,10 +381,11 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .menu_item_content  {
+            width: 100%;
+            height: 2.4em;
             padding-left: 2em;
             padding-right: 2em;
-            font-size: 0.8em;
-            width: 100%;
+            font-size: 0.7em;
         }
         .show_menu {
             pointer-events: all!important;
@@ -395,7 +396,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             transition: color 0.32s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .menu_item:hover {
-            color: #b51c14;
+            color: #b51c14!important;
         }
         @media all and (max-width: 640px) {
             #logo {
@@ -486,7 +487,32 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             },
             {
                 name:'Robot platform',
-                id:'robot',
+                id:'robot-platform',
+                src:'big_robot.svg',
+            },
+            {
+                name:'Eszköz platform',
+                id:'eszkoz-platform',
+                src:'big_robot.svg',
+            },
+            {
+                name:'Ékszíj kezelő',
+                id:'ekszij',
+                src:'big_robot.svg',
+            },
+            {
+                name:'Tengely beállító',
+                id:'tengely',
+                src:'big_robot.svg',
+            },
+            {
+                name:'Csavar ellentartó',
+                id:'csavar-ellentarto',
+                src:'big_robot.svg',
+            },
+            {
+                name:'Munkaasztal',
+                id:'munkaasztal',
                 src:'big_robot.svg',
             },
             {
@@ -523,6 +549,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
         var checkHit;
 
         var initStep = null;
+        var isMenuShow = false;
+        var activeMenu = 0;
 
         const mouseDownCallback = (e) => {
             mouseBuffer = {x:e.pageX, y:e.pageY};
@@ -663,11 +691,10 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 menu.appendChild(element);
                 element.id = 'menu_'+id,
                 element.classList.add('menu_item');
-                element.innerHTML = '<div class="menu_item_content">'+name+'</div>';
+                element.innerHTML = '<div class="menu_item_content no_menu_hide">'+name+'</div>';
                 element.addEventListener('click', () => menuClick(id))
             }
             function menuClick(id){
-                console.log(id)
                 if(id === 'home'){
                     showHome();
                 }else{
@@ -681,16 +708,23 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 }
             }
             function showMenu(){
-                menu.classList.add('show_menu');
+                if(!isMenuShow){
+                    isMenuShow = true;
+                    menu.classList.add('show_menu');
+                }
+                elements.forEach((curr, i) => 
+                    document.getElementById('menu_'+curr.id).style.color = (activeMenu == i  ? '#b6b1a9' : '#000000')
+                )
             }
 
             function hideMenu(e){
                 // check if it's menu item
-                if(e && e.target.classList.contains('menu_item_content')){
-                    console.log('keep');
-                }else{
-                    menu.classList.remove('show_menu');
-                    console.log('hide');
+                if(isMenuShow){
+                    //console.log(e.target);
+                    if(!(e && e.target.classList.contains('no_menu_hide'))){
+                        menu.classList.remove('show_menu');
+                        isMenuShow = false;
+                    }
                 }
             }
             function zoomIn(){
@@ -846,6 +880,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                     }
                 }
                 vectorImage.src = elements[step].src;
+                activeMenu = step;
                 hideDetails();
                 hideMenu();
             }
@@ -992,8 +1027,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
     </div>
     <div class="buttons" id="buttons_right">
         <div class="buttons_wrapper">
-            <div class="button" id="menu_button">
-                <svg class="centered" width="14" height="14" x="0px" y="0px"
+            <div class="button no_menu_hide" id="menu_button">
+                <svg class="centered no_menu_hide" width="14" height="14" x="0px" y="0px"
                 viewBox="0 0 459.3 459.3" >
                     <path d="M419.1,189.5H40.2C18,189.5,0,207.5,0,229.7c0,11.1,4.5,21.1,11.8,28.4c7.3,7.3,17.3,11.8,28.4,11.8h379
                         c22.2,0,40.2-18,40.2-40.2C459.3,207.5,441.3,189.5,419.1,189.5z"/>
