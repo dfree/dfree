@@ -87,6 +87,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
         }
         .buttons_wrapper {
             position: relative;
+            opacity: 0;
         }
         .button {
             position: relative;
@@ -357,6 +358,45 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             margin-top: 3em;
             margin-bottom: 1.4em;
         }
+        #menu {
+            position: absolute;
+            width: auto;
+            height: auto;
+            bottom: 18px;
+            right: 144px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            overflow: hidden;
+            border-radius: 21px;
+            box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.10);
+            color: #222222;
+            background: white;
+            font-size: 18px;
+            line-height: 45px;
+            cursor: pointer;
+            user-select: none;
+            pointer-events: none;
+            opacity: 0;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .menu_item_content  {
+            padding-left: 2em;
+            padding-right: 2em;
+            font-size: 0.8em;
+            width: 100%;
+        }
+        .show_menu {
+            pointer-events: all!important;
+            opacity: 1!important;
+        }
+        .menu_item {
+            width: 100%;
+            transition: color 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .menu_item:hover {
+            color: #b51c14;
+        }
         @media all and (max-width: 640px) {
             #logo {
                 left: 16px;
@@ -458,7 +498,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
         
         var homeTitle = 'Audi VR koncepció';
         
-        var pinchZoom, zoomImage, vectorImage, cover, vectorCover, slider, print, mouseBuffer, desc, descTitle, descText, scrollBox, home, homeNextText;
+        var pinchZoom, zoomImage, vectorImage, cover, vectorCover, slider, print, mouseBuffer, desc, descTitle, descText, scrollBox, home, homeNextText, menu;
 
         var W = document.documentElement.clientWidth;
         var H = document.documentElement.clientHeight;
@@ -532,10 +572,14 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             homeCard = document.getElementById("home_card");
             homeNext = document.getElementById("home_next");
             homeNextText = document.getElementById("home_next_text");
+            menu = document.getElementById("menu");
             zoomImage.style.display = 'none';
             vectorImage.style.width = imageWidth;
             homeCard.style.opacity = 0;
-
+            var buttonWrappers = document.getElementsByClassName('buttons_wrapper');
+            for(var i = 0; i < buttonWrappers.length; i++){
+                buttonWrappers[i].style.opacity = 1;
+            }
             function imageLoaded(e) {
                 zoomImage.style.display = 'block';
                 
@@ -562,7 +606,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 //vectorCover.classList.add("animate");
                 vectorCover.classList.remove("animate");
             }
-            function showHome(){
+            function showHome(initialise){
                 isHome = true;
                 print.innerHTML = homeTitle;
                 clearTimeout(homeTimeout);
@@ -570,12 +614,13 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                     setTimeout( () => {
                         homeNext.classList.remove('small_home_button');
                         homeNext.classList.add('long_tween');
-                    }, 1200);
+                    }, initialise ? 1200 : 20);
                 home.style.visibility = 'visible';
                 home.style.opacity = 1;
                 home.style.pointerEvents = 'auto';
                 homeCard.style.opacity = 1;
                 homeNext.style.opacity = 1;
+                hideMenu();
             }
             function hideHome(){
                 isHome = false;
@@ -607,7 +652,47 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 desc.style.transform = 'translateY(16px)';
                 desc.style.pointerEvents = 'none';
             }
-            
+            function createMenu(){
+                addMenuItem('Koncepció', 'home');
+                elements.forEach(curr => {
+                    addMenuItem(curr.name, curr.id)
+                });
+            };
+            function addMenuItem(name, id) {
+                const element = document.createElement('div');
+                menu.appendChild(element);
+                element.id = 'menu_'+id,
+                element.classList.add('menu_item');
+                element.innerHTML = '<div class="menu_item_content">'+name+'</div>';
+                element.addEventListener('click', () => menuClick(id))
+            }
+            function menuClick(id){
+                console.log(id)
+                if(id === 'home'){
+                    showHome();
+                }else{
+                    var newStep = 0;
+                    elements.forEach((curr, i) => {
+                        if(curr.id === id){
+                            newStep = i;
+                        };
+                    });
+                    loadImage(null, false, newStep);
+                }
+            }
+            function showMenu(){
+                menu.classList.add('show_menu');
+            }
+
+            function hideMenu(e){
+                // check if it's menu item
+                if(e && e.target.classList.contains('menu_item_content')){
+                    console.log('keep');
+                }else{
+                    menu.classList.remove('show_menu');
+                    console.log('hide');
+                }
+            }
             function zoomIn(){
                 startZoom(1);
             }
@@ -679,7 +764,6 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                         pointContainer.appendChild(element);
                         element.id = dot.id,
                         element.classList.add('dot', 'animateDot', 'smallDot');
-                        element.classList.add();
                         element.innerHTML = i+1;
                         
                     });
@@ -763,6 +847,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 }
                 vectorImage.src = elements[step].src;
                 hideDetails();
+                hideMenu();
             }
 
             function distance(p1, p2) { 
@@ -815,6 +900,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                         hideDetails();
                     }
                 }
+                hideMenu();
             }
 
             function checkDoubleTap(e) {
@@ -840,19 +926,20 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             document.getElementById('plus').addEventListener('click', zoomIn);
             document.getElementById('minus').addEventListener('click', zoomOut);
             document.getElementById('load').addEventListener('click', loadImage);
-            document.getElementById('menu').addEventListener('click', showHome);
+            document.getElementById('menu_button').addEventListener('click', showMenu);
             window.addEventListener('resize', onResize);
-            
+            window.addEventListener('mousedown', hideMenu);
+
             loadImage(null, true, initStep);
+
             //start with home
-            console.log(initStep)
             if(!(initStep || initStep === 0)){
-                showHome();
-                console.log('show')
+                showHome(true);
             }else{
                 home.style.opacity = 0;
                 hideHome();
             }
+            createMenu();
         }
     </script>
 </head>
@@ -905,7 +992,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
     </div>
     <div class="buttons" id="buttons_right">
         <div class="buttons_wrapper">
-            <div class="button" id="menu">
+            <div class="button" id="menu_button">
                 <svg class="centered" width="14" height="14" x="0px" y="0px"
                 viewBox="0 0 459.3 459.3" >
                     <path d="M419.1,189.5H40.2C18,189.5,0,207.5,0,229.7c0,11.1,4.5,21.1,11.8,28.4c7.3,7.3,17.3,11.8,28.4,11.8h379
@@ -928,6 +1015,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             </div>
         </div> 
     </div>
+    <div id="menu"></div>
     <div id="desc">
         <div id="scroll_box">
             <div id="desc_title">
