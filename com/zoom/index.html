@@ -171,6 +171,25 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
                 ;
         }
+        @keyframes dot_anim {
+            0%   {transform: scale(1); opacity: 0.6;}
+            20%  {transform: scale(1); opacity: 0.6;}
+            50%  {transform: scale(6.5); opacity: 0;}
+            100% {transform: scale(6.5); opacity: 0;}
+        }
+        .dot_highlight > :first-child {
+            position: absolute;
+            display: none;
+            width: 6px;
+            height: 6px;
+            background-color: #b51c14;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .dot_highlight_visible > :first-child {
+            display: block !important;
+            animation: dot_anim 4s ease-in-out infinite;
+        }
         #print {
             opacity: 1;
             position: absolute;
@@ -944,6 +963,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
         var dotRadius = 14;
         var showDots = false;
+        var hadDots = false;
 
         var lastTap = 0;
 
@@ -956,7 +976,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
         var initStep = null;
         var isMenuShow = false;
         var activeMenu = 0;
-
+        
         function mouseDownCallback(e) {
             mouseBuffer = {x:e.pageX, y:e.pageY};
             checkHit({x:e.pageX, y:e.pageY}, elements[step].points, dotRadius);
@@ -1034,6 +1054,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 }
 
                 zoomImage.style.display = 'none';
+                hadDots = false;
                 resetDots(elements[step].points);
                 onResize(null, true);
                 resetTopGap();
@@ -1076,6 +1097,16 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             homeNext.addEventListener('click', hideHome);
 
             function showDetails(i) {
+                  if(!hadDots){
+                      var dots = elements[step].points;
+                      dots.forEach((dot, i) => {
+                        if(dot.id != ''){
+                            const element = document.querySelector('#'+dot.id);
+                            element.classList.remove('dot_highlight_visible');
+                        }
+                      });
+                  }
+                  hadDots = true;
                   var title = elements[step].points[i].title;
                   var text = elements[step].points[i].desc;
                   document.getElementById(elements[step].points[i].id).classList.add('activeDot');
@@ -1209,10 +1240,15 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 if(dots){
                     dots.forEach((dot, i) => {
                         const element = document.createElement('div');
-                        pointContainer.appendChild(element);
+                        
                         element.id = dot.id,
-                        element.classList.add('dot', 'animateDot', 'smallDot');
-                        element.innerHTML = i+1;
+                        element.classList.add('dot', 'animateDot', 'smallDot', 'dot_highlight', 'dot_highlight_visible');
+                        const highlight = document.createElement('div');
+                        element.appendChild(highlight);
+                        const text = document.createElement('div');
+                        text.innerHTML = i+1;
+                        element.appendChild(text);
+                        pointContainer.appendChild(element);
 
                     });
                 }
@@ -1220,6 +1256,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             function updateDots(dots, scale, pos, reset) {
                 if(dots){
                     const show = pinchZoom.scale > elements[step].dotStart && pinchZoom.scale > pinchZoom.minScale + 0.01;
+                    var checkHadDots = false;
+
 
                     dots.forEach((dot, i) => {
                         if(dot.id != ''){
@@ -1240,6 +1278,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                                 }
                                 if(show){
                                     element.classList.remove('smallDot');
+                                    checkHadDots = true;
                                 }else{
                                     element.classList.add('smallDot');
                                 }
@@ -1247,8 +1286,12 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                                     setTimeout(element => element.classList.add('animateDot'), 20, element);
                                 }
                             }
+                            if(checkHadDots && !hadDots){
+                                element.classList.remove('dot_highlight_visible');
+                            }
                         }
                     });
+                    hadDots = checkHadDots;
                     showDots = show;
 
                     if(showDots !== show){
@@ -1335,17 +1378,18 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 var clicked = false;
                 if(points){
                     points.forEach((point, i) => {
+                        var radiusPercent = showDots ? 1.2 : 0.7;
                         var pos = {
                             x: (point.pos.x+imageWidth/2) * pinchZoom.scale + pinchZoom.x + dotRadius,
                             y: (point.pos.y+imageHeight/2+topGap) * pinchZoom.scale + pinchZoom.y + dotRadius,
                         }
                         if(!showDots){
-                            pos.x -= dotRadius/2;
-                            pos.y -= dotRadius/2;
+                            pos.x += -dotRadius + 2;
+                            pos.y += -dotRadius + 2;
                         }
                         //TODO: make the click target bigger only on handheld devices
-                        var radiusPercent = showDots ? 1.3 : 0.5;
-                        if(distance(target, pos) < dotRadius * 1.3 ){
+                        
+                        if(distance(target, pos) < dotRadius * radiusPercent ){
                             dotClick(i);
                             clicked = true;
                         }
