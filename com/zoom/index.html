@@ -969,13 +969,18 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
         window.onload = function(e) {
             try{
-            if (window.document.documentMode) {
+            var ua = window.navigator.userAgent;
+            var isIE = /MSIE|Trident/.test(ua);
+
+            if ( isIE ) {
                 document.getElementById("home_browser_text").style.display = 'block';
                 document.getElementById("home_card").style.height = 'calc(100% - 100px - 30px - 50px)';
                 document.getElementById('home').style.visibility = 'visible';
                 console.log('ie detected');
                 throw "ie";
                 return;
+            }else{
+                console.log('ie NOT detected');
             }
             
             document.getElementById("logo").addEventListener('click', toggleFullScreen);
