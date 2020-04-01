@@ -974,6 +974,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 document.getElementById('home').style.visibility = 'visible';
                 return;
             }
+            try{
             document.getElementById("logo").addEventListener('click', toggleFullScreen);
             pinchZoom = document.querySelector('pinch-zoom');
             zoomImage = document.getElementById("zoom_image");
@@ -1374,6 +1375,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 hideHome();
             }
             createMenu();
+        }catch(e){}
         }
     </script>
 </head>
