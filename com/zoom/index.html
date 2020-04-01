@@ -153,6 +153,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             line-height: 30px;
             user-select: none;
             pointer-events: none;
+            letter-spacing: -0.08em;
         }
         .smallDot {
             width: 6px;
@@ -203,13 +204,14 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             width: 42vw;
             height: auto;
             max-height: 35vh;
+            max-width: 650px;
             left: 18px;
             bottom: 18px;
             box-shadow: 0px 0px 15px 3px rgba(0,0,0,0.133);
             border-radius: 8px;
             background: white;
             overflow: hidden;
-            word-break: break-all;
+            word-break: break-word;
             transition: opacity 0.34s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.4, 0.2, 1);
 
         }
@@ -361,14 +363,18 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             margin-top: 3em;
             margin-bottom: 1.4em;
         }
+        a:link, a:visited, a:hover, a:active {
+          color:#b51c14;
+          text-decoration: none;
+        }
         #menu {
             position: absolute;
             width: auto;
             height: auto;
             bottom: 18px;
             right: 144px;
-            padding-top: 8px;
-            padding-bottom: 18px;
+            padding-top: 3px;
+            padding-bottom: 16px;
             z-index: 1;
             overflow: hidden;
             border-radius: 21px;
@@ -438,6 +444,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 -->
 
     <script>
+        var url = window.location.href.split('?')[0];
+
         /*https://yoksel.github.io/url-encoder/*/
         var controllerImage = 'data:image/png;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAAyAAD/4QMxaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0NSA3OS4xNjM0OTksIDIwMTgvMDgvMTMtMTY6NDA6MjIgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkNEQTgyOTdENkFCQjExRUFCNTk5RkM2RDk0MUMxQjU0IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkNEQTgyOTdFNkFCQjExRUFCNTk5RkM2RDk0MUMxQjU0Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Q0RBODI5N0I2QUJCMTFFQUI1OTlGQzZEOTQxQzFCNTQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Q0RBODI5N0M2QUJCMTFFQUI1OTlGQzZEOTQxQzFCNTQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7/7gAOQWRvYmUAZMAAAAAB/9sAhAAIBgYGBgYIBgYIDAgH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';
         var lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec molestie maximus nunc, a convallis enim hendrerit id. Aliquam in ipsum nec dui vehicula rhoncus in at ligula. Maecenas sed gravida erat. Morbi non urna ut enim sodales porttitor tincidunt eu sapien. \n\n\nNunc condimentum erat non lacus semper accumsan. Praesent consequat enim sed felis eleifend porttitor. Ut eget ex ut erat pulvinar dictum. Nullam ullamcorper tempor massa, vitae suscipit est efficitur ac.';
@@ -508,99 +516,364 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                         pos: {x:237, y:549},
                         desc: 'Az ablakon kinézve téli tájat látunk a távolban hófödte hegycsúcsokkal, jobbra nézve pedig az üzem külső falai tűnnek fel.',
                     },
-                    {
-                        id: '',
-                        title: '',
-                        pos: {x:623, y:158},
-                        desc: '',
-                    },
-                    {
-                        id: '',
-                        title: '',
-                        pos: {x:623, y:158},
-                        desc: '',
-                    },
-                    {
-                        id: '',
-                        title: '',
-                        pos: {x:623, y:158},
-                        desc: '',
-                    },
-                    {
-                        id: '',
-                        title: '',
-                        pos: {x:623, y:158},
-                        desc: '',
-                    },
-                    {
-                        id: '',
-                        title: '',
-                        pos: {x:623, y:158},
-                        desc: '',
-                    },
-                    {
-                        id: '',
-                        title: '',
-                        pos: {x:623, y:158},
-                        desc: '',
-                    },
                 ]
             },
             {
-                name:'Digitalis Csavarkulcs',
+                name:'Univerzális csavarkulcs',
                 id:'csavarkulcs',
                 src:'screwdriver.svg',
                 dotStart: 0.2,
                 points: [
-                    {
-                        id: 'human',
-                        title: 'The Human Touch',
-                        pos: {x:-1019, y:725},
-                        desc: lorem,
-                    },
-                    {
-                        id: 'robot',
-                        title: 'The Robot Platform',
-                        pos: {x:0, y:0},
-                        desc: lorem,
-                    },
-                    {
-                        id: 'desk',
-                        title: 'Workbench',
-                        pos:  {x:1008, y:-544},
-                        desc: lorem,
-                    },
+                  {
+                      id: 'fej',
+                      title: 'Univerzális fej',
+                      pos: {x:666, y:-474},
+                      desc: 'A VR élmény gördülékennyé tételéhez segítségül hívtunk egy jövőbeni kompozit anyagot, mely szuper könnyű és nanoszerkezetéből adódóan óriási oldalirányú erőhatást képes elviselni. Az ebből készült vékony rudacskák benyomódáskor nemcsak megállapítják a csavar típusát, de ellentartásukkal a fej forgásközéppontba rendezik azt és rászorítanak a forgatás megkezdésekor.',
+                  },
+                  {
+                      id: 'rudacskak',
+                      title: 'Nanoszerkezetű rudacskák',
+                      pos: {x:216, y:-380},
+                      desc: 'A VR kontroller ravaszának egyhe meghúzására a rudacska mátrix kicsúszik a fejból hogy letapogassa a hozzáérintett csavart. Amint a felhasználó jobban behúzza a ravaszt, a fej forgáskozeppontba kerül, és a ravasz húzásának erősségével elkezdi forgatni a teljes fejet.',
+                  },
+                  {
+                      id: 'tok',
+                      title: 'Cserélhető fej',
+                      pos: {x:-56, y:-372},
+                      desc: 'Teljes hosszúságában az egymáson csúszó kompozit rudacskákat tartalmazza és gondoskodik a nyomás hatására keletkező hő elvezetéséről forgás közben.<br><br>Kopás esetén cserélendő!',
+                  },
+                  {
+                      id: 'motor',
+                      title: 'Nagyteljesítményű motor',
+                      pos: {x:-325, y:-306},
+                      desc: 'Kis mérete és súlya ellenére erős elektromos zajt kelt.',
+                  },
+                  {
+                      id: 'ravasz',
+                      title: 'Ravasz',
+                      pos: {x:-527, y:-127},
+                      desc: 'A VR kontroller húzásával szinkronban mozog.',
+                  },
+                  {
+                      id: 'nyel',
+                      title: 'Cserelhető nyél akkumulátorral',
+                      pos: {x:-1020, y:311},
+                      desc: 'Praktikus zárszerkezettel csatlakozik a csavarkulcshoz, és külön tölthető egy asztali modullal.<br><br>Alján folyamatosan jelzi töltöttsége mértékét.',
+                  },
+                  {
+                      id: 'csik',
+                      title: 'Nyomaték visszajelző ledcsíkok',
+                      pos: {x:-1031, y:811},
+                      desc: 'Információval szolgálnak csavar feszitéssénél:<br><br>• a zöld világít ha pont eléggé szorít<br>• a piros túlhúzás esetén.',
+                  },
+                  {
+                      id: 'forgasirany',
+                      title: 'Forgásirány szabályzó',
+                      pos: {x:-880, y:759},
+                      desc: 'A csavar detektálásánál a feszességétől függően a forgásirányt is automatikusan meghatarozza a műszer. Ennek a gombnak a megnyomásával manuálisan felülírhatjuk a gép döntését.',
+                  },
+                  {
+                      id: 'csapolas',
+                      title: 'Autómatikus csapolás felismerés',
+                      pos: {x:-784, y:765},
+                      desc: 'Azoknál a csavaroknál, amelyeknél fontos a forgatás iránya, a fej automatikusan a csapolás vagy jelölés irányába fordul, és kijelzi az eltérés éppen aktualis szögét',
+                  },
+                  {
+                      id: 'kijelzo',
+                      title: 'Kijelző',
+                      pos: {x:-593, y:765},
+                      desc: 'Információt kaphatunk például az éppen felismert csavarról vagy a forgatas nyomatékáról.<br><br>Probléma esetén pirosra vált a monokróm kijelző háttérvilágítása.',
+                  },
+                  {
+                      id: 'rovatka',
+                      title: 'Csapolás visszajelzés',
+                      pos: {x:149, y:578},
+                      desc: 'Miutan a fej automatikusan egy csapolás irányába fordul, egy jól látható jelölésen lehet nyomonkövetni aktuális forgásirányát a folyamat közben.',
+                  },
+                  {
+                      id: 'csavar',
+                      title: 'Csavarhúzó funkció',
+                      pos: {x:250, y:677},
+                      desc: 'Csavar detektálása esetén az érintkező rudacskák kitöltik a csavarfej réseit, a körben szabadon maradtak pedig visszahúzódnak a csavarkulcsba.',
+                  },
+                  {
+                      id: 'kontroller',
+                      title: 'A virtuális tárgy illesztése a kontroller formájára',
+                      pos: {x:775, y:622},
+                      desc: 'Modellezés során ügyelüni fogunk arra, hogy a csavarkulcs formája illeszkedjen a valós, kézben tartott kontrollerére.<br><br>Például hogy a ravasz ugyanoda essen, a nyél dőlésszöge egyezzen vagy hogy pont ott érjen véget a virtuális fej ahol amúgy is koppanna fizikai kontroller.',
+                  },
                 ]
             },
             {
                 name:'Robot platform',
-                id:'robot platform',
+                id:'platform',
                 src:'robot.svg',
+                dotStart: 0.4,
+                points: [
+                    {
+                        id: 'meghajtas',
+                        title: 'A platform meghajtása',
+                        pos: {x:983, y:-161},
+                        desc: 'Az üzem teljes területe enyhén negativ töltésű fémmel borított. Ez teszi lehetővé (koncentrált elektromágneses polusváltással) a robotok stabilizálását vagy lebegését pár centiméterre a burkolt fémrétegtől.<br/><br>Az elektromágneseknek nagyobb energiát kell kifejteniük mozgásnál mint stabilizálásnál, igy elindulásnál a robot megemeli az hajtóművek köralakú védburkolatát a megfelelő léghűtés biztosítására - mind a négyet kisebb időeltolódással az elektromágnesek melegedésének ütemében.'
+                    },
+                    {
+                        id: 'csatlakozo',
+                        title: 'Univerzális csatlakozó',
+                        pos: {x:685, y:-53},
+                        desc: 'A robot platform minden eleme rendelkezik ezzel a csatlakozóval: ezen keresztül tudják tölteni akkumulátoraikat és rögzíteni magukat egymáshoz.<br><br>A folyamatos radiókapcsolat ellenére, redundás rendszerként, minden csatlakozó QR kód formájában információt jelez ki tulajdonosáról és az éppen ott elvegezhető funkcionalitásról.',
+                    },
+                    {
+                        id: 'vilagitas',
+                        title: 'Világítás és optikai szenzorok',
+                        pos: {x:333, y:-53},
+                        desc: 'A gyár területén, ahol nem dolgoznak emberek, nincs közvilágítás sem.<br><br>A robotok saját iranyítható reflektoraikkal segítik az - oldalikon sűrün elhelyezett - optikai szenzorok munkajat és az automatikus mozgást.',
+                    },
+                    {
+                        id: 'allvany',
+                        title: 'Emelhető állvány',
+                        pos: {x:682, y:-367},
+                        desc: 'A hidraulikus emelő a rendszer legtöbb elemére jellemző, automatikusan igazodik a feladathoz es a felhasználó magasságához.',
+                    },
+                    {
+                        id: 'rogzito',
+                        title: 'Szabványos rögzítési pontok',
+                        pos: {x:-863, y:-513},
+                        desc: 'A platform az összes ipari szabványal kompatibilis: csak az eszköznek megfelelő tartó alátétet kell a hidraulikus emelőre rögzíteni, az informació és áram ellátás már egységes csatlakozón keresztül törtetnik.',
+                    },
+                    {
+                        id: 'eszkozok',
+                        title: 'Eszközök',
+                        pos: {x:-804, y:-601},
+                        desc: 'A műveletek során több különböző gyártóktól származó eszközzel fogunk dolgozni, melyek ugyanarra a hordozó platformra vannak felszerelve. Ebből a két komponensből áll össze egy funkcionális robot a rendszerben.',
+                    },
+                    {
+                        id: 'akku',
+                        title: 'Közös akkumulátor szabvány',
+                        pos: {x:-424, y:257},
+                        desc: 'Míg a rendszer kisebb elemei könnyen feltölttik magukat egy-egy dokkolás alkalmával, a nagyobb robotok kivehető akkumulatorokkal biztosítják a folyamatos munkavégzést.<br><br>Minden akkumulátor egy ledsor segítségével folyamatosan kijelzi aktuális töltöttségi állapotát.<br><br>Ezeket az akkumulátorokat a dokkoló egységekben is lehet tölteni. (ez a szcenárió csak design funkcióval bír, nem a feladatok része)',
+                    },
+                    {
+                        id: 'kijelzo',
+                        title: 'Érintőképernyők',
+                        pos: {x:-43, y:601},
+                        desc: 'A platform elemei, melyek kontaktba kerülnek a dolgozókkal, mind rendelkeznek érintőképernyővel. Itt a felhasználó információkat kaphat a műveletek és robotok állapotáról, felülírhatja automatikus viselkedésüket.',
+                    },
+                    {
+                        id: 'ledcsik',
+                        title: 'Állapotjelző ledcsíkok',
+                        pos: {x:-151, y:587},
+                        desc: 'A platform eszközöket szállító elemei mind tartalmaznak szines ledcsíkokat jól látható helyenken. Ezek funkciója egyertelmű:<br><br>• ha zölden világít akkor lehet dolgozni a géppel<br>• a piros pedig jelzi ha a mozgásban van a robot és távol kell maradni tőle.',
+                    },
+                    {
+                        id: 'allito',
+                        title: 'Állítható emelőtávolság',
+                        pos: {x:-371, y:555},
+                        desc: 'A hidraulikus emelők előre-hárta csúsztathatók, alkalmazkodva a hordozott eszköz igényeihez.<br><br>Az erre használt sínrendszert egy redőnyszerű takarás védi a lehulló alkatrészektől.',
+                    },
+
+                    {
+                        id: 'veszjelzes',
+                        title: 'Egyértelmű veszély jelzéssek',
+                        pos: {x:-947, y:607},
+                        desc: 'Mikor a platform egy eleme mozgásba lendül, az adott robot összes ledcsíkja pirosra vált, es minden érintőképernyő egy figyelmeztető jelzést jelenít meg.',
+                    },
+                    {
+                        id: 'utkozok',
+                        title: 'Biztonsági ütközők',
+                        pos: {x:12, y:877},
+                        desc: 'Nincs tökéletes rendszer, ezért a platform összes elemét gumiból készült ütközőfelület veszi körül, mely védi őket a nemvárt ütközésektől. A gépek sarkain jellemzően megerősített ez a védelem.',
+                    },
+                ],
             },
             {
                 name:'Eszköz platform',
                 id:'eszkoz-platform',
                 src:'small_robot.svg',
+                dotStart: 0.4,
+                points: [
+                  {
+                      id: 'meghajtas',
+                      title: 'A platform meghajtása',
+                      pos: {x:716, y:-151},
+                      desc: 'Az üzem teljes területe enyhén negativ töltésű fémmel borított. Ez teszi lehetővé (koncentrált elektromágneses polusváltással) a robotok stabilizálását vagy lebegését pár centiméterre a burkolt fémrétegtől.<br/><br>Az elektromágneseknek nagyobb energiát kell kifejteniük mozgásnál mint stabilizálásnál, igy elindulásnál a robot megemeli az hajtóművek köralakú védburkolatát a megfelelő léghűtés biztosítására - mind a négyet kisebb időeltolódással az elektromágnesek melegedésének ütemében.'
+                  },
+                  {
+                      id: 'csatlakozo',
+                      title: 'Univerzális csatlakozó',
+                      pos: {x:552, y:-53},
+                      desc: 'A robot platform minden eleme rendelkezik ezzel a csatlakozóval: ezen keresztül tudják tölteni akkumulátoraikat és rögzíteni magukat egymáshoz.<br><br>A folyamatos radiókapcsolat ellenére, redundás rendszerként, minden csatlakozó QR kód formájában információt jelez ki tulajdonosáról és az éppen ott elvegezhető funkcionalitásról.',
+                  },
+                  {
+                      id: 'vilagitas',
+                      title: 'Világítás és optikai szenzorok',
+                      pos: {x:284, y:-53},
+                      desc: 'A gyár területén, ahol nem dolgoznak emberek, nincs közvilágítás sem.<br><br>A robotok saját iranyítható reflektoraikkal segítik az - oldalikon sűrün elhelyezett - optikai szenzorok munkajat és az automatikus mozgást.',
+                  },
+                  {
+                      id: 'allvany',
+                      title: 'Emelhető állvány',
+                      pos: {x:534, y:-367},
+                      desc: 'A hidraulikus emelő a rendszer legtöbb elemére jellemző, automatikusan igazodik a feladathoz es a felhasználó magasságához.',
+                  },
+                  {
+                      id: 'rogzito',
+                      title: 'Szabványos rögzítési pontok',
+                      pos: {x:-542, y:-513},
+                      desc: 'A platform az összes ipari szabványal kompatibilis: csak az eszköznek megfelelő tartó alátétet kell a hidraulikus emelőre rögzíteni, az informació és áram ellátás már egységes csatlakozón keresztül törtetnik.',
+                  },
+                  {
+                      id: 'eszkozok',
+                      title: 'Eszközök',
+                      pos: {x:-498, y:-601},
+                      desc: 'A műveletek során több különböző gyártóktól származó eszközzel fogunk dolgozni, melyek ugyanarra a hordozó platformra vannak felszerelve. Ebből a két komponensből áll össze egy funkcionális robot a rendszerben.',
+                  },
+                  {
+                      id: 'ledcsik',
+                      title: 'Állapotjelző ledcsíkok',
+                      pos: {x:-352, y:595},
+                      desc: 'A platform eszközöket szállító elemei mind tartalmaznak szines ledcsíkokat jól látható helyenken. Ezek funkciója egyertelmű:<br><br>• ha zölden világít akkor lehet dolgozni a géppel<br>• a piros pedig jelzi ha a mozgásban van a robot és távol kell maradni tőle.',
+                  },
+                  {
+                      id: 'allito',
+                      title: 'Állítható emelőtávolság',
+                      pos: {x:-532, y:555},
+                      desc: 'A hidraulikus emelők előre-hárta csúsztathatók, alkalmazkodva a hordozott eszköz igényeihez.<br><br>Az erre használt sínrendszert egy redőnyszerű takarás védi a lehulló alkatrészektől.',
+                  },
+                  {
+                      id: 'utkozok',
+                      title: 'Biztonsági ütközők',
+                      pos: {x:-350, y:763},
+                      desc: 'Nincs tökéletes rendszer, ezért a platform összes elemét gumiból készült ütközőfelület veszi körül, mely védi őket a nemvárt ütközésektől. A gépek sarkain jellemzően megerősített ez a védelem.',
+                  },
+                  {
+                      id: 'hajtomu',
+                      title: 'Rejtett hajtómű',
+                      pos: {x:-685, y:504},
+                      desc: 'A platform könnyebb elemei egy kisebb, 3 hajtóművel rendelkező robot segítségével mozognak. A működésükhöz szükséges technológia a hátsó hajtómű fölött került elhelyezésre, így elektromágneseinek hűtését az oldalán húzódó szellőzőkön keresztül oldja meg.',
+                  },
+                ],
             },
             {
                 name:'Ékszíj kezelő',
                 id:'ekszij',
                 src:'belt_robot.svg',
+                dotStart: 0.4,
+                points: [
+                  {
+                      id: 'platform',
+                      title: 'Szállító platform',
+                      pos: {x:773, y:7},
+                      desc: 'Az eszközt mozgató robot platformról <a href="'+url+'?page=eszkoz-platform'+'">további információ itt.</a>',
+                  },
+                  {
+                      id: 'karok',
+                      title: 'Feszítőkarok',
+                      pos: {x:618, y:-477},
+                      desc: 'Mielőtt az eszköz csatlakozna a <a href="'+url+'?page=platform'+'">motorállványhoz</a>, tárcsái egy előre programozott pozícióba fordulnak és karjai az aktualis tartott ékszíj csatlakozási pontjaiba pozicionálják magukat.',
+                  },
+                  {
+                      id: 'teleszkop',
+                      title: 'Teleszkópos emelőrudak',
+                      pos: {x:-175, y:-386},
+                      desc: 'Az álványhoz csatlakozás után a karok teleskópos emelőrudjai kicsúsznak és szekvenciálisan felfeszitik az ékszíjat a motoron lévő tárcsákra',
+                  },
+                ],
             },
             {
                 name:'Forgás beállító',
                 id:'tengely',
                 src:'helper_robot.svg',
+                dotStart: 0.4,
+                points: [
+                  {
+                      id: '',
+                      title: '',
+                      pos: {x:623, y:158},
+                      desc: '',
+                  },
+                  {
+                      id: '',
+                      title: '',
+                      pos: {x:623, y:158},
+                      desc: '',
+                  },
+                  {
+                      id: '',
+                      title: '',
+                      pos: {x:623, y:158},
+                      desc: '',
+                  },
+                  {
+                      id: '',
+                      title: '',
+                      pos: {x:623, y:158},
+                      desc: '',
+                  },
+                ],
             },
             {
                 name:'Munkaasztal',
                 id:'munkaasztal',
                 src:'workbench.svg',
+                dotStart: 0.4,
+                points: [
+                  {
+                      id: '',
+                      title: '',
+                      pos: {x:623, y:158},
+                      desc: '',
+                  },
+                  {
+                      id: '',
+                      title: '',
+                      pos: {x:623, y:158},
+                      desc: '',
+                  },
+                  {
+                      id: '',
+                      title: '',
+                      pos: {x:623, y:158},
+                      desc: '',
+                  },
+                  {
+                      id: '',
+                      title: '',
+                      pos: {x:623, y:158},
+                      desc: '',
+                  },
+                ],
             },
             {
                 name:'Dokkoló',
                 id:'dokkolo',
                 src:'docker.svg',
+                dotStart: 0.4,
+                points: [
+                  {
+                      id: '',
+                      title: '',
+                      pos: {x:623, y:158},
+                      desc: '',
+                  },
+                  {
+                      id: '',
+                      title: '',
+                      pos: {x:623, y:158},
+                      desc: '',
+                  },
+                  {
+                      id: '',
+                      title: '',
+                      pos: {x:623, y:158},
+                      desc: '',
+                  },
+                  {
+                      id: '',
+                      title: '',
+                      pos: {x:623, y:158},
+                      desc: '',
+                  },
+                ],
             },
         ];
 
