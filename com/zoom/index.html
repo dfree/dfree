@@ -946,7 +946,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
         var isMenuShow = false;
         var activeMenu = 0;
 
-        const mouseDownCallback = (e) => {
+        function mouseDownCallback(e) {
             mouseBuffer = {x:e.pageX, y:e.pageY};
             checkHit({x:e.pageX, y:e.pageY}, elements[step].points, dotRadius);
         };
@@ -969,7 +969,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
         window.onload = function(e) {
             try{
-                const ie6test = () => {};
+                var IEtest = () => {};
             }catch(e){
                 document.getElementById("home_browser_text").style.display = 'block';
                 document.getElementById("home_card").style.height = 'calc(100% - 100px - 30px - 50px)';
@@ -1532,6 +1532,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
 <script> // close this long one here
     try{
+        var IEtest = () => {};
         var PinchZoom = (function () {
             'use strict';
 
@@ -2053,7 +2054,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
         const urlParams = new URLSearchParams(window.location.search);
         const urlParam = urlParams.get('page');
-        elements.forEach((curr, i) => {
+        elements.forEach(function(curr, i) {
             if(curr.id === urlParam){
                 initStep = i;
             };
