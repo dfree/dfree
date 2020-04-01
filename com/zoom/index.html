@@ -2052,8 +2052,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
     </script>
     <script>
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const urlParam = urlParams.get('page');
+        var urlParams = new URLSearchParams(window.location.search);
+        var urlParam = urlParams.get('page');
         elements.forEach(function(curr, i) {
             if(curr.id === urlParam){
                 initStep = i;
