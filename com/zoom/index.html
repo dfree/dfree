@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height, user-scalable=no"/>
     <meta name="HandheldFriendly" content="true">
-    <title>Audi VR Plans</title>
+    <title>Audi VR koncepció</title>
 
 <!--
     --
@@ -172,8 +172,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 ;
         }
         @keyframes dot_anim {
-            0%   {transform: scale(1); opacity: 0.6;}
-            20%  {transform: scale(1); opacity: 0.6;}
+            0%   {transform: scale(1); opacity: 0.4;}
+            20%  {transform: scale(1); opacity: 0.4;}
             50%  {transform: scale(6.5); opacity: 0;}
             100% {transform: scale(6.5); opacity: 0;}
         }
@@ -182,12 +182,13 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             display: none;
             width: 6px;
             height: 6px;
-            background-color: #b51c14;
+            background: #b51c14;
             border-radius: 50%;
             pointer-events: none;
         }
         .dot_highlight_visible > :first-child {
             display: block !important;
+            box-sizing: border-box;
             animation: dot_anim 4s ease-in-out infinite;
         }
         #print {
@@ -437,6 +438,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             }
             #print {
                 right: 16px;
+                top: 19px;
+                font-size: 16px;
             }
             #desc {
                 width: 55vw;
@@ -489,7 +492,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                     },
                     {
                         id: 'asztal',
-                        title: 'Inteligens alkatrésztálca',
+                        title: 'Inteligens alkatrésztálca',
                         pos: {x:660, y:226},
                          desc: 'Az asztal a jövő munkahelyének "idegközpontja": az alkatrészek tárolásán kívül az asztal felületén elhelyezett érintőképernyőn nyomon követhetjük a szerelési folyamatot, utasításokat kaphatunk és adhatunk a műveletekhez kapcsolódóan.<br><br>Mint a platform minden eleme, szintén automatikusan alkalmazkodik a felhasználóhoz és a mozgását biztosító kondukciós hajtómű is ugyanolyan elven működik mint a többi, gyártásban résztvevő roboté.',
                     },
@@ -497,55 +500,55 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                         id: 'terulet',
                         title: 'Mozgásterületek',
                         pos: {x:360, y:232},
-                        desc: 'A robotok a számukra kijelölt sárga felfestésen közlekednek, az emberek pedig a sárga csíkkal körülhatárolt területen belül mozoghatnak csak. A szerelés elvégzéséhez szükséges közös zónába (narancssárga körcikkel jelölve) mind gépek, mind emberek bemehetnek, különleges körültekintéssel mozogva ott.<br><br>A szerelőcsarnok teljes területe alkalmas a kondukciós mozgásra, de az alkatrésztálcán kívül más robot nem közlekedik a kijelölt területeken kívül. Az alkatrésztálca saját szenzorjaival biztosítja az ütközések el- kerülését.'
+                        desc: 'A robotok a számukra kijelölt sárga felfestésen közlekednek, az emberek pedig a sárga csíkkal körülhatárolt területen belül mozoghatnak csak. A szerelés elvégzéséhez szükséges közös zónába (narancssárga körcikkel jelölve) mind gépek, mind emberek bemehetnek, különleges körültekintéssel mozogva ott.<br><br>A szerelőcsarnok teljes területe alkalmas a kondukciós mozgásra, de az alkatrésztálcán kívül más robot nem közlekedik a kijelölt területeken kívül. Az alkatrésztálca saját szenzorjaival biztosítja az ütközések el- kerülését.'
                     },
                     {
                         id: 'small_robot',
-                        title: 'Szerelő robotok',
+                        title: 'Szerelő robotok',
                         pos: {x:125, y:74},
-                        desc: 'A szerelés közben használt speciális eszközök mozgatására a digitális gyártósor kisebb, önműködő robotokat használ, melyek a központi rendszer által megszabott módon, a gyár teljes területén autonóm módon közlekednek.<br><br>Ahol hamarosan szükség lesz egy ilyen eszközre, a mesterséges intelligencia a helyszínre küld egyet az összeszerelés menetéhez igazodva.'
+                        desc: 'A szerelés közben használt speciális eszközök mozgatására a digitális gyártósor kisebb, önműködő robotokat használ, melyek a központi rendszer által megszabott módon, a gyár teljes területén autonóm módon közlekednek.<br><br>Ahol hamarosan szükség lesz egy ilyen eszközre, a mesterséges intelligencia a helyszínre küld egyet az összeszerelés menetéhez igazodva.'
                     },
                     {
                         id: 'dokkolo',
-                        title: 'Robot dokkolók',
+                        title: 'Robot dokkolók',
                         pos: {x:125, y:-32},
-                        desc: 'Amikor nincs szükség a robot platform egy elemére, csatlakozik a gyár területén elhelyezett valamelyik töltőegységhez.<br><br>Ezek a dokkolók a platform barmely egységét képesek ellátni árammal, még a nagyobb robotok kivehető akkumulátorait is lehet tölteni itt.<br><br>Az életszerű működést szemléltetve a dokkolóra néha a külső helyiségből a fotocellás ajtón áthaladva robot csatlakozik, majd a töltés végeztével kimegy.'
+                        desc: 'Amikor nincs szükség a robot platform egy elemére, csatlakozik a gyár területén elhelyezett valamelyik töltőegységhez.<br><br>Ezek a dokkolók a platform barmely egységét képesek ellátni árammal, még a nagyobb robotok kivehető akkumulátorait is lehet tölteni itt.<br><br>Az életszerű működést szemléltetve a dokkolóra néha a külső helyiségből a fotocellás ajtón áthaladva robot csatlakozik, majd a töltés végeztével kimegy.'
                     },
                     {
                         id: 'tarolo',
                         title: 'Műhely környezet',
                         pos: {x:853, y:10},
-                        desc: 'Itt az általános műhelymunka kellékei (szerszámtárolók, mobil eszközök, akkumulátor töltők és egymásra rakott tartalék alkatrészek) találhatók.',
+                        desc: 'Itt az általános műhelymunka kellékei (szerszámtárolók, mobil eszközök, akkumulátor töltők és egymásra rakott tartalék alkatrészek) találhatók.',
                     },
                     {
                         id: 'kozossegiter',
                         title: 'Közösségi tér',
                         pos: {x:1025, y:214},
-                        desc: 'A terem jobb oldalán található fotocellás ajtó üvegén keresztül egy helyiséget látunk, ahol székek, asztalok és italautomata található.<br><br>A falon keresztül a közösségi térbe szintén benézhet a felhasználó, ilyenkor a szerelőcsarnok monoton hangját felváltja a rádióból szóló zene.',
+                        desc: 'A terem jobb oldalán található fotocellás ajtó üvegén keresztül egy helyiséget látunk, ahol székek, asztalok és italautomata található.<br><br>A falon keresztül a közösségi térbe szintén benézhet a felhasználó, ilyenkor a szerelőcsarnok monoton hangját felváltja a rádióból szóló zene.',
                     },
                     {
                         id: 'iroda',
                         title: 'Iroda',
                         pos: {x:571, y:513},
-                        desc: 'Az összeszerelő terület mellett egy kisebb irodahelyiség található, nagy üvegfalakkal és általános irodai munkához szükséges berendezések futurisztikus verzióival, megtartva természetes műhely jellegét falinaptárral és kávéspoharakkal.',
+                        desc: 'Az összeszerelő terület mellett egy kisebb irodahelyiség található, nagy üvegfalakkal és általános irodai munkához szükséges berendezések futurisztikus verzióival, megtartva természetes műhely jellegét falinaptárral és kávéspoharakkal.',
                     },
                     {
                         id: 'kulter',
                         title: 'Külső tér',
                         pos: {x:237, y:549},
-                        desc: 'A déli falon lévő ablakon kinézve téli tájat látja a felhasználó - a távolban hófödte hegycsúcsokkal -, a keleti ablakon pedig az üzem külső falai tűnnek fel.<brr><br>Lehetőség van arra, hogy a felhasználó kidugja a fejét a falon keresztül, ilyenkor szél, hófúvás hangja hallatszik.',
+                        desc: 'A déli falon lévő ablakon kinézve téli tájat látja a felhasználó - a távolban hófödte hegycsúcsokkal -, a keleti ablakon pedig az üzem külső falai tűnnek fel.<brr><br>Lehetőség van arra, hogy a felhasználó kidugja a fejét a falon keresztül, ilyenkor szél, hófúvás hangja hallatszik.',
                     },
                     {
                         id: 'folyoso',
-                        title: 'Robot közlekedő folyosó',
+                        title: 'Robot közlekedő folyosó',
                         pos: {x:-295, y:115},
-                        desc: 'A baloldali fotocellás ajtón keresztül egy folyosót látunk, ahol önműködő robotok közlekednek a kijelölt útvonalon.<br><br>Természetesen itt is át lehet dugni a fejet a falon keresztül, ilyenkor egyrészt a folyosón közlekedő robotokat lehet látni, másrészt a szerelőcsarnok hangjait felváltja a közlekedő robotok hangja.',
+                        desc: 'A baloldali fotocellás ajtón keresztül egy folyosót látunk, ahol önműködő robotok közlekednek a kijelölt útvonalon.<br><br>Természetesen itt is át lehet dugni a fejet a falon keresztül, ilyenkor egyrészt a folyosón közlekedő robotokat lehet látni, másrészt a szerelőcsarnok hangjait felváltja a közlekedő robotok hangja.',
                     },
                     {
                         id: 'fotocella',
-                        title: 'Fotocellás ajtók',
+                        title: 'Fotocellás ajtók',
                         pos: {x:-145, y:175},
-                        desc: 'A fotocellás ajtókon keresztül a másik helyiségekben történő eseményeket és a berendezési tárgyakat lehet látni, érzékelni.<br><br>A fotocellás ajtó kinyílásakor a túlsó helyiségben lévő hanghatások felerősödnek, ezzel is erősítve a vizuális élményt.',
+                        desc: 'A fotocellás ajtókon keresztül a másik helyiségekben történő eseményeket és a berendezési tárgyakat lehet látni, érzékelni.<br><br>A fotocellás ajtó kinyílásakor a túlsó helyiségben lévő hanghatások felerősödnek, ezzel is erősítve a vizuális élményt.',
                     },
                 ]
             },
@@ -559,25 +562,25 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                       id: 'fej',
                       title: 'Univerzális működés',
                       pos: {x:666, y:-474},
-                      desc: 'A VR élmény gördülékennyé tételéhez segítségül hívtunk egy jövőbeni kompozit anyagot, mely szuper könnyű és nanoszerkezetéből adódóan óriási oldalirányú erőhatást képes elviselni. Az ebből készült vékony rudacskák benyomódáskor nemcsak megállapítják az elem (pl.: csavar) típusát, de ellentartásukkal a fej forgásközéppontba rendezik azt és rászorítanak a forgatás megkezdésekor.',
+                      desc: 'A VR élmény gördülékennyé tételéhez segítségül hívtunk egy jövőbeni kompozit anyagot, mely szuper könnyű és nanoszerkezetéből adódóan óriási oldalirányú erőhatást képes elviselni. Az ebből készült vékony rudacskák benyomódáskor nemcsak megállapítják az elem (pl.: csavar) típusát, de ellentartásukkal a fej forgásközéppontba rendezik azt és rászorítanak a forgatás megkezdésekor.',
                   },
                   {
                       id: 'rudacskak',
                       title: 'Nanoszerkezetű rudacskák',
                       pos: {x:216, y:-380},
-                      desc: 'A VR kontroller ravaszának enyhe meghúzására a rudacska mátrix kicsúszik a fejből, hogy letapogassa a hozzáérintett elemet (pl.: csavart). Amint a felhasználó jobban behúzza a ravaszt, a fej forgásközéppontba kerül, és a ravasz húzásának erősségével elkezdi forgatni a teljes fejet.',
+                      desc: 'A VR kontroller ravaszának enyhe meghúzására a rudacska mátrix kicsúszik a fejből, hogy letapogassa a hozzáérintett elemet (pl.: csavart). Amint a felhasználó jobban behúzza a ravaszt, a fej forgásközéppontba kerül, és a ravasz húzásának erősségével elkezdi forgatni a teljes fejet.',
                   },
                   {
                       id: 'tok',
                       title: 'Cserélhető fej',
                       pos: {x:-56, y:-372},
-                      desc: 'Teljes hosszúságában az egymáson csúszó kompozit rudacskákat tartalmazza és gondoskodik a nyomás hatására keletkező hő elvezetéséről forgás közben.',
+                      desc: 'Teljes hosszúságában az egymáson csúszó kompozit rudacskákat tartalmazza és gondoskodik a nyomás hatására keletkező hő elvezetéséről forgás közben.',
                   },
                   {
                       id: 'motor',
-                      title: 'Nagyteljesítményű motor',
+                      title: 'Nagyteljesítményű motor',
                       pos: {x:-325, y:-306},
-                      desc: 'Kis mérete és súlya ellenére erős elektromos zajt kelt.',
+                      desc: 'Kis mérete és súlya ellenére erős elektromos zajt kelt.',
                   },
                   {
                       id: 'ravasz',
@@ -593,39 +596,39 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                   },
                   {
                       id: 'csik',
-                      title: 'Visszajelző ledcsíkok',
+                      title: 'Visszajelző ledcsíkok',
                       pos: {x:-1031, y:811},
-                      desc: 'Információval szolgálnak csavarozásnál:<br><br>• a zöld világít, ha megfelelő a csavarozás<br>• a piros világít túlhúzás esetén.',
+                      desc: 'Információval szolgálnak csavarozásnál:<br><br>• a zöld világít, ha megfelelő a csavarozás<br>• a piros világít túlhúzás esetén.',
                   },
                   {
                       id: 'forgasirany',
                       title: 'Forgásirány szabályzó',
                       pos: {x:-880, y:759},
-                      desc: 'Csavar detektálásánál a feszességétől függően a forgásirányt is automatikusan meghatározza a műszer. Ennek a gombnak a megnyomásával manuálisan felülírhatjuk a gép döntését.',
+                      desc: 'Csavar detektálásánál a feszességétől függően a forgásirányt is automatikusan meghatározza a műszer. Ennek a gombnak a megnyomásával manuálisan felülírhatjuk a gép döntését.',
                   },
                   {
                       id: 'csapolas',
                       title: 'Autómatikus csapolás felismerés',
                       pos: {x:-784, y:765},
-                      desc: 'Azoknál az elemeknél (pl.: tengely), amelyeknél fontos a forgatás iránya, a fej automatikusan a csapolás vagy jelölés irányába fordul, és kijelzi az eltérés éppen aktuális szögét.',
+                      desc: 'Azoknál az elemeknél (pl.: tengely), amelyeknél fontos a forgatás iránya, a fej automatikusan a csapolás vagy jelölés irányába fordul, és kijelzi az eltérés éppen aktuális szögét.',
                   },
                   {
                       id: 'kijelzo',
                       title: 'Kijelző',
                       pos: {x:-593, y:765},
-                      desc: 'Információt kaphatunk például az éppen felismert elemről vagy a forgatás nyomatékáról.<br><br>Probléma esetén pirosra vált a monokróm kijelző háttérvilágítása.',
+                      desc: 'Információt kaphatunk például az éppen felismert elemről vagy a forgatás nyomatékáról.<br><br>Probléma esetén pirosra vált a monokróm kijelző háttérvilágítása.',
                   },
                   {
                       id: 'rovatka',
                       title: 'Csapolás visszajelzés',
                       pos: {x:149, y:578},
-                      desc: 'Miután a fej automatikusan egy csapolás irányába fordul, egy jól látható jelölésen lehet nyomonkövetni aktuális forgásirányát a folyamat közben.',
+                      desc: 'Miután a fej automatikusan egy csapolás irányába fordul, egy jól látható jelölésen lehet nyomonkövetni aktuális forgásirányát a folyamat közben.',
                   },
                   {
                       id: 'csavar',
                       title: 'Csavarhúzó funkció',
                       pos: {x:250, y:677},
-                      desc: 'Csavar detektálása esetén az érintkező rudacskák kitöltik a csavarfej réseit, a körben szabadon maradtak pedig visszahúzódnak a csavarkulcsba.',
+                      desc: 'Csavar detektálása esetén az érintkező rudacskák kitöltik a csavarfej réseit, a körben szabadon maradtak pedig visszahúzódnak a csavarkulcsba.',
                   },
                   {
                       id: 'kontroller',
@@ -636,88 +639,88 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 ]
             },
             {
-                name:'Motorállvány robot platform',
+                name:'Motorállvány platform',
                 id:'motorallvany',
                 src:'robot.svg',
                 dotStart: 0.4,
                 points: [
                     {
                         id: 'meghajtas',
-                        title: 'Platform meghajtás',
+                        title: 'Platform meghajtás',
                         pos: {x:983, y:-161},
-                        desc: 'Az üzem teljes területe enyhén negatív töltésű fémmel borított. Ez teszi lehetővé (koncentrált elektromágneses pólusváltással) a robotok stabilizálását vagy lebegését pár centiméterre a burkolt fémrétegtől.<br/><br>Az elektromágneseknek nagyobb energiát kell kifejteniük mozgásnál, mint stabilizálásnál, igy elindulásnál a robot megemeli az hajtóművek köralakú védburkolatát a megfelelő léghűtés biztosítására - mind a négyet kisebb időeltolódással az elektromágnesek melegedésének ütemében.'
+                        desc: 'Az üzem teljes területe enyhén negatív töltésű fémmel borított. Ez teszi lehetővé (koncentrált elektromágneses pólusváltással) a robotok stabilizálását vagy lebegését pár centiméterre a burkolt fémrétegtől.<br/><br>Az elektromágneseknek nagyobb energiát kell kifejteniük mozgásnál, mint stabilizálásnál, igy elindulásnál a robot megemeli az hajtóművek köralakú védburkolatát a megfelelő léghűtés biztosítására - mind a négyet kisebb időeltolódással az elektromágnesek melegedésének ütemében.'
                     },
                     {
                         id: 'csatlakozo',
                         title: 'Univerzális csatlakozó',
                         pos: {x:685, y:-53},
-                        desc: 'A robot platform minden eleme rendelkezik ezzel a csatlakozóval: ezen keresztül tudják tölteni akkumulátoraikat és rögzíteni magukat egymáshoz.<br><br>A folyamatos radiókapcsolat ellenére - redundáns rendszerként - minden csatlakozó QR kód formájában információt jelez ki tulajdonosáról és az éppen ott elvégezhető funkcionalitásról.',
+                        desc: 'A robot platform minden eleme rendelkezik ezzel a csatlakozóval: ezen keresztül tudják tölteni akkumulátoraikat és rögzíteni magukat egymáshoz.<br><br>A folyamatos radiókapcsolat ellenére - redundáns rendszerként - minden csatlakozó QR kód formájában információt jelez ki tulajdonosáról és az éppen ott elvégezhető funkcionalitásról.',
                     },
                     {
                         id: 'vilagitas',
                         title: 'Világítás és optikai szenzorok',
                         pos: {x:333, y:-53},
-                        desc: 'A gyár területén, ahol nem dolgoznak emberek, nincs közvilágítás sem.<br><br>A robotok saját irányítható reflek- toraikkal segítik az - oldalikon sűrűn elhelyezett - optikai szenzorok munkáját és az automatikus mozgást.',
+                        desc: 'A gyár területén, ahol nem dolgoznak emberek, nincs közvilágítás sem.<br><br>A robotok saját irányítható reflek- toraikkal segítik az - oldalikon sűrűn elhelyezett - optikai szenzorok munkáját és az automatikus mozgást.',
                     },
                     {
                         id: 'allvany',
                         title: 'Emelhető állvány',
                         pos: {x:682, y:-367},
-                        desc: 'A hidraulikus emelő a rendszer legtöbb elemére jellemző, automatikusan vagy külön gombnyomásra igazodik a feladathoz es a felhasználó magasságához.',
+                        desc: 'A hidraulikus emelő a rendszer legtöbb elemére jellemző, automatikusan vagy külön gombnyomásra igazodik a feladathoz es a felhasználó magasságához.',
                     },
                     {
                         id: 'rogzito',
                         title: 'Szabványos rögzítési pontok',
                         pos: {x:-863, y:-513},
-                        desc: 'A platform az összes ipari szabvánnyal kompatibilis: csak az eszköznek megfelelő tartó alátétet kell a hidraulikus emelőre rögzíteni, az információ és áramellátás már egységes csatlakozón keresztül történik.',
+                        desc: 'A platform az összes ipari szabvánnyal kompatibilis: csak az eszköznek megfelelő tartó alátétet kell a hidraulikus emelőre rögzíteni, az információ és áramellátás már egységes csatlakozón keresztül történik.',
                     },
                     {
                         id: 'eszkozok',
                         title: 'Eszközök',
                         pos: {x:-804, y:-601},
-                        desc: 'A műveletek során több - különböző gyártóktól származó - eszközzel történik a munkavégzés, melyek ugyanarra a hordozó platformra vannak felszerelve. Ebből a két komponensből áll össze egy funkcionális robot.',
+                        desc: 'A műveletek során több - különböző gyártóktól származó - eszközzel történik a munkavégzés, melyek ugyanarra a hordozó platformra vannak felszerelve. Ebből a két komponensből áll össze egy funkcionális robot.',
                     },
                     {
                         id: 'akku',
                         title: 'Közös akkumulátor szabvány',
                         pos: {x:-424, y:257},
-                        desc: 'Míg a rendszer kisebb elemei könnyen feltöltik magukat egy-egy dokkolás alkalmával, a nagyobb robotok kivehető akkumulátorokkal biztosítják a folyamatos munkavégzést.<br><br>Minden akkumulátor egy ledsor segítségével folyamatosan kijelzi aktuális töltöttségi állapotát, és ezeket az akkumulátorokat a dokkoló egységekben is lehet tölteni.',
+                        desc: 'Míg a rendszer kisebb elemei könnyen feltöltik magukat egy-egy dokkolás alkalmával, a nagyobb robotok kivehető akkumulátorokkal biztosítják a folyamatos munkavégzést.<br><br>Minden akkumulátor egy ledsor segítségével folyamatosan kijelzi aktuális töltöttségi állapotát, és ezeket az akkumulátorokat a dokkoló egységekben is lehet tölteni.',
                     },
                     {
                         id: 'kijelzo',
                         title: 'Érintőképernyők',
                         pos: {x:-43, y:601},
-                        desc: 'A platform elemei, melyek kontaktba kerülnek a szerelést végzővel, mind rendelkeznek érintőképernyővel. Itt a felhasználó információkat kaphat a műveletek és robotok állapotáról, felülírhatja automatikus viselkedésüket.',
+                        desc: 'A platform elemei, melyek kontaktba kerülnek a szerelést végzővel, mind rendelkeznek érintőképernyővel. Itt a felhasználó információkat kaphat a műveletek és robotok állapotáról, felülírhatja automatikus viselkedésüket.',
                     },
                     {
                         id: 'ledcsik',
                         title: 'Állapotjelző ledcsíkok',
                         pos: {x:-151, y:587},
-                        desc: 'A platform eszközöket szállító elemei mind tartalmaznak színes ledcsíkokat jól látható helyeken. Ezek funkciója egyértelmű:<br><br>• ha zölden világít, akkor lehet dolgozni a géppel<br>• a piros pedig jelzi, ha a mozgásban van a robot és megfelelő távolságban kell maradni tőle.',
+                        desc: 'A platform eszközöket szállító elemei mind tartalmaznak színes ledcsíkokat jól látható helyeken. Ezek funkciója egyértelmű:<br><br>• ha zölden világít, akkor lehet dolgozni a géppel<br>• a piros pedig jelzi, ha a mozgásban van a robot és megfelelő távolságban kell maradni tőle.',
                     },
                     {
                         id: 'allito',
                         title: 'Emelőtávolság állító',
                         pos: {x:-371, y:555},
-                        desc: 'A hidraulikus emelők előre-hátra csúsztathatók, alkalmazkodva a hordozott eszköz igényeihez.<br><br>Az erre használt sínrendszert egy redőnyszerű takarás védi a lehulló alkatrészektől.',
+                        desc: 'A hidraulikus emelők előre-hátra csúsztathatók, alkalmazkodva a hordozott eszköz igényeihez.<br><br>Az erre használt sínrendszert egy redőnyszerű takarás védi a lehulló alkatrészektől.',
                     },
 
                     {
                         id: 'veszjelzes',
-                        title: 'Vészjelzők',
+                        title: 'Vészjelzők',
                         pos: {x:-947, y:607},
-                        desc: 'Mikor a platform egy eleme mozgásba lendül, az adott robot összes ledcsíkja pirosra vált, es minden érintőképernyő egy figyelmeztető jelzést jelenít meg.',
+                        desc: 'Mikor a platform egy eleme mozgásba lendül, az adott robot összes ledcsíkja pirosra vált, es minden érintőképernyő egy figyelmeztető jelzést jelenít meg.',
                     },
                     {
                         id: 'utkozok',
                         title: 'Biztonsági ütközők',
                         pos: {x:12, y:877},
-                        desc: 'Nincs tökéletes rendszer, ezért a platform összes elemét gumiból készült ütközőfelület veszi körül, mely védi őket a nemvárt ütközésektől. A robotok sarkain jellemzően ez egy megerősített védelem.',
+                        desc: 'Nincs tökéletes rendszer, ezért a platform összes elemét gumiból készült ütközőfelület veszi körül, mely védi őket a nemvárt ütközésektől. A robotok sarkain jellemzően ez egy megerősített védelem.',
                     },
                 ],
             },
             {
-                name:'Szerelő robot platform',
+                name:'Szerelő robot platform',
                 id:'szerelorobot',
                 src:'small_robot.svg',
                 dotStart: 0.4,
@@ -726,55 +729,55 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                       id: 'meghajtas',
                       title: 'A platform meghajtása',
                       pos: {x:716, y:-151},
-                      desc: 'Az üzem teljes területe enyhén negatív töltésű fémmel borított. Ez teszi lehetővé (koncentrált elektromágneses pólusváltással) a robotok stabilizálását vagy lebegését pár centiméterre a burkolt fémrétegtől.<br/><br>Az elektromágneseknek nagyobb energiát kell kifejteniük mozgásnál, mint stabilizálásnál, igy elindulásnál a robot megemeli az hajtóművek köralakú védburkolatát a megfelelő léghűtés biztosítására - mind a négyet kisebb időeltolódással az elektromágnesek melegedésének ütemében.'
+                      desc: 'Az üzem teljes területe enyhén negatív töltésű fémmel borított. Ez teszi lehetővé (koncentrált elektromágneses pólusváltással) a robotok stabilizálását vagy lebegését pár centiméterre a burkolt fémrétegtől.<br/><br>Az elektromágneseknek nagyobb energiát kell kifejteniük mozgásnál, mint stabilizálásnál, igy elindulásnál a robot megemeli az hajtóművek köralakú védburkolatát a megfelelő léghűtés biztosítására - mind a négyet kisebb időeltolódással az elektromágnesek melegedésének ütemében.'
                   },
                   {
                       id: 'csatlakozo',
                       title: 'Univerzális csatlakozó',
                       pos: {x:552, y:-53},
-                      desc: 'A robot platform minden eleme rendelkezik ezzel a csatlakozóval: ezen keresztül tudják tölteni akkumulátoraikat és rögzíteni magukat egymáshoz.<br><br>A folyamatos radiókapcsolat ellenére - redundáns rendszerként - minden csatlakozó QR kód formájában információt jelez ki tulajdonosáról és az éppen ott elvégezhető funkcionalitásról.',
+                      desc: 'A robot platform minden eleme rendelkezik ezzel a csatlakozóval: ezen keresztül tudják tölteni akkumulátoraikat és rögzíteni magukat egymáshoz.<br><br>A folyamatos radiókapcsolat ellenére - redundáns rendszerként - minden csatlakozó QR kód formájában információt jelez ki tulajdonosáról és az éppen ott elvégezhető funkcionalitásról.',
                   },
                   {
                       id: 'vilagitas',
                       title: 'Világítás és optikai szenzorok',
                       pos: {x:284, y:-53},
-                      desc: 'A gyár területén, ahol nem dolgoznak emberek, nincs közvilágítás sem.<br><br>A robotok saját irányítható reflek- toraikkal segítik az - oldalikon sűrűn elhelyezett - optikai szenzorok munkáját és az automatikus mozgást.',
+                      desc: 'A gyár területén, ahol nem dolgoznak emberek, nincs közvilágítás sem.<br><br>A robotok saját irányítható reflek- toraikkal segítik az - oldalikon sűrűn elhelyezett - optikai szenzorok munkáját és az automatikus mozgást.',
                   },
                   {
                       id: 'allvany',
                       title: 'Emelhető állvány',
                       pos: {x:534, y:-367},
-                      desc: 'A hidraulikus emelő a rendszer legtöbb elemére jellemző, automatikusan vagy külön gombnyomásra igazodik a feladathoz es a felhasználó magasságához.',
+                      desc: 'A hidraulikus emelő a rendszer legtöbb elemére jellemző, automatikusan vagy külön gombnyomásra igazodik a feladathoz es a felhasználó magasságához.',
                   },
                   {
                       id: 'rogzito',
                       title: 'Szabványos rögzítési pontok',
                       pos: {x:-542, y:-513},
-                      desc: 'A platform az összes ipari szabvánnyal kompatibilis: csak az eszköznek megfelelő tartó alátétet kell a hidraulikus emelőre rögzíteni, az információ és áramellátás már egységes csatlakozón keresztül történik.',
+                      desc: 'A platform az összes ipari szabvánnyal kompatibilis: csak az eszköznek megfelelő tartó alátétet kell a hidraulikus emelőre rögzíteni, az információ és áramellátás már egységes csatlakozón keresztül történik.',
                   },
                   {
                       id: 'eszkozok',
                       title: 'Eszközök',
                       pos: {x:-498, y:-601},
-                      desc: 'A műveletek során több - különböző gyártóktól származó - eszközzel történik a munkavégzés, melyek ugyanarra a hordozó platformra vannak felszerelve. Ebből a két komponensből áll össze egy funkcionális robot.',
+                      desc: 'A műveletek során több - különböző gyártóktól származó - eszközzel történik a munkavégzés, melyek ugyanarra a hordozó platformra vannak felszerelve. Ebből a két komponensből áll össze egy funkcionális robot.',
                   },
                   {
                       id: 'ledcsik',
                       title: 'Állapotjelző ledcsíkok',
                       pos: {x:-352, y:595},
-                      desc: 'A platform eszközöket szállító elemei mind tartalmaznak színes ledcsíkokat jól látható helyeken. Ezek funkciója egyértelmű:<br><br>• ha zölden világít, akkor lehet dolgozni a géppel<br>• a piros pedig jelzi, ha a mozgásban van a robot és megfelelő távolságban kell maradni tőle.',
+                      desc: 'A platform eszközöket szállító elemei mind tartalmaznak színes ledcsíkokat jól látható helyeken. Ezek funkciója egyértelmű:<br><br>• ha zölden világít, akkor lehet dolgozni a géppel<br>• a piros pedig jelzi, ha a mozgásban van a robot és megfelelő távolságban kell maradni tőle.',
                   },
                   {
                       id: 'allito',
                       title: 'Állítható emelőtávolság',
                       pos: {x:-532, y:555},
-                      desc: 'A hidraulikus emelők előre-hátra csúsztathatók, alkalmazkodva a hordozott eszköz igényeihez.<br><br>Az erre használt sínrendszert egy redőnyszerű takarás védi a lehulló alkatrészektől.',
+                      desc: 'A hidraulikus emelők előre-hátra csúsztathatók, alkalmazkodva a hordozott eszköz igényeihez.<br><br>Az erre használt sínrendszert egy redőnyszerű takarás védi a lehulló alkatrészektől.',
                   },
                   {
                       id: 'utkozok',
                       title: 'Biztonsági ütközők',
                       pos: {x:-350, y:763},
-                      desc: 'Nincs tökéletes rendszer, ezért a platform összes elemét gumiból készült ütközőfelület veszi körül, mely védi őket a nemvárt ütközésektől. A robotok sarkain jellemzően ez egy megerősített védelem.',
+                      desc: 'Nincs tökéletes rendszer, ezért a platform összes elemét gumiból készült ütközőfelület veszi körül, mely védi őket a nemvárt ütközésektől. A robotok sarkain jellemzően ez egy megerősített védelem.',
                   },
                   {
                       id: 'hajtomu',
@@ -785,40 +788,40 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 ],
             },
             {
-                name:'Szíjszerelő robot',
+                name:'Szíjszerelő robot',
                 id:'ekszijszerelo',
                 src:'belt_robot.svg',
                 dotStart: 0.4,
                 points: [
                   {
                       id: 'platform',
-                      title: 'Szerelő robot platform',
+                      title: 'Szerelő robot platform',
                       pos: {x:773, y:7},
                       desc: 'Az eszközt mozgató robot platformról <a href="'+url+'?page=szerelorobot'+'">további információ itt.</a>',
                   },
                   {
                       id: 'karok',
-                      title: 'Feszítőkarok',
+                      title: 'Feszítőkarok',
                       pos: {x:618, y:-477},
-                      desc: 'Mielőtt a szíjszerelő robot csatlakozna a <a href="'+url+'?page=platform'+'">motorállványhoz</a>, tárcsái egy előre programozott pozícióba for- dulnak és karjai a tartott ékszíj csatlakozási pontjaiba pozícionálják magukat.',
+                      desc: 'Mielőtt a szíjszerelő robot csatlakozna a <a href="'+url+'?page=platform'+'">motorállványhoz</a>, tárcsái egy előre programozott pozícióba for- dulnak és karjai a tartott ékszíj csatlakozási pontjaiba pozícionálják magukat.',
                   },
                   {
                       id: 'teleszkop',
                       title: 'Teleszkópos emelőrudak',
                       pos: {x:-175, y:-386},
-                      desc: 'Az állványhoz csatlakozás után a karok teleszkópos emelőrúdjai kicsúsznak és szekvenciálisan felfeszítik az ékszíjat a motoron lévő tárcsákra.',
+                      desc: 'Az állványhoz csatlakozás után a karok teleszkópos emelőrúdjai kicsúsznak és szekvenciálisan felfeszítik az ékszíjat a motoron lévő tárcsákra.',
                   },
                 ],
             },
             {
-                name:'Beállítóműszer',
+                name:'Beállítóműszer',
                 id:'beallitomuszer',
                 src:'helper_robot.svg',
                 dotStart: 0.4,
                 points: [
                   {
                       id: 'platform',
-                      title: 'Szerelő robot platform',
+                      title: 'Szerelő robot platform',
                       pos: {x:773, y:7},
                       desc: 'Az eszközt mozgató robot platformról <a href="'+url+'?page=szerelorobot'+'">további információ itt.</a>',
                   },
@@ -838,24 +841,24 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                       id: 'karok',
                       title: 'Inverz kinematikus karok',
                       pos: {x:-134, y:-444},
-                      desc: 'Dinamikus felépítése lehetővé teszi a hozzáférést a legrejtettebb csavarokhoz is. A karbon csövekből készült karok könnyű súlyuk miatt gyors és precíz mozgásokat tesznek lehetővé.',
+                      desc: 'Dinamikus felépítése lehetővé teszi a hozzáférést a legrejtettebb csavarokhoz is. A karbon csövekből készült karok könnyű súlyuk miatt gyors és precíz mozgásokat tesznek lehetővé.',
                   },
                   {
                       id: 'tarto',
-                      title: 'Irányítópanel tartó',
+                      title: 'Irányítópanel tartó',
                       pos: {x:-691, y:-462},
-                      desc: 'A tengelyek forgatását egy kijelzővel ellátott irányítópanelen szabályozhatja a felhasználó két gomb segítségével.<br><br>Amíg a gombokat nyomva tartja, a forgás üteme exponenciálisan növekszik mindkét irányba a kihívás fokozása érdekében.'
+                      desc: 'A tengelyek forgatását egy kijelzővel ellátott irányítópanelen szabályozhatja a felhasználó két gomb segítségével.<br><br>Amíg a gombokat nyomva tartja, a forgás üteme exponenciálisan növekszik mindkét irányba a kihívás fokozása érdekében.'
                   },
                   {
                       id: 'kompakt',
-                      title: 'Mozgás',
+                      title: 'Mozgás',
                       pos: {x:-400, y:-265},
                       desc: 'A művelett befejezése után a robotkarok becsukódnak és az elektromágneses rögzítés feloldása előtt az eszköz a platform súlyközéppontjába helyezkedik a beépített sínrendszer segítségével.',
                   },
                 ],
             },
             {
-                name:'Tesztelőrobot',
+                name:'Tesztelőrobot',
                 id:'teszt',
                 src:'tester_robot.svg',
                 dotStart: 0.4,
@@ -884,31 +887,31 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                       id: 'hajtomu',
                       title: 'Elektromágneses talpak',
                       pos: {x:1000, y:-69},
-                      desc: 'Az alkatrésztálca mozgatása ugyanolyan elven működik mint a platform többi eleme, csak a súlykülöngség miatt lényegesen kisebb kivitelben.',
+                      desc: 'Az alkatrésztálca mozgatása ugyanolyan elven működik mint a platform többi eleme, csak a súlykülöngség miatt lényegesen kisebb kivitelben.',
                   },
                   {
                       id: 'talpak',
                       title: 'Dinamikus tartókarok',
                       pos: {x:731, y:575},
-                      desc: 'A talpak tartóelemei dinamikusan forgathatók a legmegfelelőbb helykihasználás érdekében.',
+                      desc: 'A talpak tartóelemei dinamikusan forgathatók a legmegfelelőbb helykihasználás érdekében.',
                   },
                   {
                       id: 'kijelzo',
                       title: 'Érintőképernyő',
                       pos: {x:-264, y:468},
-                      desc: 'Egy ütéssálló kijelző található az asztallapba építve, amely információátadásra és bevitelre is szolgál.<br><br>Nyomon követheti segítségéve a felhasználó a munka fázisait, információk jelennek meg a következő szerelési lépéssel kapcsolatban, hibánál pirosan villog, és az egyes gombokat is itt lehet kezelni.',
+                      desc: 'Egy ütéssálló kijelző található az asztallapba építve, amely információátadásra és bevitelre is szolgál.<br><br>Nyomon követheti segítségéve a felhasználó a munka fázisait, információk jelennek meg a következő szerelési lépéssel kapcsolatban, hibánál pirosan villog, és az egyes gombokat is itt lehet kezelni.',
                   },
                   {
                       id: 'alkatrészek',
                       title: 'Alkatrészek',
                       pos: {x:-463, y:605},
-                      desc: 'A szerelési lépéshez szükséges alkatrészt kiválasztva és felvéve végezhető el az adott munkafázis. Az assztalra lerakott fém alkatrészek mágneses segítséggel a helyükre mozognak.',
+                      desc: 'A szerelési lépéshez szükséges alkatrészt kiválasztva és felvéve végezhető el az adott munkafázis. Az assztalra lerakott fém alkatrészek mágneses segítséggel a helyükre mozognak.',
                   },
                   {
                       id: 'felulet',
                       title: 'Asztalfelület',
                       pos: {x:-866, y:465},
-                      desc: 'A leguruló tárgyak elkerülése érdekében az asztallap süllyesztett, peremet képezve az asztal teljes körvonalán.<br/><br/>Iranyított mágnesességgel tudja mozgatni felületén a fémből készült tárgyakat.',
+                      desc: 'A leguruló tárgyak elkerülése érdekében az asztallap süllyesztett, peremet képezve az asztal teljes körvonalán.<br/><br/>Iranyított mágnesességgel tudja mozgatni felületén a fémből készült tárgyakat.',
                   },
                   {
                       id: 'csatlakozo',
@@ -1377,7 +1380,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                 }
             }
             function onTap(e){
-                checkHit({x:e.clientX, y:e.clientY}, elements[step].points, dotRadius);
+                console.log(e)
+                checkHit({x:e.touches[0].pageX, y:e.touches[0].pageY}, elements[step].points, dotRadius);
             }
             function dotClick(i){
                 if(elements[step].points[i].id){
