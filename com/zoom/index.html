@@ -132,7 +132,7 @@
                     id: 'kulter',
                     title: 'Külső tér',
                     pos: {x:237, y:549},
-                    desc: 'A déli falon lévő ablakon kinézve téli tájat látja a felhasználó - a távolban hófödte hegycsúcsokkal -, a keleti ablakon pedig az üzem külső falai tűnnek fel.<brr><br>Lehetőség van arra, hogy a felhasználó kidugja a fejét a falon keresztül, ilyenkor szél, hófúvás hangja hallatszik.',
+                    desc: 'A déli falon lévő ablakon kinézve téli tájat látja a felhasználó - a távolban hófödte hegycsúcsokkal -, a keleti ablakon pedig az üzem külső falai tűnnek fel.<br><br>Lehetőség van arra, hogy a felhasználó kidugja a fejét a falon keresztül, ilyenkor szél, hófúvás hangja hallatszik.',
                 },
                 {
                     id: 'folyoso',
@@ -715,6 +715,7 @@
         };
 
         hideDetails = function() {
+            console.log('hide details')
             clearActiveDot();
             desc.style.opacity = 0;
             desc.style.transform = 'translateY(16px)';
@@ -977,8 +978,6 @@
 
         function hoverItem(i){
             if(i != hover_item){
-                console.log('hover item', i);
-
                 if(i >= 0){
                     pinchZoom.style.cursor = 'pointer';
                 }else{
@@ -1008,9 +1007,10 @@
 
         checkHit = function (target, points, radius, isHover){
             var clicked = false;
-            var hover = false;
+            var hover = -1;
             if(points){
-                points.forEach((point, i) => {
+                for (i = 0; i < points.length; i++) { 
+                    var point = points[i];
                     var radiusPercent = showDots ? 1.2 : 0.7;
                     var pos = {
                         x: (point.pos.x+imageWidth/2) * pinchZoom.scale + pinchZoom.x + dotRadius,
@@ -1020,8 +1020,7 @@
                         pos.x += -dotRadius + 2;
                         pos.y += -dotRadius + 2;
                     }
-                    //TODO: make the click target bigger only on handheld devices
-
+                    
                     if(distance(target, pos) < dotRadius * radiusPercent ){
                         if(!isHover){
                             dotClick(i);
@@ -1031,8 +1030,7 @@
                             hoverItem(i);
                         }
                     }
-                    return null;
-                });
+                };
                 if(!clicked && !isHover){
                     hideDetails();
                 }
