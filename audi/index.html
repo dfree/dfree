@@ -158,19 +158,19 @@
                   id: 'fej',
                   title: 'Univerzális működés',
                   pos: {x:666, y:-474},
-                  desc: 'A VR élmény gördülékennyé tételéhez segítségül hívtunk egy jövőbeni kompozit anyagot, mely szuper könnyű, és nanoszerkezetéből adódóan óriási oldalirányú erőhatást képes elviselni. Az ebből készült vékony rudacskák benyomódáskor nemcsak megállapítják az elem (pl. csavar) típusát, de ellentartásukkal a fej forgásközéppontba rendezik azt, és rászorítanak a forgatás megkezdésekor.',
+                  desc: 'A VR élmény gördülékennyé tételéhez segítségül hívtunk egy jövőbeni kompozit anyagot, mely szuper könnyű, és nanoszerkezetéből adódóan óriási oldalirányú erőhatást képes elviselni. Az ebből készült vékony rudacskák benyomódáskor nemcsak megállapítják az elem (pl. csavar) típusát automatikus üzemmódban, de ellentartásukkal a fej forgásközéppontba rendezik azt, és rászorítanak a forgatás megkezdésekor.',
               },
               {
                   id: 'rudacskak',
                   title: 'Nanoszerkezetű rudacskák',
                   pos: {x:216, y:-380},
-                  desc: 'A VR kontroller ravaszának enyhe meghúzására a rudacska mátrix kicsúszik a fejből, hogy letapogassa a hozzáérintett elemet (pl. csavart).<br><br>Amint a felhasználó jobban behúzza a ravaszt, a fej forgásközéppontba kerül, és a ravasz húzásának erősségével elkezdi forgatni a teljes fejet.',
+                  desc: 'A VR kontroller ravaszának enyhe meghúzására a rudacska mátrix kicsúszik a fejből, és automatikus üzemmódban letapogatja a hozzáérintett elemet (pl. csavart).<br><br>Amint a felhasználó jobban behúzza a ravaszt, a fej forgásközéppontba kerül, és a ravasz húzásának erősségével elkezdi forgatni a teljes fejet.',
               },
               {
                   id: 'tok',
                   title: 'Cserélhető fej',
                   pos: {x:-56, y:-372},
-                  desc: 'Teljes hosszúságában az egymáson csúszó kompozit rudacskákat tartalmazza, és gondoskodik a nyomás hatására keletkező hő elvezetéséről forgás közben.',
+                  desc: 'Teljes hosszúságában az egymáson csúszó kompozit rudacskákat tartalmazza.',
               },
               {
                   id: 'motor',
@@ -212,7 +212,7 @@
                   id: 'kijelzo',
                   title: 'Kijelző',
                   pos: {x:-593, y:765},
-                  desc: 'Információt kaphatunk az éppen felismert elemről vagy a forgatás nyomatékáról.<br><br>Probléma esetén pirosra vált a monokróm kijelző háttérvilágítása.',
+                  desc: 'Információt kaphatunk az éppen felismert elemről vagy a forgatás nyomatékáról.<br><br>Tutoriál módban a kijelző érintésével lehet csavartípust váltani.<br><br>Probléma esetén pirosra vált a monokróm kijelző háttérvilágítása.',
               },
               {
                   id: 'rovatka',
@@ -349,7 +349,7 @@
                   id: 'rogzito',
                   title: 'Szabványos rögzítési pontok',
                   pos: {x:-542, y:-513},
-                  desc: 'A platform az összes ipari szabvánnyal kompatibilis: csak az eszköznek megfelelő tartó alátétet kell a hidraulikus emelőre rögzíteni, az információ és áramellátás már egységes csatlakozón keresztül történik.',
+                  desc: 'A platfon csak az eszköznek megfelelő tartó alátétet kell a hidraulikus emelőre rögzíteni, az információ és áramellátás már egységes csatlakozón keresztül történik.',
               },
               {
                   id: 'eszkozok',
@@ -1653,7 +1653,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
             <div id="home_scroll_box">
                 <div id="home_title"><div>Motorszerelés Virtuális Valóságban</div></div>
                 <div id="home_desc">
-                  A következőkben bemutatásra kerülő VR élmény koncepciója egy közeljövőben üzemelő gyárba repít minket, ahol tengelybeállítást kell végeznünk egy motoron és utána összeszerelni azt. A program elsődlegesen marketing célokat szolgál, ötvözve a technikai hitelességet a feladatok kényelmes kivitelezhetőségével. A "Tovább" gombra kattintva a rendszer elemeinek részletes terveit találja nagyítható környezetben.
+                  A következőkben bemutatásra kerülő VR élmény koncepciója egy közeljövőben üzemelő gyárba repít minket, ahol vezémű tengely pozícionálást kell végeznünk egy motoron és utána összeszerelni azt. A program elsődlegesen marketing célokat szolgál, ötvözve a technikai hitelességet a feladatok kényelmes kivitelezhetőségével. A "Tovább" gombra kattintva a rendszer elemeinek részletes terveit találja nagyítható környezetben.
                   <br><br>
                   A koncepció egy olyan jövőt vetít előre, amelyben a digitális összefonódás már betört a gyártási technológiákba, és a ma még egzotikusan hangzó felkapott szakkifejezések mindennapi életünk részei lesznek. Ezek a futurisztikus megoldások hivatottak áthidalni a VR, mint fejlődőben lévő technológia jelenlegi nehézségeit: olyan, mint a motorikus mozgások eltérése valós tárgyak és súlyok nélkül vagy a két kéz nehézkes összehangolása egy virtuális térben. A munkafolyamat és a környezet kialakítása ezen kihívások kombinációjára kereste a lehető legjobb megoldást.
                   <br><br><br>
@@ -1675,7 +1675,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
                   <br><br>
                   A lépések többségében a felhasználónak az alkatrésztálcán az adott munkalépéshez felhasznált alkatrészt kell bal kézzel megfognia, és a motoron a megfelelő helyre illeszteni. Csavarozás során a felhasználó a jobb kezében lévő univerzális csavarkulccsal tudja rögzíteni az alkatrészt, miközben a bal kézzel továbbra is tartja azt a szerelés befejezéséig. Speciális lépéseknél az automatikusan igazodó robotok kezelésével történik a feladat végrehajtása.
                   <br><br>
-                  Az összeszerelés befejezése után az elkészült motor főtengelyét egy tesztelő robot forgatni kezdi, és az AR szemüvegen keresztül a felhasználó látni fogja a motoron belül mozgó alkatrészeket, valamint a virtuális teszt eredményeit. A kontroller segítségével lehet gyorsíthatja a forgást, amíg a négy lépéses teszt be nem fejeződik.
+                  Az összeszerelés befejezése után az elkészült motor főtengelyét egy tesztelő robot forgatni kezdi, és az AR szemüvegen keresztül a felhasználó látni fogja a motoron belül mozgó alkatrészeket, valamint a virtuális teszt eredményeit. A kontroller segítségével gyorsíthatja a forgást, amíg a négy lépéses teszt be nem fejeződik.
                   <br><br>
                   A tesztelés után a motorszerelő állvány elhagyja a helyiséget és a felhasználó újra szabadon mozoghat a térben, felfedezve a rejtett részleteket a következő szerelés kezdetéig.
                 </div>
