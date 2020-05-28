@@ -33,26 +33,25 @@
 					element.slice.style = 
 						'position:absolute;left:'+(-slice.width/2)+'px;top:0;width:'+slice.width+'px;height:'+slice.height+'px;'+
 						'transform:rotate('+(rota * i)+'deg);'+
-						'transform-origin:50% 0%;mask-image:url(wheel/img/mask.svg);-webkit-mask-image:url(wheel/img/mask.svg);';
+						'transform-origin:50% 0%;mask-image:url(wheel/img/mask.svg);-webkit-mask-image:url(wheel/img/mask.svg);'//clip-path: polygon(50% 0%, -10% 100%, 110% 100%);-webkit-clip-path: polygon(50% 0%, -10% 100%, 110% 100%);';
 
 					element.container = document.createElement('div');
 					element.container.style = 
 						'position:absolute;left:'+container.x+'px;top:'+container.y+'px;cursor:pointer;'+
 						'transform-origin:0px 0px;transform:rotate('+(-rota * i)+'deg);';
-
+					element.videoHolder = document.createElement('div');
+					element.videoHolder.style = 'position:absolute;left:'+(-setting.width/2)+'px;top:'+(-setting.height/2)+'px;width:'+setting.width+'px;height:'+setting.height+'px;overflow:hidden;';
 					element.video = document.createElement('video');
 					element.video.id = setting.id;
 					element.video.muted = 'true';
 					element.video.class = 'video-js';
 					element.video.loop = true;
 					element.video.poster = setting.img;
-					element.video.style = 
-						'transform:translate(-50%, -50%);';
+					
 					element.source = document.createElement('source');
 					element.source.setAttribute('src', setting.video+'.mp4');
 
 					videos[setting.id] = element.video;
-
 					
 					element.button = document.createElement('object');
 					element.button.data = 'wheel/img/mask.svg';
@@ -62,7 +61,8 @@
 						'position:absolute;left:'+(-slice.width/2)+'px;top:0;width:'+slice.width+'px;height:'+slice.height+'px;'+
 						'transform-origin:50% 0%;transform:scale(1, 0.713);'
 					element.video.appendChild(element.source);
-					element.container.appendChild(element.video);
+					element.container.appendChild(element.videoHolder);
+					element.videoHolder.appendChild(element.video);
 					element.slice.appendChild(element.container);
 					
 					var buttonBranch = document.createElement('div');
@@ -94,9 +94,15 @@
 						path.addEventListener('touchend', function(e){ stopVideo(e.target.id.split('_')[0]) });
 					};
 				}
+				requestAnimationFrame(setupVideojs)
 			}
 		}
 
+		function setupVideojs() {
+			for(var i = 0; i < elements.length; i++){
+				//videojs(elements[i].id);
+			}
+		}
 		function startVideo(id) {
 			console.log('start_'+id)
 			videos[id].play();
