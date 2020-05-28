@@ -15,8 +15,8 @@
 		];
 		var elements = [];
 		var videos = {};
+
 		function init() {
-			console.log('init')
 			if(parent){
 				var wrapper = document.createElement('div');
 				var buttons = document.createElement('div');
@@ -24,6 +24,7 @@
 				buttons.style = 'position:absolute;left:50%;top:50%;';
 				parent.appendChild(buttons);
 				parent.appendChild(wrapper);
+
 				for(var i = 0; i < setup.length; i++){
 					var setting = setup[i];
 					var element = {};
@@ -50,15 +51,16 @@
 					element.source = document.createElement('source');
 					element.source.setAttribute('src', setting.video+'.mp4');
 
+					videos[setting.id] = element.video;
+
 					element.button = document.createElement('object');
-					//element.button.style = 'pointer-events:none;';
 					element.button.data = 'wheel/img/mask.svg';
 					element.button.type = 'image/svg+xml';
 					element.button.id = setting.id+"_button";
 					element.button.style = 
 						'position:absolute;left:'+(-slice.width/2)+'px;top:0;width:'+slice.width+'px;height:'+slice.height+'px;'+
 						'transform:rotate('+(rota * i)+'deg);'+
-						'transform-origin:50% 0%;border:1px solid black'
+						'transform-origin:50% 0%;border:1px solid black, clip-path: polygon(50% 0%, -10% 100%, 110% 100%);-webkit-clip-path: polygon(50% 0%, -10% 100%, 110% 100%);'
 					element.video.appendChild(element.source);
 					element.container.appendChild(element.video);
 					element.slice.appendChild(element.container);
@@ -66,23 +68,22 @@
 					wrapper.appendChild(element.slice);
 
 					elements.push(element);
+
 					element.button.onload = function(e){
 						var path = e.currentTarget.contentDocument.documentElement.firstElementChild;
 						path.id = e.currentTarget.id+'_shape'
 						path.addEventListener('mouseenter', function(e){ startVideo(e.target.id.split('_')[0]) })
 						path.addEventListener('mouseleave', function(e){ stopVideo(e.target.id.split('_')[0]) });
 					};
-
-					videos[setting.id] = element.video;
 				}
 			}
 			requestAnimationFrame(setupPlayers);
 		}
 
 		function startVideo(id) {
-			console.log(id, videos)
 			videos[id].play();
 		}
+
 		function stopVideo(id) {
 			videos[id].pause();
 		}
