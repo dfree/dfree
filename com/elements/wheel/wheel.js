@@ -21,9 +21,9 @@
 				var wrapper = document.createElement('div');
 				var buttons = document.createElement('div');
 				wrapper.style = 'position:absolute;left:50%;top:50%;pointer-events:none;';
-				buttons.style = 'position:absolute;left:50%;top:50%;opacity:0.8;';
-				parent.appendChild(buttons);
+				buttons.style = 'position:absolute;left:50%;top:50%;opacity:0.6;';
 				parent.appendChild(wrapper);
+				parent.appendChild(buttons);
 				for(var i = 0; i < setup.length; i++){
 					var setting = setup[i];
 					var element = {};
@@ -46,7 +46,7 @@
 					element.video.muted = 'true';
 					element.video.class = 'video-js';
 					element.video.loop = true;
-					element.video.playsinline = true;
+					element.video.playsInline = true;
 					element.video.poster = setting.img;
 					element.video.style='pointer-events:none;-webkit-user-select:none';
 					element.source = document.createElement('source');
