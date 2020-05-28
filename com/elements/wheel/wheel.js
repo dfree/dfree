@@ -49,23 +49,24 @@
 					element.video.preload = true;
 					element.video.playsInline = true;
 					element.video.poster = setting.img;
-					element.video.style='pointer-events:none;-webkit-user-select:none';
+					element.video.style='pointer-events:none;-webkit-user-select:none;-webkit-touch-callout: none;';
 					element.source = document.createElement('source');
+					element.source.style='pointer-events:none;-webkit-user-select:none;-webkit-touch-callout: none;';
 					element.source.setAttribute('src', setting.video+'.mp4');
 
 					videos[setting.id] = element.video;
 					
-					element.button = document.createElement('object');
-					element.button.data = 'wheel/img/mask.svg';
-					element.button.type = 'image/svg+xml';
-					element.button.id = setting.id+"_button";
-					element.button.style = 
-						'position:absolute;left:'+(-slice.width/2)+'px;top:0;width:'+slice.width+'px;height:'+slice.height+'px;'+
-						'transform-origin:50% 0%;transform:scale(1, 0.713);'
 					element.video.appendChild(element.source);
 					element.container.appendChild(element.videoHolder);
 					element.videoHolder.appendChild(element.video);
 					element.slice.appendChild(element.container);
+
+					element.button = document.createElement('object');
+					element.button.data = 'wheel/img/mask.svg';
+					element.button.id = setting.id+"_button";
+					element.button.style = 
+						'position:absolute;left:'+(-slice.width/2)+'px;top:0;width:'+slice.width+'px;height:'+slice.height+'px;'+
+						'transform-origin:50% 0%;transform:scale(1, 0.713);-webkit-user-select:none;-webkit-touch-callout: none;'
 					
 					var buttonBranch = document.createElement('div');
 					buttonBranch.style = 'transform:rotate('+(rota * i)+'deg);';
@@ -92,8 +93,8 @@
 						path.addEventListener('mouseover', function(e){ startVideo(e.target.id.split('_')[0]) });
 						path.addEventListener('mouseout', function(e){ stopVideo(e.target.id.split('_')[0]) });
 
-						path.addEventListener('touchstart', function(e){ e.preventDefault;startVideo(e.target.id.split('_')[0]) });
-						path.addEventListener('touchend', function(e){ e.preventDefault;stopVideo(e.target.id.split('_')[0]) });
+						path.addEventListener('touchstart', function(e){ e.preventDefault(); startVideo(e.target.id.split('_')[0]) });
+						path.addEventListener('touchend', function(e){ e.preventDefault(); stopVideo(e.target.id.split('_')[0]) });	
 					};
 				}
 				requestAnimationFrame(setupVideojs)
@@ -102,7 +103,7 @@
 
 		function setupVideojs() {
 			for(var i = 0; i < elements.length; i++){
-				videojs(elements[i].id);
+				//videojs(elements[i].id);
 			}
 		}
 		function startVideo(id) {
