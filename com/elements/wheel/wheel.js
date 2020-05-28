@@ -46,12 +46,10 @@
 					element.video.muted = 'true';
 					element.video.class = 'video-js';
 					element.video.loop = true;
-					element.video.preload = true;
+					element.video.preload = 'auto';
 					element.video.playsInline = true;
 					element.video.poster = setting.img;
-					element.video.style='pointer-events:none;-webkit-user-select:none;-webkit-touch-callout: none;';
 					element.source = document.createElement('source');
-					element.source.style='pointer-events:none;-webkit-user-select:none;-webkit-touch-callout: none;';
 					element.source.setAttribute('src', setting.video+'.mp4');
 
 					videos[setting.id] = element.video;
@@ -66,7 +64,7 @@
 					element.button.id = setting.id+"_button";
 					element.button.style = 
 						'position:absolute;left:'+(-slice.width/2)+'px;top:0;width:'+slice.width+'px;height:'+slice.height+'px;'+
-						'transform-origin:50% 0%;transform:scale(1, 0.713);-webkit-user-select:none;-webkit-touch-callout: none;'
+						'transform-origin:50% 0%;transform:scale(1, 0.713);'
 					
 					var buttonBranch = document.createElement('div');
 					buttonBranch.style = 'transform:rotate('+(rota * i)+'deg);';
@@ -94,7 +92,7 @@
 						path.addEventListener('mouseout', function(e){ stopVideo(e.target.id.split('_')[0]) });
 
 						path.addEventListener('touchstart', function(e){ e.preventDefault(); startVideo(e.target.id.split('_')[0]) });
-						path.addEventListener('touchend', function(e){ e.preventDefault(); stopVideo(e.target.id.split('_')[0]) });	
+						path.addEventListener('touchend', function(e){ e.preventDefault(); stopVideo(e.target.id.split('_')[0]) });
 					};
 				}
 				requestAnimationFrame(setupVideojs)
@@ -103,7 +101,7 @@
 
 		function setupVideojs() {
 			for(var i = 0; i < elements.length; i++){
-				videojs(elements[i].id);
+				//videojs(elements[i].id);
 			}
 		}
 		function startVideo(id) {
