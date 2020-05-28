@@ -21,7 +21,7 @@
 				var wrapper = document.createElement('div');
 				var buttons = document.createElement('div');
 				wrapper.style = 'position:absolute;left:50%;top:50%;pointer-events:none;';
-				buttons.style = 'position:absolute;left:50%;top:50%;opacity:0.6;';
+				buttons.style = 'position:absolute;left:50%;top:50%;opacity:0.8;';
 				parent.appendChild(wrapper);
 				parent.appendChild(buttons);
 				for(var i = 0; i < setup.length; i++){
