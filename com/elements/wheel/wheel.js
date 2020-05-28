@@ -46,6 +46,7 @@
 					element.video.muted = 'true';
 					element.video.class = 'video-js';
 					element.video.loop = true;
+					element.video.preload = true;
 					element.video.playsInline = true;
 					element.video.poster = setting.img;
 					element.video.style='pointer-events:none;-webkit-user-select:none';
