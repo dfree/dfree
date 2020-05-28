@@ -45,6 +45,7 @@
 					element.video.muted = 'true';
 					element.video.class = 'video-js';
 					element.video.loop = true;
+					element.video.poster = setting.img;
 					element.video.style = 
 						'transform:translate(-50%, -50%);';
 					element.source = document.createElement('source');
