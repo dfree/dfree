@@ -91,8 +91,8 @@
 						path.addEventListener('mouseover', function(e){ startVideo(e.target.id.split('_')[0]) });
 						path.addEventListener('mouseout', function(e){ stopVideo(e.target.id.split('_')[0]) });
 
-						path.addEventListener('touchstart', function(e){ startVideo(e.target.id.split('_')[0]) });
-						path.addEventListener('touchend', function(e){ stopVideo(e.target.id.split('_')[0]) });
+						path.addEventListener('touchstart', function(e){ e.preventDefault;startVideo(e.target.id.split('_')[0]) });
+						path.addEventListener('touchend', function(e){ e.preventDefault;stopVideo(e.target.id.split('_')[0]) });
 					};
 				}
 				requestAnimationFrame(setupVideojs)
