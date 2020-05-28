@@ -21,7 +21,7 @@
 				var wrapper = document.createElement('div');
 				var buttons = document.createElement('div');
 				wrapper.style = 'position:absolute;left:50%;top:50%;pointer-events:none;';
-				buttons.style = 'position:absolute;left:50%;top:50%;opacity:0.6;';
+				buttons.style = 'position:absolute;left:50%;top:50%;opacity:0.8;';
 				parent.appendChild(wrapper);
 				parent.appendChild(buttons);
 				for(var i = 0; i < setup.length; i++){
@@ -47,7 +47,7 @@
 					element.video.class = 'video-js';
 					element.video.loop = true;
 					element.video.poster = setting.img;
-					
+					element.video.style='pointer-events:none;'
 					element.source = document.createElement('source');
 					element.source.setAttribute('src', setting.video+'.mp4');
 
@@ -100,7 +100,7 @@
 
 		function setupVideojs() {
 			for(var i = 0; i < elements.length; i++){
-				//videojs(elements[i].id);
+				videojs(elements[i].id);
 			}
 		}
 		function startVideo(id) {
