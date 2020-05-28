@@ -4,10 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <title>Wheel</title>
+    <link href="https://vjs.zencdn.net/7.8.2/video-js.css" rel="stylesheet" />
+
     <script src="wheel/wheel.js"></script>
     <style type="text/css">
         body{
             background-color: #222222;
+            -webkit-user-select: none;
         }
         .wheel{
             position: relative;
@@ -15,6 +18,7 @@
             margin-left: 100px;
             width: 900px;
             height: 900px;
+            overflow: hidden;
             background: #f5efe0;
         }
     </style>
@@ -23,9 +27,8 @@
 
 <body>
     <div id="wheel" class="wheel">
-
-       
     </div>
+    <script src="https://vjs.zencdn.net/7.8.2/video.js"></script>
 </body>
 
 
