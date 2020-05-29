@@ -1,11 +1,12 @@
 (function () {
 	window.onload = function(e) {
 		var parent = document.getElementById('wheel');
+		var scaleContainer = document.createElement('div');
 		var video_size = 520;
 		var slice = {width: 520, height: 450};
 		var container = {x:slice.width/2, y:270};
 		var rota = 72;
-
+		var originalSize = 900;
 		var setup = [
 			{id: 'water', video: 'wheel/videos/water', img: 'wheel/img/water.jpg', width: video_size, height: video_size},
 			{id: 'water2', video: 'wheel/videos/water', img: 'wheel/img/water.jpg', width: video_size, height: video_size},
@@ -18,12 +19,14 @@
 
 		function init() {
 			if(parent){
-				var wrapper = document.createElement('div');
+				wrapper = document.createElement('div');
 				var buttons = document.createElement('div');
-				wrapper.style = 'position:absolute;left:50%;top:50%;pointer-events:none;';
-				buttons.style = 'position:absolute;left:50%;top:50%;opacity:0.3;';
-				parent.appendChild(buttons);
-				parent.appendChild(wrapper);
+				wrapper.style = 'position:absolute;pointer-events:none;';
+				buttons.style = 'position:absolute;opacity:0.1;';
+				scaleContainer.appendChild(buttons);
+				scaleContainer.appendChild(wrapper);
+				parent.appendChild(scaleContainer);
+				
 				for(var i = 0; i < setup.length; i++){
 					var setting = setup[i];
 					var element = {};
@@ -33,7 +36,7 @@
 					element.slice.style = 
 						'position:absolute;left:'+(-slice.width/2)+'px;top:0;width:'+slice.width+'px;height:'+slice.height+'px;'+
 						'transform:rotate('+(rota * i)+'deg);'+
-						'transform-origin:50% 0%;mask-image:url(wheel/img/mask.svg);-webkit-mask-image:url(wheel/img/mask.svg);'//clip-path: polygon(50% 0%, -10% 100%, 110% 100%);-webkit-clip-path: polygon(50% 0%, -10% 100%, 110% 100%);';
+						'transform-origin:50% 0%;mask-image:url(wheel/img/mask.svg);-webkit-mask-image:url(wheel/img/mask.svg);'
 
 					element.container = document.createElement('div');
 					element.container.style = 
@@ -95,22 +98,21 @@
 						path.addEventListener('touchend', function(e){ e.preventDefault(); stopVideo(e.target.id.split('_')[0]) });
 					};
 				}
-				requestAnimationFrame(setupVideojs)
+				window.addEventListener('resize', resize);
+				resize();
 			}
 		}
+		function resize() {
+			var bounds = parent.getBoundingClientRect();
+			var scale = bounds.width < bounds.height ? bounds.width / originalSize : bounds.height / originalSize;
+			scaleContainer.style = 'position:absolute;left:50%;top:50%;transform:scale('+scale+')';
 
-		function setupVideojs() {
-			for(var i = 0; i < elements.length; i++){
-				//videojs(elements[i].id);
-			}
 		}
 		function startVideo(id) {
-			console.log('start_'+id)
 			videos[id].play();
 		}
 
 		function stopVideo(id) {
-			console.log('stop_'+id)
 			videos[id].pause();
 		}
 
