@@ -102,10 +102,13 @@
 						});
 						path.addEventListener('touchstart', function(e){ 
 							e.preventDefault(); 
-							startVideo(e.target.id.split('_')[0]); 
+							startVideo(e.target.id.split('_')[0]);
+						});
+						path.addEventListener('touchend', function(e){
+							e.preventDefault(); 
+							stopVideo(e.target.id.split('_')[0]);
 							clickThrough(e.target.id.split('_')[0]);
 						});
-						path.addEventListener('touchend', function(e){ e.preventDefault(); stopVideo(e.target.id.split('_')[0]); });
 					};
 				}
 				window.addEventListener('resize', resize);
