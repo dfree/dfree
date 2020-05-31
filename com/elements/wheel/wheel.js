@@ -1,5 +1,6 @@
 (function () {
 	window.onload = function(e) {
+		var DEMO = true;
 		var parent = document.getElementById('wheel');
 		var scaleContainer = document.createElement('div');
 		var video_size = 520;
@@ -7,17 +8,11 @@
 		var container = {x:slice.width/2, y:270};
 		var rota = 72;
 		var originalSize = 900;
-		var setup = [
-			{id: 'water', video: 'wheel/videos/water', img: 'wheel/img/water.jpg', width: video_size, height: video_size},
-			{id: 'water2', video: 'wheel/videos/water', img: 'wheel/img/water.jpg', width: video_size, height: video_size},
-			{id: 'water3', video: 'wheel/videos/water', img: 'wheel/img/water.jpg', width: video_size, height: video_size},
-			{id: 'water4', video: 'wheel/videos/water', img: 'wheel/img/water.jpg', width: video_size, height: video_size},
-			{id: 'water5', video: 'wheel/videos/water', img: 'wheel/img/water.jpg', width: video_size, height: video_size},
-		];
 		var elements = [];
 		var videos = {};
-
+		var links = {};
 		function init() {
+			var setup = JSON.parse(parent.dataset.config);
 			if(parent){
 				wrapper = document.createElement('div');
 				var buttons = document.createElement('div');
@@ -42,8 +37,12 @@
 					element.container.style = 
 						'position:absolute;left:'+container.x+'px;top:'+container.y+'px;cursor:pointer;'+
 						'transform-origin:0px 0px;transform:rotate('+(-rota * i)+'deg);';
+
+					var videoX = setting.x ? setting.x : 0;
+					var videoY = setting.y ? setting.y : 0;
+
 					element.videoHolder = document.createElement('div');
-					element.videoHolder.style = 'position:absolute;left:'+(-setting.width/2)+'px;top:'+(-setting.height/2)+'px;width:'+setting.width+'px;height:'+setting.height+'px;overflow:hidden;';
+					element.videoHolder.style = 'position:absolute;left:'+(-setting.width/2+videoX)+'px;top:'+(-setting.height/2+videoY)+'px;width:'+setting.width+'px;height:'+setting.height+'px;overflow:hidden;';
 					element.video = document.createElement('video');
 					element.video.id = setting.id;
 					element.video.muted = 'true';
@@ -53,10 +52,13 @@
 					element.video.playsInline = true;
 					element.video.poster = setting.img;
 					element.source = document.createElement('source');
-					element.source.setAttribute('src', setting.video+'.mp4');
+					if(setting.video && !DEMO){
+						element.source.setAttribute('src', setting.video+'.mp4');
+					}
 
 					videos[setting.id] = element.video;
-					
+					links[setting.id] = setting.link;
+
 					element.video.appendChild(element.source);
 					element.container.appendChild(element.videoHolder);
 					element.videoHolder.appendChild(element.video);
@@ -90,12 +92,20 @@
 
 					element.button.onload = function(e){
 						var path = e.currentTarget.contentDocument.documentElement.firstElementChild;
+						path.style='cursor:pointer;';
 						path.id = e.currentTarget.id+'_shape';
-						path.addEventListener('mouseover', function(e){ startVideo(e.target.id.split('_')[0]) });
-						path.addEventListener('mouseout', function(e){ stopVideo(e.target.id.split('_')[0]) });
-
-						path.addEventListener('touchstart', function(e){ e.preventDefault(); startVideo(e.target.id.split('_')[0]) });
-						path.addEventListener('touchend', function(e){ e.preventDefault(); stopVideo(e.target.id.split('_')[0]) });
+						path.addEventListener('mouseover', function(e){ startVideo(e.target.id.split('_')[0]); });
+						path.addEventListener('mouseout', function(e){ stopVideo(e.target.id.split('_')[0]); });
+						path.addEventListener('click', function(e){ 
+							stopVideo(e.target.id.split('_')[0]); 
+							clickThrough(e.target.id.split('_')[0]);
+						});
+						path.addEventListener('touchstart', function(e){ 
+							e.preventDefault(); 
+							startVideo(e.target.id.split('_')[0]); 
+							clickThrough(e.target.id.split('_')[0]);
+						});
+						path.addEventListener('touchend', function(e){ e.preventDefault(); stopVideo(e.target.id.split('_')[0]); });
 					};
 				}
 				window.addEventListener('resize', resize);
@@ -109,13 +119,23 @@
 
 		}
 		function startVideo(id) {
-			videos[id].play();
+			if(!DEMO){
+				videos[id].play();
+			}
 		}
 
 		function stopVideo(id) {
-			videos[id].pause();
+			if(!DEMO){
+				videos[id].pause();
+			}
 		}
 
+		function clickThrough(id) {
+			console.log(links)
+			if(links[id]){
+				location.href = links[id];
+			}
+		}
 		init();
 	};
 })();

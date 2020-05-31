@@ -13,15 +13,21 @@
             position: relative;
             margin-top: 30px;
             margin-left: 100px;
-            width: 600px;
-            height: 200px;
+            width: 900px;
+            height: 900px;
             overflow: hidden;
             background: #f5efe0;
         }
     </style>
 </head>
 <body>
-    <div id="wheel" class="wheel">
+    <div id="wheel" class="wheel" data-config='[
+        {"id": "energy", "video": "wheel/videos/water", "img": "wheel/img/energy_520.jpg", "width": 520, "height": 520, "link": "http://google.com"},
+        {"id": "aero", "video": "wheel/videos/water", "img": "wheel/img/aero_520.jpg", "y":34, "width": 520, "height": 520, "link": "http://google.com"},
+        {"id": "ether", "video": "wheel/videos/water", "img": "wheel/img/ether_520.jpg", "x":-40, "width": 520, "height": 520, "link": "http://google.com"},
+        {"id": "land", "video": "wheel/videos/water", "img": "wheel/img/land_520.jpg", "x":40, "width": 520, "height": 520, "link": "http://google.com"},
+        {"id": "water", "video": "wheel/videos/water", "img": "wheel/img/water_520.jpg", "y":34, "width": 520, "height": 520, "link": "http://google.com"}
+    ]'>
     </div>
 </body>
 </html>
