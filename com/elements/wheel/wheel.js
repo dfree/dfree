@@ -12,7 +12,9 @@
 		var videos = {};
 		var links = {};
 		function init() {
-			var setup = JSON.parse(parent.dataset.config);
+			console.log(parent.dataset.config)
+			var setup = JSON.parse(parent.dataset.config).setup;
+			var root = JSON.parse(parent.dataset.config).asset_root;
 			if(parent){
 				wrapper = document.createElement('div');
 				var buttons = document.createElement('div');
@@ -31,15 +33,15 @@
 					element.slice.style = 
 						'position:absolute;left:'+(-slice.width/2)+'px;top:0;width:'+slice.width+'px;height:'+slice.height+'px;'+
 						'transform:rotate('+(rota * i)+'deg);'+
-						'transform-origin:50% 0%;mask-image:url(wheel/img/mask.svg);-webkit-mask-image:url(wheel/img/mask.svg);'
+						'transform-origin:50% 0%;mask-image:url('+root+'img/mask.svg);-webkit-mask-image:url('+root+'img/mask.svg);'
 
 					element.container = document.createElement('div');
 					element.container.style = 
 						'position:absolute;left:'+container.x+'px;top:'+container.y+'px;cursor:pointer;'+
-						'transform-origin:0px 0px;transform:rotate('+(-rota * i)+'deg);';
+						'transform:rotate('+(-rota * i)+'deg);';
 
-					var videoX = setting.x ? setting.x : 0;
-					var videoY = setting.y ? setting.y : 0;
+					var videoX = setting.x || 0;
+					var videoY = setting.y || 0;
 
 					element.videoHolder = document.createElement('div');
 					element.videoHolder.style = 'position:absolute;left:'+(-setting.width/2+videoX)+'px;top:'+(-setting.height/2+videoY)+'px;width:'+setting.width+'px;height:'+setting.height+'px;overflow:hidden;';
@@ -50,10 +52,10 @@
 					element.video.loop = true;
 					element.video.preload = 'auto';
 					element.video.playsInline = true;
-					element.video.poster = setting.img;
+					element.video.poster = root+setting.img;
 					element.source = document.createElement('source');
 					if(setting.video && !DEMO){
-						element.source.setAttribute('src', setting.video+'.mp4');
+						element.source.setAttribute('src', root+setting.video+'.mp4');
 					}
 
 					videos[setting.id] = element.video;
@@ -65,7 +67,7 @@
 					element.slice.appendChild(element.container);
 
 					element.button = document.createElement('object');
-					element.button.data = 'wheel/img/mask.svg';
+					element.button.data = ''+root+'img/mask.svg';
 					element.button.id = setting.id+"_button";
 					element.button.style = 
 						'position:absolute;left:'+(-slice.width/2)+'px;top:0;width:'+slice.width+'px;height:'+slice.height+'px;'+
