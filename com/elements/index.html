@@ -9,25 +9,30 @@
         body{
             background-color: #222222;
         }
-        .wheel{
+        .wrapper {
+            width:900px;
+            height:900px;
+        }
+        .wheel {
             position: relative;
-            margin-top: 30px;
-            margin-left: 100px;
-            width: 900px;
-            height: 900px;
             overflow: hidden;
-            background: #f5efe0;
+            width:100%;
+            height:100%;
         }
     </style>
 </head>
 <body>
-    <div id="wheel" class="wheel" data-config='[
-        {"id": "energy", "video": "wheel/videos/water", "img": "wheel/img/energy_520.jpg", "width": 520, "height": 520, "link": "http://google.com"},
-        {"id": "aero", "video": "wheel/videos/water", "img": "wheel/img/aero_520.jpg", "y":34, "width": 520, "height": 520, "link": "http://google.com"},
-        {"id": "ether", "video": "wheel/videos/water", "img": "wheel/img/ether_520.jpg", "x":-40, "width": 520, "height": 520, "link": "http://google.com"},
-        {"id": "land", "video": "wheel/videos/water", "img": "wheel/img/land_520.jpg", "x":40, "width": 520, "height": 520, "link": "http://google.com"},
-        {"id": "water", "video": "wheel/videos/water", "img": "wheel/img/water_520.jpg", "y":34, "width": 520, "height": 520, "link": "http://google.com"}
-    ]'>
+    <div class="wrapper">
+        <div id="wheel" class="wheel" data-config='{"asset_root":"https://oy9hnw540rb4.fra1.cdn.digitaloceanspaces.com/wheel/",
+            "setup":[
+                {"id": "energy", "video": "videos/water", "img": "img/energy_520.jpg", "width": 520, "height": 520, "link": "http://google.com"},
+                {"id": "aero", "video": "videos/water", "img": "img/aero_520.jpg", "y":34, "width": 520, "height": 520, "link": "http://google.com"},
+                {"id": "ether", "video": "videos/water", "img": "img/ether_520.jpg", "x":-40, "width": 520, "height": 520, "link": "http://google.com"},
+                {"id": "land", "video": "videos/water", "img": "img/land_520.jpg", "x":40, "width": 520, "height": 520, "link": "http://google.com"},
+                {"id": "water", "video": "videos/water", "img": "img/water_520.jpg", "y":34, "width": 520, "height": 520, "link": "http://google.com"}
+            ]}'
+        >
+        </div>
     </div>
 </body>
 </html>
