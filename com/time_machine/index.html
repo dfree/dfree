@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Wheel</title>
+    <script src="base.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment-precise-range-plugin@1.3.0/moment-precise-range.min.js"></script>
+    <style type="text/css">
+        html, body{
+            background-color: #ffffff;
+            width: 100%;
+            height: 100%;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 1em;
+        }
+        .container {
+           width: 100%;
+           height: 100%; 
+        }
+        .wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            padding: 20px;
+            transform: translate(-50%, -50%);
+            width:900px;
+            height:600px;
+            overflow: scroll;
+            background: #DDD
+        }
+        .relative {
+            position: relative;
+        }
+        .absolute {
+            position: absolute;
+        }
+        input {
+            margin: 5px 0 5px 0;
+        }
+        #printer {
+            margin-left: 300px;
+            width: 600px;
+            white-space: pre;
+        }
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div class="relative">
+                <div class="absolute">
+                    Kezdés:<br/>
+                    <input type="text" id="start"/><br/><br/>
+                    Aktuális időpont:<br/>
+                    <input type="text" id="end"/><br/><br/>
+                    <button id="butt">Mehet</button>
+                    
+                </div>
+                <div id="printer">
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
