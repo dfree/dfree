@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="Achive_DIS" viewBox="0 0 107.9 94">
+    <defs>
+        <style>
+            .cls-1,.cls-2{fill:none;stroke:#b3b3b3;stroke-miterlimit:10;stroke-width:2.392px}.cls-2{stroke-linecap:round}.cls-3{fill:#b3b3b3}
+        </style>
+    </defs>
+    <g id="Group_119" data-name="Group 119">
+        <path id="Path_202" d="M71 58.4H36.3a.945.945 0 0 1-1-1v-7.8a.945.945 0 0 1 1-1H71a.945.945 0 0 1 1 1v7.8a1 1 0 0 1-1 1z" class="cls-1" data-name="Path 202"/>
+    </g>
+    <path id="Line_32" d="M0 0h47.6" class="cls-2" data-name="Line 32" transform="translate(30.2 12.1)"/>
+    <path id="Line_33" d="M0 0h59.6" class="cls-2" data-name="Line 33" transform="translate(24.2 23.9)"/>
+    <path id="Path_203" d="M24.2 0a1.442 1.442 0 0 0-1.1.7L.3 33.6a1.4 1.4 0 0 0-.3.9v58A1.538 1.538 0 0 0 1.5 94h104.9a1.5 1.5 0 0 0 1.5-1.6v-58a1.613 1.613 0 0 0-.3-.9L84.9.7a1.525 1.525 0 0 0-1.2-.7H24.2zm.9 3.1h57.8l20.6 29.8h-99zM3.1 36h101.8v54.8H3.1z" class="cls-3" data-name="Path 203"/>
+</svg>
