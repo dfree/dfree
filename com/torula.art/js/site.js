@@ -551,16 +551,29 @@
      */
 
     function onKeyDown(e) {
-      console.log(e.key);
       switch (e.key) {
         case "Enter":
-          nextArt();
+            if(actStage){
+                nextClick();
+            }else{
+                nextArt();
+            }
           break;
         case "ArrowRight":
-          nextGallery();
+            if(actStage){
+                nextClick();
+            }else{
+                nextGallery();
+            }
           break;
         case "ArrowLeft":
           prevGallery();
+          break;
+        case "ArrowUp":
+          nextArt();
+          break;
+        case "ArrowDown":
+          prevArt();
           break;
         case " ":
           toggleCleanMode();
@@ -758,6 +771,14 @@
         actArt = 0;
       }
       allowToDraw = true;
+    }
+    function prevArt() {
+      actArt--;
+      if (actArt < 0) {
+        actArt = artworks.length - 1;
+      }
+      allowToDraw = true;
+      console.log('prev', actArt);
     }
 
     /*
