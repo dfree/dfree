@@ -1,0 +1,52 @@
+{
+    "default": {
+        "frame": "#515151",
+        "background": "#CCC",
+        "darkMode": "true"
+    },
+    "works":[
+        "art/enter_active/Elliott_Erwitt- Sequentially_Yours_Duck",
+        "art/enter_active/Elliott_Erwitt- Sequentially_Yours_Dog",
+        "art/enter_active/Elliott_Erwitt- Sequentially_Yours_Wind"
+    ],
+    "menu": [
+        {
+            "name": {
+                "hu": "Torula Mûvésztér",
+                "en": "Torula Art Space"
+            },
+            "id": "torula",
+            "link": "http://www.torula.hu/"
+        },
+        {
+            "name": {
+                "hu": "Artus",
+                "en": "Artus"
+            },
+            "id": "artus",
+            "link": "http://artus.hu/"
+        },
+        {
+            "name": {
+                "hu": "\"Enter Aktív\"",
+                "en": "\"Enter Active\""
+            },
+            "id": "enter_active",
+            "link": {
+                "hu": "./art/enter_active/intro_hu.html",
+                "en": "./art/enter_active/intro_en.html"
+            }
+        },
+        {
+            "name": {
+                "hu": "Digitális Tárlat",
+                "en": "Digital Art Exhibition"
+            },
+            "id": "manual",
+            "link": {
+                "hu": "./art/enter_active/manual_hu.html",
+                "en": "./art/enter_active/manual_en.html"
+            }
+        }
+    ]
+}

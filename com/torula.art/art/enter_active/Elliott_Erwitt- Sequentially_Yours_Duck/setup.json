@@ -1,0 +1,38 @@
+{
+    "theme": {
+        "frame": "#515151",
+        "background": "#CCC",
+        "darkMode": "true"
+    },
+    "author": "Erwitt, Elliott",
+    "title": {
+        "hu": "Szekvenciális Üdvözlettel",
+        "en": "Sequencially Yours"
+    },
+    "sub_title": {
+        "hu": "Kacsa",
+        "en": "Duck"
+    },
+    "info":{
+        "hu": "index_hu.html",
+        "en": "index_en.html"
+    },
+    "details": [
+        {
+            "hu": "Fotográfia sorozat",
+            "en": "Photo series"
+        },
+        {
+            "hu": "Toronto, Kanada",
+            "en": "Toronto, Canada"
+        },
+        {
+            "hu": "1954",
+            "en": "1954"
+        }
+    ],
+    "artwork": [
+        "duck_1.jpg",
+        "duck_2.jpg"
+    ]
+}

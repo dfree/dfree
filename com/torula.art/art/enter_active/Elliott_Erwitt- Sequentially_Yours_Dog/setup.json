@@ -1,0 +1,34 @@
+{
+    "theme": {
+        "frame": "#CCC",
+        "background": "#333333"
+    },
+    "author": "Erwitt, Elliott",
+    "title": {
+        "hu": "Szekvenciális Üdvözlettel",
+        "en": "Sequencially Yours"
+    },
+    "sub_title": {
+        "hu": "Kutyta",
+        "en": "Dog"
+    },
+    "details": [
+        {
+            "hu": "Fotográfia sorozat",
+            "en": "Photo series"
+        },
+        {
+            "hu": "Toronto, Kanada",
+            "en": "Toronto, Canada"
+        },
+        {
+            "hu": "1954",
+            "en": "1954"
+        }
+    ],
+    "artwork": [
+        "dog_1.jpg",
+        "dog_2.jpg",
+        "dog_3.jpg"
+    ]
+}

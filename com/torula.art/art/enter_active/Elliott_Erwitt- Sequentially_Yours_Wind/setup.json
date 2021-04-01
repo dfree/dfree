@@ -1,0 +1,33 @@
+{
+    "theme": {
+        "frame": "#FFF",
+        "background": "#FFF"
+    },
+    "author": "Erwitt, Elliott",
+    "title": {
+        "hu": "Szekvenciális Üdvözlettel",
+        "en": "Sequencially Yours"
+    },
+    "sub_title": {
+        "hu": "Szél",
+        "en": "Wind"
+    },
+    "details": [
+        {
+            "hu": "Fotográfia sorozat",
+            "en": "Photo series"
+        },
+        {
+            "hu": "Toronto, Kanada",
+            "en": "Toronto, Canada"
+        },
+        {
+            "hu": "1954",
+            "en": "1954"
+        }
+    ],
+    "artwork": [
+        "wind_2.jpg",
+        "wind_1.jpg"
+    ]
+}

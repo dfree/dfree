@@ -1,0 +1,108 @@
+:root {
+  --large-gap: 8em;
+  --small-gap: 2em;
+  --brown: #f7d0aa;
+  --black: #2b2b2b;
+}
+@font-face {
+  font-family: "NeueHaasBold";
+  src: url("../font/NeueHaasGroteskText75Bold.woff") format("woff"),
+    url("../font/NeueHaasGroteskText75Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "NeueHaasRoman";
+  src: url("../font/NeueHaasGroteskText55Roman.woff") format("woff"),
+    url("../font/NeueHaasGroteskText55Roman.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "NeueHaasLight";
+  src: url("../font/NeueHaasGroteskText35Light.woff") format("woff"),
+    url("../font/NeueHaasGroteskText35Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  background-color: #efefef;
+  color: var(--black);
+  padding: var(--large-gap);
+  font-size: 15px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+h1 {
+  font-size: 3.8em;
+  transform: translateX(-0.06em);
+  font-family: "NeueHaasBold";
+  margin-bottom: 0.353em;
+}
+h2 {
+  font-size: 1.34em;
+  transform: translate(-0.06em, -0.26em);
+  font-family: "NeueHaasBold";
+  margin-bottom: 2.6em;
+  line-height: 1.2;
+}
+h3 {
+  font-size: 1.4em;
+  margin-bottom: 1.3em;
+}
+#page {
+  display: grid;
+  grid-template-columns: 1fr 0.614fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "title cover"
+    "content cover";
+}
+
+#title {
+  grid-area: title;
+  padding-right: var(--large-gap);
+}
+#content {
+  grid-area: content;
+  padding-right: var(--large-gap);
+}
+#cover {
+  grid-area: cover;
+}
+#content div {
+  margin-bottom: 1em;
+}
+
+#cover img {
+  width: 100%;
+  height: auto;
+}
+.bold {
+  font-weight: 600;
+}
+@media only screen and (max-width: 1000px) {
+  :root {
+    --large-gap: 4em;
+  }
+}
+@media (max-width: 1200px) {
+  #page {
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "title"
+      "cover"
+      "content";
+  }
+  #cover img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 4em;
+  }
+  #title {
+    padding-right: 0;
+  }
+  #content {
+    padding-right: 0;
+  }
+}
