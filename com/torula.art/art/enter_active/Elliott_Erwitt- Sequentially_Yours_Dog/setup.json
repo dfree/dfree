@@ -1,4 +1,5 @@
 {
+    "fps": 10,
     "theme": {
         "frame": "#CCC",
         "background": "#333333"

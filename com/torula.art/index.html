@@ -4,24 +4,30 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0" />
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
-    <meta name="HandheldFriendly" content="true">
+    <meta name="HandheldFriendly" content="false">
     <title>Torula Művésztér | Enter Aktív</title>
     <script src="src/tweenmax.js"></script>
     <script src="src/CustomEase.js"></script>
+    <script src="src/clay.js"></script>
     <script src="js/site.js"></script>
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/site.css" />
 </head>
 
 <body id="body">
+    <div id="cover"></div>
     <div id="logo"></div>
-    <div id="main-menu" class="list list-left button-list large-text bold">
-        <div>Torula Mûvésztér</div><div class="separator">|</div>
-        <div>Artus</div><div class="separator">|</div>
-        <div>"Enter Aktív"</div><div class="separator">|</div>
-                <div>Digitális tárlat</div></div>
+    <div id="main-menu" class="list list-left button-list large-text bold break-lines">
+        <div>Torula Mûvésztér</div>
+        <div class="separator">|</div>
+        <div>Artus</div>
+        <div class="separator">|</div>
+        <div>"Enter Aktív"</div>
+        <div class="separator">|</div>
+        <div>Digitális tárlat</div>
+    </div>
     <div id="content-wrapper">
         <canvas id="display"></canvas>
         <div id="popup">
@@ -38,17 +44,21 @@
             <div class="shadow"></div>
         </div>
     </div>
-    <div id="cover"></div>
     <div id="art-description">
         <div id="art-wrapper">
-            <div id="art-title" class="list list-right bold">Kacsa<span class="separator">|</span>Szekvenciális Üdvözlettel
+            <div id="art-title" class="list list-right bold">Kacsa<span class="separator">|</span>Szekvenciális
+                Üdvözlettel
                 (Sequencially Yours)<span class="separator">|</span>Erwitt, Elliott</div>
-            <div id="art-details" class="list list-right">Fotográfia sorozat<span class="separator">|</span>Toronto, Kanada
+            <div id="art-details" class="list list-right">Fotográfia sorozat<span class="separator">|</span>Toronto,
+                Kanada
                 <span class="separator">|</span>1954
             </div>
             <div id="info-button" class="bold text-button">Részletek</div>
-            <div id="back-button" class="bold text-button center-button">Vissza&nbsp;a&nbsp;galériához&nbsp;&nbsp;→</div>
-            <div id="next-button" class="bold text-button center-button">Tovább&nbsp;&nbsp;→</div>
+            <div id="back-button" class="bold text-button center-button inverse-button transparent-button">
+                &nbsp;Vissza&nbsp;a&nbsp;galériához&nbsp;&nbsp;→</div>
+            <div id="next-button" class="bold text-button center-button inverse-button transparent-button">
+                <!-- <div class="corner-cut"></div> -->
+                &nbsp;Tovább&nbsp;&nbsp;→</div>
         </div>
         <div id="arrows">
             <div id="left-arrow" class="arrow flipped"></div>
@@ -56,6 +66,25 @@
             <div id="right-arrow" class="arrow"></div>
         </div>
     </div>
+
+    <!-- <div id="stepper">
+        <div class="step">
+            <div class="dot">
+            </div>
+        </div>
+        <div class="step">
+            <div class="dot">
+            </div>
+        </div>
+        <div class="step active">
+            <div class="dot">
+            </div>
+        </div>
+        <div class="step">
+            <div class="dot">
+            </div>
+        </div>
+    </div> -->
     <div id="control">
         <div id="control-button">
             <div id="control-panel">

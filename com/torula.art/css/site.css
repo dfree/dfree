@@ -7,26 +7,50 @@
   --secondary: var(--white);
   --negative: var(--white);
   --positive: var(--white);
-  --logo-size: 3.8em;
-  --global-gap: 7em;
+  --large-logo-size: 4em;
+  --small-logo-size: 2.3em;
+  --large-logo-left: 1.7em;
+  --small-logo-left: 0.57em;
+  --large-logo-top: 3em;
+  --small-logo-top: 1em;
+  --logo-size: var(--large-logo-size);
+  --logo-left: var(--large-logo-left);
+  --logo-top: var(--large-logo-top);
+  --large-global-gap: 7em;
+  --small-global-gap: 3.4em;
+  --global-gap: var(--large-global-gap);  
   --side-gap: var(--global-gap);
   --grad-color-start: rgba(247, 208, 170, 0);
   --grad-color-end: rgba(247, 208, 170, 1);
   --grad-percent-start: 50%;
   --grad-percent-end: 97%;
-  --title-margin-top: 2.38em;
-  --title-margin-left: 8em;
+  --title-margin-top: 3.42em;
+  --title-margin-left: 7em;
   --border-width: 0.1em;
   --control-button-size: 3.25em;
   --control-button-open-transition: 0.27s cubic-bezier(0.61, 0.1, 0.58, 0.98);
   --color-transition: 1s cubic-bezier(0.3, 0, 0.2, 1);
   --separator-transition: 1s cubic-bezier(0.3, 0.6, 0.2, 1);
+  --gap-transition-base: 0.2s cubic-bezier(0, 0.4, 0.4, 1);
+  --gap-transition-delay: 0.2s cubic-bezier(0, 0.4, 0.4, 1) 0.65s;
+  --gap-transition: var(--gap-transition-base);
   --menu-button-margin: 1em;
+  --step-size: 1.4em;
+  --small-description-margin: 0;
+  --large-description-margin: -1.7em;
+  --description-margin: var(--small-description-margin);
+  --logo-mobile-top-small: 0.46em;
+  --logo-mobile-top-large: 1.45em;
+  --logo-mobile-top: var(--logo-mobile-top-large);
+  --selectable: auto;
 }
-@media screen and (max-width: 1000px) {
-  :root {
-    --side-gap: 1em;
-  }
+canvas{
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  user-select: none;
+}
+div, span {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  user-select: var(--selectable);
 }
 @font-face {
   font-family: "NeueHaasBold";
@@ -74,23 +98,11 @@ body {
   height: 100%;
   display: none;
 }
-/* 
-
-FONTOS LEHET A HIGHLIGHT
-
-canvas {
-  width: 250px;
-  height: 250px;
-  position: absolute;
-  display: block;
-  background-color: rgba(255, 255, 255, 0);
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-} */
 
 #logo {
   position: absolute;
-  left: 2.1em;
-  top: 2em;
+  left: var(--logo-left);
+  top: var(--logo-top);
   width: var(--logo-size);
   height: var(--logo-size);
   mask-image: url(../img/logo.png);
@@ -101,7 +113,13 @@ canvas {
   -webkit-mask-repeat: no-repeat;
   background-color: var(--secondary);
   cursor: pointer;
-  transition: background-color var(--color-transition);
+  transition: background-color var(--color-transition), 
+    left var(--gap-transition),
+    top var(--gap-transition),
+    width var(--gap-transition),
+    height var(--gap-transition),
+    mask-size var(--gap-transition),
+    -webkit-mask-size var(--gap-transition);
 }
 
 #content-wrapper {
@@ -118,7 +136,12 @@ canvas {
   height: calc(100% - var(--top-gap) - var(--bottom-gap));
   /* background-color: #372e25; */
   background-color: var(--positive);
-  transition: background-color var(--color-transition);
+  transition: background-color var(--color-transition), 
+    left var(--gap-transition),
+    top var(--gap-transition),
+    width var(--gap-transition),
+    height var(--gap-transition)
+    ;
 }
 #darken {
   position: relative;
@@ -132,7 +155,12 @@ canvas {
   left: var(--side-gap);
   width: calc(100% - var(--side-gap) - var(--side-gap));
   height: 5.1em;
+  margin-bottom: var(--description-margin);
+  transition: margin-bottom var(--gap-transition),
+    left var(--gap-transition),
+    width var(--gap-transition);
 }
+
 #art-wrapper {
   position: relative;
   width: 100%;
@@ -154,7 +182,10 @@ canvas {
   right: 0;
   bottom: 0em;
   opacity: 0;
-  transition: opacity var(--color-transition);
+  transition: opacity var(--color-transition), 
+    color var(--color-transition),
+    border-color var(--color-transition),
+    background-color var(--color-transition);
 }
 #arrows {
   position: absolute;
@@ -225,6 +256,7 @@ canvas {
   cursor: pointer;
   user-select: none;
   border: var(--border-width) solid var(--negative);
+  overflow: hidden;
   transition: color var(--color-transition),
     border-color var(--color-transition),
     background-color var(--color-transition);
@@ -236,6 +268,18 @@ canvas {
   transition: color var(--color-transition),
     border-color var(--color-transition),
     background-color var(--color-transition);
+}
+.transparent-button {
+  background-color: transparent;
+}
+.corner-cut {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translate(51%, -70%) rotate(30deg);
+  background-color: var(--negative);
 }
 /* #art-cover {
   position: absolute;
@@ -289,6 +333,7 @@ canvas {
   background-color: var(--secondary);
   transform-origin: 100% 100%;
   transition: background-color var(--color-transition);
+  pointer-events: all;
 }
 #control-content {
   position: relative;
@@ -357,17 +402,22 @@ canvas {
   width: var(--control-button-size);
   height: var(--control-button-size);
 }
+.break-lines {
+  flex-wrap: wrap;
+}
 .list {
   display: flex;
   opacity: 0;
   transition: opacity var(--color-transition);
 }
-.list div {
+.list div,
+.list span {
   white-space: nowrap;
 }
 .button-list div {
   cursor: pointer;
   user-select: none;
+  margin-bottom: 0.56em;
 }
 .list-left {
   justify-content: flex-start;
@@ -382,6 +432,7 @@ canvas {
   position: absolute;
   top: var(--title-margin-top);
   left: var(--title-margin-left);
+  margin-right: 4em;
 }
 .bold {
   font-family: "NeueHaasBold";
@@ -505,8 +556,9 @@ canvas {
 .center-button {
   position: absolute;
   margin-left: 50%;
-  transform: translate(-50%, 0%);
+  transform: translate(-50%, -49.5%);
   opacity: 0;
+  font-size: 1.16em;
   transition: opacity var(--color-transition);
 }
 #display {
@@ -514,4 +566,71 @@ canvas {
   left: 0;
   top: 0;
   opacity: 0;
+}
+
+/*
+
+    Stepper
+
+*/
+
+#stepper {
+  position: absolute;
+  top: 4.64em;
+  right: calc(var(--side-gap) - 0.54em);
+  display: flex;
+  justify-content: flex-end;
+}
+.step {
+  width: var(--step-size);
+  height: var(--step-size);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dot {
+  width: 4px;
+  height: 4px;
+  background-color: var(--primary);
+  transition: background-color var(--color-transition);
+}
+.active .dot{
+  background-color: var(--secondary) !important;
+}
+
+/*
+
+    RESPONSIVE
+
+*/
+
+@media screen and (max-width: 1000px) {
+  :root {
+    --side-gap: 1em;
+    --title-margin-top: 1.86em;
+    --title-margin-left: 6.76em;
+  }
+  body,
+  html {
+    font-size: 13px;
+  }
+  #logo {
+    left: 0.5em;
+    top: var(--logo-mobile-top);
+  }
+  #main-menu {
+    left: 6.6em;
+    top: 1.86em;
+  }
+  #stepper {
+    top: 4.18em;
+  }
+}
+@media screen and (max-width: 600px) {
+  #arrows {
+    top: unset;
+    bottom: 0.35em;
+    height: auto;
+  }
 }
