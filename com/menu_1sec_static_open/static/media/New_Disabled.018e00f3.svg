@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="Setup_DIS" viewBox="0 0 100 100">
-    <defs>
-        <style>
-            .cls-1{fill:none;stroke:#b3b3b3;stroke-linecap:round;stroke-miterlimit:10;stroke-width:4px}
-        </style>
-    </defs>
-    <path id="Line_30" d="M0 0h96" class="cls-1" data-name="Line 30" transform="translate(2 50)"/>
-    <path id="Line_31" d="M0 0v96" class="cls-1" data-name="Line 31" transform="translate(50 2)"/>
-</svg>

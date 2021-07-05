@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 48">
-    <defs>
-        <style>
-            .cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-miterlimit:10;stroke-width:2px;opacity:.5}
-        </style>
-    </defs>
-    <path id="Vertical_Devider" d="M0 0v46" class="cls-1" data-name="Vertical Devider" transform="translate(1 1)"/>
-</svg>
