@@ -265,7 +265,7 @@
     const camcorder = $.id("camcorder");
 
     function startCamera() {
-      const constraints = {
+      /* const constraints = {
         video: {
           width: {
             min: 1280,
@@ -279,12 +279,22 @@
           },
           facingMode: "user",
         },
-      };
+      }; */
+      var constraints = { video: { facingMode: "user" }, audio: false };
       startStream(constraints);
     }
     const startStream = async (constraints) => {
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
-      handleStream(stream);
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(function (stream) {
+          track = stream.getTracks()[0];
+          video.srcObject = stream;
+        })
+        .catch(function (error) {
+          console.error("Oops. Something is broken.", error);
+        });
+      /* const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      handleStream(stream); */
     };
     const handleStream = (stream) => {
       video.srcObject = stream;
