@@ -209,10 +209,10 @@
       mousePos = { x: eventTarget.pageX, y: eventTarget.pageY };
     }
     function handleDragMove(e) {
-      if (isMouseDown) {
+      //if (isMouseDown) {
         const eventTarget = e.touches ? e.touches[0] : e;
         mousePos = { x: eventTarget.pageX, y: eventTarget.pageY };
-      }
+      //}
     }
     function handleDragEnd() {
       isMouseDown = false;
