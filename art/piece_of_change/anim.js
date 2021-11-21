@@ -25,10 +25,10 @@
     brushCtx.font = fontSize + "px Inconsolata";
     //brushCtx.fillText("10010100101001001010010001010", 0, 20);
     for (var i = 0; i < num; i++) {
-      var charLength = Math.round($.random(4, maxCharLength));
+      var charLength = Math.round($.random(6, maxCharLength));
       brushCtx.fillText(
         getDigitalCharacterLine(charLength),
-        Math.random() * (width - fontSize * charLength),
+        Math.random() * (width - (fontSize / 2) * charLength),
         Math.random() * (height - fontSize) + fontSize
       );
     }
@@ -99,11 +99,18 @@
 
     var bgImg = $.id("bg");
     var frontImg = $.id("front");
+    var message = $.id("message");
+    var main = $.id("main");
+    var button = $.id("button");
 
     var resizeTimeout = 0;
     init = function () {
       TweenPlugin.activate([CSSPlugin]);
-      $.id("main").style.display = "block";
+      main.style.display = "block";
+      $.delay(0.2, function () {
+        button.style.display = "block";
+        message.style.display = "block";
+      });
       reset();
       resize();
       canvasFront.addEventListener("touchstart", handleDragStart, false);
@@ -113,6 +120,8 @@
       document.addEventListener("touchmove", handleDragMove, false);
       document.addEventListener("mousemove", handleDragMove, false); /*  */
       window.addEventListener("resize", resize, false);
+      button.addEventListener("click", restart, false);
+
       tick();
       startCamera();
     };
@@ -127,6 +136,7 @@
     function resize() {
       W = document.documentElement.clientWidth;
       H = document.documentElement.clientHeight;
+      $.set("body", { width: W, height: H });
       canvasBg.width = W;
       canvasBg.height = H;
       canvasMiddle.width = W;
@@ -136,22 +146,61 @@
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(start, 60);
     }
-
+    var imgWidth;
+    var imgHeight;
+    var x;
+    var y;
     function start() {
       var scale = 0.8;
-      var imgWidth = Math.round(Math.min(maxSize.width, W * scale));
-      var imgHeight = (imgWidth / maxSize.width) * maxSize.height;
-      var x = W / 2 - imgWidth / 2;
-      var y = H / 2 - imgHeight / 2;
+      imgWidth = Math.round(Math.min(maxSize.width, W * scale));
+      imgHeight = (imgWidth / maxSize.width) * maxSize.height;
+      x = W / 2 - imgWidth / 2;
+      y = H / 2 - imgHeight / 2;
 
-      camcorder.style = "left: "+x+"px; top:"+y+"px; width:"+imgWidth+"px; height: "+imgHeight+"px;";
-      
-      console.log(imgWidth, imgHeight);
+      camcorder.style =
+        "left: " +
+        x +
+        "px; top:" +
+        y +
+        "px; width:" +
+        imgWidth +
+        "px; height: " +
+        imgHeight +
+        "px;";
+
       ctxBg.drawImage(bgImg, x, y, imgWidth, imgHeight);
+      drawDollar();
+      generateBrushes({ width: imgWidth, height: imgHeight });
+
+      message.style.fontSize = imgHeight * 0.1 + "px";
+      message.style.bottom = imgHeight * 0.08 + "px";
+      console.log("ms", message);
+    }
+
+    var turning = false;
+    function restart() {
+      if (!turning) {
+        turning = true;
+        $.tween("main", 0.8, { rotationY: 90, ease: Power2.easeIn });
+        $.delay(0.8, function () {
+          drawDollar();
+          $.set("main", { rotationY: 270 });
+          $.tween("main", 0.8, {
+            rotationY: 360,
+            ease: Power2.easeOut,
+            onComplete: function () {
+              $.set("main", { rotationY: 0 });
+              turning = false;
+            },
+          });
+        });
+      }
+    }
+
+    function drawDollar() {
       ctxMiddle.globalCompositeOperation = "source-over";
       ctxMiddle.drawImage(frontImg, x, y, imgWidth, imgHeight);
       ctxMiddle.globalCompositeOperation = "destination-out";
-      generateBrushes({ width: imgWidth, height: imgHeight });
     }
 
     function handleDragStart(e) {
