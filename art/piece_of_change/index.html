@@ -1,0 +1,70 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="ad.size" content="width=300,height=250" />
+  <title>Piece of Change</title>
+
+  <script type="text/javascript" src="js/tweenmax.js"></script>
+
+  <script src="anim.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="css/reset.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@800&display=swap');
+    </style>
+
+  <style type="text/css">
+    html,
+    body {
+      -webkit-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      width: 100%;
+      height: 100%;
+      font-size: 23px;
+      margin: 0;
+      padding: 0;
+      overscroll-behavior: none;
+      font-family: 'Inconsolata', monospace;
+      color: white;
+    }
+
+    #main {
+      background: black;
+      cursor: cell;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      display: none;
+    }
+    #camcorder {
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #camera {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main">
+    <div id='camcorder'>
+      <video id="camera" autoplay></video>
+    </div>
+    
+    <img id="bg" src="img/bg.png" />
+    <img id="front" src="img/front.jpg" />
+    <canvas id="canvas_bg"></canvas>
+    <canvas id="canvas_middle"></canvas>
+    <canvas id="canvas_front"></canvas>
+  </div>
+</body>
+
+</html>
