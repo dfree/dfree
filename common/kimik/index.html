@@ -1,0 +1,45 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Whilli</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <style type="text/css">
+        /*---- FOR PRESENTATION ----*/
+        html, body {
+            background-color: #FFFFFF;
+            padding: 0;
+            margin: 0;
+        }
+        .stretch {
+            position: relative;
+            width: 100%;
+            height: auto;
+        }
+        #desktop {
+            display: block;
+        }
+        #mobile {
+            display: none;
+        }
+        
+        @media only screen and (orientation: portrait) {
+            #desktop {
+                display: none;
+            }
+            #mobile {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img id="desktop" class="stretch" src="kimik_plan.jpg" />
+    <img id="mobile" class="stretch" src="kimik_plan.jpg" />
+</body>
+
+</html>
