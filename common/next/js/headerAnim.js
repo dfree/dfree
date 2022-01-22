@@ -157,6 +157,12 @@ function handleOrientation(event) {
   //Object.keys(event).forEach((key) => keys += key+', ');
   printer.innerHTML =
     event.alpha + " : " + event.beta + " : " + event.gamma + "<br/>" + keys;
+
+  mousePos = {
+    x: ((event.gamma + 90) / 180) * W,
+    y: ((event.beta + 90) / 180) * W,
+  };
+  letItDraw = true;
 }
 window.addEventListener("load", initOnLoad);
 
