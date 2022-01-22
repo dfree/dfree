@@ -156,7 +156,7 @@ function handleOrientation(event) {
   var keys = "";
   //Object.keys(event).forEach((key) => keys += key+', ');
   printer.innerHTML =
-    "gyro <br/>x: "+ Math.round(event.gamma) + "<br/>y: " + Math.round(beta) + "<br/>" + keys;
+    "gyro <br/>x: "+ Math.round(event.gamma) + "<br/>y: " + Math.round(event.beta) + "<br/>" + keys;
 
   mousePos = {
     x: ((event.gamma + 90) / 180) * W,
