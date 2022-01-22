@@ -162,8 +162,8 @@ function handleOrientation(event) {
     Math.round(event.gamma) +
     "<br/>y: " +
     Math.round(event.beta) +
-    "<br/>" +
-    keys;
+    "<br/>alpha:" +
+    Math.round(event.alpha)
 
   mousePos = {
     x: ((event.gamma + 90) / 180) * W,
