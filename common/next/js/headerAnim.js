@@ -120,7 +120,14 @@ function initOnLoad() {
       document.addEventListener("mouseup", onMouseUp);
       document.addEventListener("mouseleave", onMouseLeave);
     } else {
-      document.addEventListener("click", touchEnd);
+      if (
+        typeof DeviceOrientationEvent !== "undefined" &&
+        typeof DeviceOrientationEvent.requestPermission === "function"
+      ) {
+        document.addEventListener("click", touchEnd);
+      } else {
+        window.addEventListener("deviceorientation", handleOrientation);
+      }
       printer.innerHTML = "0 : 0 : 0 : added";
     }
     document.body.addEventListener("touchend", touchEnd);
@@ -136,27 +143,20 @@ function touchEnd() {
   if (!gyroEventAdded) {
     gyroEventAdded = true;
     printer.innerHTML = "0 : 0 : 0 : cool";
-    if (
-      typeof DeviceOrientationEvent !== "undefined" &&
-      typeof DeviceOrientationEvent.requestPermission === "function"
-    ) {
-      DeviceOrientationEvent.requestPermission()
-        .then((permissionState) => {
-          if (permissionState === "granted") {
-            window.addEventListener("deviceorientation", handleOrientation);
-          }
-        })
-        .catch(console.error);
-    } else {
-      // Handle regular non iOS 13+ devices.
-      window.addEventListener("deviceorientation", handleOrientation);
-    }
+    DeviceOrientationEvent.requestPermission()
+      .then((permissionState) => {
+        if (permissionState === "granted") {
+          window.addEventListener("deviceorientation", handleOrientation);
+        }
+      })
+      .catch(console.error);
   }
 }
 function handleOrientation(event) {
-  var keys = '';
-  Object.keys(handleOrientation).forEach((key) => keys += key+', ');
-  printer.innerHTML = event.alpha + " : " + event.beta + " : " + event.gamma + '<br/>'+keys;
+  var keys = "";
+  //Object.keys(event).forEach((key) => keys += key+', ');
+  printer.innerHTML =
+    event.alpha + " : " + event.beta + " : " + event.gamma + "<br/>" + keys;
 }
 window.addEventListener("load", initOnLoad);
 
