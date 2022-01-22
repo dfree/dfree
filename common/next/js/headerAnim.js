@@ -109,7 +109,7 @@ function initOnLoad() {
     };
     initBooks();
     resize();
-    //printer.style = 'position: absolute; top: 10px; left: 10px; font-size: 20px;'
+    printer.style = 'position: fixed; top: 10px; left: 10px; font-size: 20px;'
     document.body.appendChild(printer);
     printer.innerHTML = "0 : 0 : 0";
 
@@ -156,7 +156,7 @@ function handleOrientation(event) {
   var keys = "";
   //Object.keys(event).forEach((key) => keys += key+', ');
   printer.innerHTML =
-    "gyro"+ event.alpha + " : " + event.beta + " : " + event.gamma + "<br/>" + keys;
+    "gyro <br/>x: "+ Math.round(event.gamma) + "<br/>y: " + Math.round(beta) + "<br/>" + keys;
 
   mousePos = {
     x: ((event.gamma + 90) / 180) * W,
