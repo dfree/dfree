@@ -156,11 +156,11 @@ function handleOrientation(event) {
   var keys = "";
   //Object.keys(event).forEach((key) => keys += key+', ');
   printer.innerHTML =
-    event.alpha + " : " + event.beta + " : " + event.gamma + "<br/>" + keys;
+    "gyro"+ event.alpha + " : " + event.beta + " : " + event.gamma + "<br/>" + keys;
 
   mousePos = {
     x: ((event.gamma + 90) / 180) * W,
-    y: ((event.beta + 90) / 180) * W,
+    y: ((event.beta + 90) / 180) * H,
   };
   letItDraw = true;
 }
