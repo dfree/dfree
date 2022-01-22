@@ -136,25 +136,27 @@ function touchEnd() {
   if (!gyroEventAdded) {
     gyroEventAdded = true;
     printer.innerHTML = "0 : 0 : 0 : cool";
-    if (typeof DeviceMotionEvent.requestPermission === "function") {
-      // Handle iOS 13+ devices.
-      DeviceMotionEvent.requestPermission()
-        .then((state) => {
-          if (state === "granted") {
-            window.addEventListener("devicemotion", handleOrientation);
-          } else {
-            console.error("Request to access the orientation was rejected");
+    if (
+      typeof DeviceOrientationEvent !== "undefined" &&
+      typeof DeviceOrientationEvent.requestPermission === "function"
+    ) {
+      DeviceOrientationEvent.requestPermission()
+        .then((permissionState) => {
+          if (permissionState === "granted") {
+            window.addEventListener("deviceorientation", handleOrientation);
           }
         })
         .catch(console.error);
     } else {
       // Handle regular non iOS 13+ devices.
-      window.addEventListener("devicemotion", handleOrientation);
+      window.addEventListener("deviceorientation", handleOrientation);
     }
   }
 }
 function handleOrientation(event) {
-  printer.innerHTML = event.alpha + " : " + event.beta + " : " + event.gamma;
+  var keys = '';
+  Object.keys(handleOrientation).forEach((key) => keys += key+', ');
+  printer.innerHTML = event.alpha + " : " + event.beta + " : " + event.gamma + '<br/>'+keys;
 }
 window.addEventListener("load", initOnLoad);
 
