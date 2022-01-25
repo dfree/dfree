@@ -13,6 +13,10 @@ var headerText; // <img/> html element
 var headerTextDimensions = { width: 0, height: 0 };
 var headerProjection = { x: 0, y: 0, width: 0, height: 0 };
 var headerContainerBounds = { x: 0, y: 0, width: 0, height: 0 };
+
+var renderCanvas = null; // <canvas/> html element
+var renderCtx = null; // renderCanvas 2D context
+
 var lightOrigin = { x: 0, y: 0 };
 var light = null; // set on init
 var lightTween = null;
@@ -34,7 +38,7 @@ var printer = document.createElement("div");
 
 var imagesLoaded = 0;
 var bookPrototype = {
-  src: "img/book_1.jpg", // relative path to the book's image file 
+  src: "img/book_1.jpg", // relative path to the book's image file
   startDelay: 0, // fade in delay
   depth: 0, // book's virtual 3D distance from the page (0 - 0.8), ideally all books have different depths
   originX: 0, // x center of the book
@@ -49,6 +53,8 @@ var bookPrototype = {
   shadow: null, // shadow image
   moveX: 0, // added drag position x
   moveY: 0, // added drag position y
+  opacity: 0, // the opacity of the book and shadow at rendering
+  shadowOpacity: 0, // the opacity of the shadow (rendered on shadowCanvas)
   canvas: null, // book image rendered on a canvas in actual size
   ctx: null, // book canvas context
   shadowCanvas: null, // shadow image rendered on a canvas in actual size
@@ -100,7 +106,7 @@ var bookSetup = [
   {
     src: "img/book_4.png",
     startDelay: 0.2,
-    depth: 0.7,
+    depth: 0.5,
     originX: 558,
     originY: 440,
     originWidth: 181,
@@ -142,7 +148,7 @@ function initBeforeLoad() {
   });
   for (var i = 0; i < bookSetup.length; i++) {
     var newBook = Object.assign({}, bookPrototype);
-    Object.keys(bookSetup[i]).forEach(function(key){
+    Object.keys(bookSetup[i]).forEach(function (key) {
       newBook[key] = bookSetup[i][key];
     });
     books.push(newBook);
@@ -155,7 +161,6 @@ function initBeforeLoad() {
       imagesLoaded++;
       if (imagesLoaded == books.length) {
         booksLoaded = true;
-        console.log("books loaded");
         if (documentLoaded) {
           startBooks();
         }
@@ -222,14 +227,7 @@ function touchEnd() {
   if (!gyroEventAdded) {
     gyroEventAdded = true;
     printer.innerHTML = "0 : 0 : 0 : cool";
-    DeviceOrientationEvent.requestPermission()
-      .then((permissionState) => {
-        if (permissionState === "granted") {
-          //window.removeEventListener("deviceorientation", handleOrientation);
-          //window.addEventListener("deviceorientation", handleOrientation);
-        }
-      })
-      .catch(console.error);
+    DeviceOrientationEvent.requestPermission();
   }
 }
 function handleOrientation(event) {
@@ -244,13 +242,21 @@ function handleOrientation(event) {
   if (
     event.gamma > -90 &&
     event.gamma < 90 &&
-    event.beta < 70 &&
-    event.beta > -70
+    event.beta < 90 &&
+    event.beta > -90
   ) {
-    mousePos = {
+    if (mouseTween) {
+      mouseTween.invalidate();
+    }
+    mouseTween = gsap.to(mousePos, {
+      duration: 0.8,
       x: ((event.gamma + 90) / 180) * W,
       y: ((event.beta + 90) / 180) * H,
-    };
+      ease: "power1.out",
+      onUpdate: function () {
+        letItDraw = true;
+      },
+    });
   }
   letItDraw = true;
 }
@@ -264,7 +270,7 @@ function resize() {
   headerContainerBounds = headerContainer.getBoundingClientRect();
   headerContainerBounds.x += window.scrollX;
   headerContainerBounds.y += window.scrollY;
-  console.log(headerContainerBounds.y);
+
   if (
     headerContainerBounds.width / headerContainerBounds.height <
     headerTextDimensions.width / headerTextDimensions.height
@@ -371,48 +377,48 @@ function onMouseMove(e) {
 */
 // reduce framerate from 60fps to 30fps by skipping every second frame
 var frameSkipper = false;
-var bookContainer = null;
 
 function initBooks() {
-  bookContainer = document.createElement("div");
-  bookContainer.style =
-    "position: fixed; left: 0; top:0; pointer-events: none;";
-  document.body.appendChild(bookContainer);
+  renderCanvas = document.createElement("canvas");
+  renderCtx = renderCanvas.getContext("2d");
+  renderCtx.imageSmoothingEnabled = true;
+  renderCanvas.style = "position: fixed; left: 0; top:0; pointer-events: none;";
+  document.body.appendChild(renderCanvas);
   documentLoaded = true;
 
-  console.log("documentLoaded", booksLoaded);
   if (booksLoaded) {
     startBooks();
   }
 }
 
 function startBooks() {
-  console.log("startBooks");
   resizeBooks();
   var baseFadeDelay = 0.4;
   for (var i = 0; i < books.length; i++) {
     var book = books[i];
-    book.shadowCanvas.style.position = "absolute";
-    bookContainer.appendChild(book.shadowCanvas);
-    gsap.to(book.shadowCanvas, {
-      duration: 1,
-      opacity: 1,
-      delay: baseFadeDelay + book.startDelay,
-      ease: "power2.inOut",
-    });
 
-    book.canvas.style.position = "absolute";
-    bookContainer.appendChild(book.canvas);
-    gsap.to(book.canvas, {
+    // adjust book position roughly to mouse position displacement
+    book.originX =
+      book.originX +
+      (headerTextDimensions.width / 2 - book.originX) * (book.depth / 4);
+    book.originY =
+      book.originY +
+      (headerTextDimensions.height / 2 - book.originY) * (book.depth / 4);
+
+    gsap.to(book, {
       duration: 1,
       opacity: 1,
       delay: baseFadeDelay + book.startDelay,
       ease: "power2.inOut",
+      onUpdate: function () {
+        letItDraw = true;
+      },
     });
   }
   tick();
 }
 function tick() {
+  frameSkipper = false;
   if (frameSkipper) {
     frameSkipper = false;
   } else {
@@ -453,6 +459,8 @@ function isBookOnScreen(book) {
 function renderBooks() {
   var scale = headerProjection.width / headerTextDimensions.width;
   var scrollY = window.scrollY;
+  renderCtx.clearRect(0, 0, W, H);
+
   for (var i = 0; i < books.length; i++) {
     var book = books[i];
     var mouseDistance = {
@@ -462,22 +470,24 @@ function renderBooks() {
 
     var multiplyBookDepth =
       (1 + book.depth) * (1 + book.depth) * (1 + book.depth);
+
     var bookCenterX =
       book.originX * scale +
       headerProjection.x +
       (mouseDistance.x / W) *
         (headerProjection.width / 60) *
         multiplyBookDepth *
-        (1 + book.depth) +
+        multiplyBookDepth +
       book.moveX;
+
     var bookCenterY =
       book.originY * scale +
       headerProjection.y +
       (mouseDistance.y / W) *
         (headerProjection.width / 60) *
         multiplyBookDepth *
-        (1 + book.depth) -
-      scrollY * (1 + book.depth / 2) +
+        multiplyBookDepth -
+      scrollY * (1 + book.depth) +
       book.moveY;
 
     book.x = bookCenterX - book.width / 2;
@@ -492,6 +502,7 @@ function renderBooks() {
       bookCenterX -
       book.shadowWidth / 2 +
       (lightDistance.x / W) * (headerProjection.width / 60) * multiplyBookDepth;
+
     book.shadowY =
       bookCenterY -
       book.shadowHeight / 2 +
@@ -500,35 +511,42 @@ function renderBooks() {
     if (isBookOnScreen(book)) {
       if (book.offScreen) {
         book.offScreen = false;
-        book.canvas.style.visibility = "visible";
-        book.shadowCanvas.style.visibility = "visible";
+        // book.canvas.style.visibility = "visible";
+        // book.shadowCanvas.style.visibility = "visible";
       }
-      book.canvas.style.transform =
-        "translate(" + book.x + "px, " + book.y + "px)";
-      book.shadowCanvas.style.transform =
-        "translate(" + book.shadowX + "px, " + book.shadowY + "px)";
+      renderCtx.globalAlpha = book.opacity;
+      renderCtx.drawImage(
+        book.shadowCanvas,
+        book.shadowX,
+        book.shadowY,
+        book.shadowWidth,
+        book.shadowHeight
+      );
+      renderCtx.drawImage(book.canvas, book.x, book.y, book.width, book.height);
     } else {
       if (!book.offScreen) {
         book.offScreen = true;
-        book.canvas.style.visibility = "hidden";
-        book.shadowCanvas.style.visibility = "hidden";
+        // book.canvas.style.visibility = "hidden";
+        // book.shadowCanvas.style.visibility = "hidden";
       }
     }
   }
 }
 
 function resizeBooks() {
+  renderCanvas.width = W;
+  renderCanvas.height = H;
   var scale = headerProjection.width / headerTextDimensions.width;
   for (var i = 0; i < books.length; i++) {
     var book = books[i];
     book.width = book.originWidth * scale;
     book.height = book.originHeight * scale;
 
-    book.canvas.width = book.width * 2;
-    book.canvas.height = book.height * 2;
+    book.canvas.width = book.width + 2;
+    book.canvas.height = book.height + 2;
     book.canvas.style.width = book.width + "px";
     book.canvas.style.height = book.height + "px";
-    book.ctx.drawImage(book.img, 0, 0, book.width * 2, book.height * 2);
+    book.ctx.drawImage(book.img, 1, 1, book.width, book.height);
 
     book.shadowOpacity = (1 - book.depth) * 0.5;
     book.shadowWidth = book.width * (1.05 + book.depth / 6);
