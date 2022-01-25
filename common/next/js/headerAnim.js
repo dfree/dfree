@@ -33,9 +33,6 @@ var DIRECTION = {
 };
 var shadowSrc = "img/shadow.png";
 
-//debug
-var printer = document.createElement("div");
-
 var imagesLoaded = 0;
 var bookPrototype = {
   src: "img/book_1.jpg", // relative path to the book's image file
@@ -170,11 +167,9 @@ function initBeforeLoad() {
     book.shadow = new Image();
     book.shadow.src = shadowSrc;
     book.canvas = document.createElement("canvas");
-    book.canvas.style.opacity = 0;
     book.canvas.imageSmoothingEnabled = true;
     book.ctx = book.canvas.getContext("2d");
     book.shadowCanvas = document.createElement("canvas");
-    book.shadowCanvas.style.opacity = 0;
     book.shadowCtx = book.shadowCanvas.getContext("2d");
   }
 }
@@ -193,9 +188,6 @@ function initOnLoad() {
     };
     resize();
     initBooks();
-    printer.style = "position: fixed; top: 10px; left: 10px; font-size: 20px;";
-    // document.body.appendChild(printer);
-    printer.innerHTML = "0 : 0 : 0";
 
     window.addEventListener("resize", resize);
     if (!isTouchDevice) {
@@ -211,12 +203,10 @@ function initOnLoad() {
         document.addEventListener("click", touchEnd);
       }
       window.addEventListener("deviceorientation", handleOrientation);
-
-      printer.innerHTML = "0 : 0 : 0 : added";
     }
     document.body.addEventListener("touchend", touchEnd);
     document.addEventListener("scroll", function () {
-      requestAnimationFrame(renderBooks);
+      letItDraw = true;
     });
     headerContainer.style.opacity = 1;
   }
@@ -226,19 +216,11 @@ var gyroEventAdded = false;
 function touchEnd() {
   if (!gyroEventAdded) {
     gyroEventAdded = true;
-    printer.innerHTML = "0 : 0 : 0 : cool";
     DeviceOrientationEvent.requestPermission();
   }
 }
 function handleOrientation(event) {
   gyroEventAdded = true;
-  printer.innerHTML =
-    "gyroscope <br/>x: " +
-    Math.round(event.gamma) +
-    "<br/>y: " +
-    Math.round(event.beta) +
-    "<br/>alpha:" +
-    Math.round(event.alpha);
   if (
     event.gamma > -90 &&
     event.gamma < 90 &&
@@ -248,10 +230,24 @@ function handleOrientation(event) {
     if (mouseTween) {
       mouseTween.invalidate();
     }
-    mouseTween = gsap.to(mousePos, {
-      duration: 0.8,
+    var orientation = window.orientation || 0;
+    var basePos = {
       x: ((event.gamma + 90) / 180) * W,
       y: ((event.beta + 90) / 180) * H,
+    };
+    if (orientation === 90) {
+      basePos = { x: basePos.y, y: basePos.x };
+    }
+    if (orientation === -90) {
+      basePos = { x: -basePos.y, y: -basePos.x };
+    }
+    if (orientation === 180) {
+      basePos = { x: -basePos.x, y: -basePos.y };
+    }
+    mouseTween = gsap.to(mousePos, {
+      duration: 0.8,
+      x: basePos.x,
+      y: basePos.y,
       ease: "power1.out",
       onUpdate: function () {
         letItDraw = true;
