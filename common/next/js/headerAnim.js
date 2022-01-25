@@ -88,7 +88,7 @@ var bookSetup = [
   {
     src: "img/book_2.png",
     startDelay: 0.3,
-    depth: 0.3,
+    depth: 0.2,
     originX: 233,
     originY: 375,
     originWidth: 168,
@@ -97,7 +97,7 @@ var bookSetup = [
   {
     src: "img/book_3.png",
     startDelay: 0.5,
-    depth: 0.4,
+    depth: 0.3,
     originX: 562,
     originY: 14,
     originWidth: 160,
