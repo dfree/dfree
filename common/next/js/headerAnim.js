@@ -235,10 +235,10 @@ function handleOrientation(event) {
       x: ((event.gamma + 90) / 180) * W,
       y: ((event.beta + 90) / 180) * H,
     };
-    if (orientation === 90) {
+    if (orientation === -90) {
       basePos = { x: basePos.y, y: basePos.x };
     }
-    if (orientation === -90) {
+    if (orientation === 90) {
       basePos = { x: -basePos.y, y: -basePos.x };
     }
     if (orientation === 180) {
