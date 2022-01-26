@@ -311,8 +311,8 @@ function isBookUnderMouse(mouse, book) {
   if (
     mouse.x > book.x &&
     mouse.x < book.x + book.width &&
-    mouse.y > book.y &&
-    mouse.y < book.y + book.height
+    mouse.y > book.y + window.scrollY &&
+    mouse.y < book.y + book.height + window.scrollY
   ) {
     return true;
   }
