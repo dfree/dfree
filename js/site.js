@@ -109,6 +109,7 @@
 			$.id("name").addEventListener('click', gotoMail, false);
 			$.set("name", {cursor:"pointer"});
 			$.id("linkedin").addEventListener('click', gotoLink, false);
+			$.id("footer").addEventListener('click', gotoLink, false);
 
 			loadScript("src/create.js", scriptReady);
 			
