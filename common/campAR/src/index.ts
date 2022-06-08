@@ -57,11 +57,42 @@ const trackerTransformNode = new ZapparBabylon.InstantWorldAnchorTransformNode(
   scene
 );
 light.parent = trackerTransformNode;
-let carModel: BABYLON.AbstractMesh | undefined;
 
+const carLift = {
+  down: 0.24,
+  up: 0.34,
+  actual: 0.24,
+}
+
+const flameScale = {
+  down: 0.6,
+  up: 1,
+  actual: 0.5,
+}
+
+let carModel: BABYLON.AbstractMesh | undefined;
 const carMesh = new BABYLON.Mesh("car", scene);
 carMesh.rotationQuaternion = null;
 carMesh.rotation.y = 0;
+carMesh.setEnabled(false);
+
+let readyToShowModel = false;
+
+
+const ground = BABYLON.Mesh.CreatePlane('ground', 2, scene);
+ground.rotation.x = Math.PI / 2;
+
+const shadowMaterial = new MATERIALS.ShadowOnlyMaterial('shadowOnly', scene as any);
+(ground as any).material = shadowMaterial;
+ground.receiveShadows = true;
+ground.parent = carMesh;
+shadowMaterial.alpha = 0.5;
+
+const shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
+shadowGenerator.useBlurExponentialShadowMap = true;
+shadowGenerator.blurScale = 2;
+shadowGenerator.setDarkness(0.2);
+
 const deltaEdge = {
   min: -1,
   max: 1,
@@ -80,6 +111,8 @@ const baseWheelRotation = new BABYLON.Vector3(Math.PI, Math.PI, Math.PI / 2);
 BABYLON.SceneLoader.ImportMesh(null, "", model, scene, (meshes) => {
   let mesh: BABYLON.AbstractMesh | undefined;
   [mesh] = meshes;
+  shadowGenerator?.getShadowMap()?.renderList?.push(...meshes);
+
   light.setDirectionToTarget(mesh.absolutePosition);
   mesh.rotationQuaternion = null;
   mesh.rotation.y = 0;
@@ -116,23 +149,55 @@ BABYLON.SceneLoader.ImportMesh(null, "", model, scene, (meshes) => {
       node.material = flameMaterial;
     }
   });
-  //scene.debugLayer.show();
+  
+  // wait one second to get the car model in position
+  setTimeout(() => (readyToShowModel = true), 1000);
 });
 
 window.addEventListener("resize", () => {
   engine.resize();
 });
+const hideButton = (element: HTMLElement) => element.classList.add("hidden");
+const showButton = (element: HTMLElement) => element.classList.remove("hidden");
 
 let hasPlaced = false;
 const placeButton =
   document.getElementById("tap-to-place") || document.createElement("div");
+const resetButton =
+  document.getElementById("reset") || document.createElement("div");
+
 placeButton.addEventListener("click", () => {
   hasPlaced = true;
-  placeButton.remove();
+  hideButton(placeButton);
+  showButton(resetButton);
+  enableJoystick();
+});
+
+resetButton.addEventListener("click", () => {
+  hasPlaced = false;
+  carMesh.position = new BABYLON.Vector3(0, 0, 0);
+  carMesh.rotation = new BABYLON.Vector3(0, 0, 0);
+  hideButton(resetButton);
+  showButton(placeButton);
+  disableJoystick();
 });
 
 const leftJoystick = new BABYLON.VirtualJoystick(true);
 const rightJoystick = new BABYLON.VirtualJoystick(false);
+
+const enableJoystick = () => {
+  if (BABYLON.VirtualJoystick.Canvas) {
+    BABYLON.VirtualJoystick.Canvas.style.pointerEvents = "auto";
+  }
+};
+
+const disableJoystick = () => {
+  if (BABYLON.VirtualJoystick.Canvas) {
+    BABYLON.VirtualJoystick.Canvas.style.pointerEvents = "none";
+  }
+};
+
+disableJoystick();
 
 scene.onBeforeRenderObservable.add(() => {
   if (leftJoystick.pressed) {
@@ -150,6 +215,10 @@ scene.onBeforeRenderObservable.add(() => {
 let actualMomentum = new BABYLON.Vector2(0, 0);
 
 engine.runRenderLoop(() => {
+  if (readyToShowModel && !carMesh.isEnabled(false)) {
+    carMesh.setEnabled(true);
+    showButton(placeButton);
+  }
   if (scene.isReady()) {
     placeButton.innerHTML = "Tap to place";
   }
@@ -162,7 +231,6 @@ engine.runRenderLoop(() => {
   let targetWheelRotationX = 0;
 
   let targetMomentum = new BABYLON.Vector2(0, 0);
-
 
   if (deltaX) {
     targetRotationZ =
@@ -190,9 +258,7 @@ engine.runRenderLoop(() => {
         node.rotation = BABYLON.Vector3.Lerp(
           node.rotation,
           new BABYLON.Vector3(
-            BABYLON.Tools.ToRadians(
-              targetWheelRotationX * -1 + 180
-            ),
+            BABYLON.Tools.ToRadians(targetWheelRotationX * -1 + 180),
             node.rotation.y,
             BABYLON.Tools.ToRadians(
               targetWheelRotationZ * (idx < 2 ? -1 : 1) + 90
@@ -204,21 +270,48 @@ engine.runRenderLoop(() => {
     }
   );
 
-  actualMomentum = BABYLON.Vector2.Lerp(actualMomentum, targetMomentum, (!deltaX && !deltaY) ? 0.03 : 0.02);
-  
+  actualMomentum = BABYLON.Vector2.Lerp(
+    actualMomentum,
+    targetMomentum,
+    !deltaX && !deltaY ? 0.03 : 0.02
+  );
+
   carMesh.rotate(
     BABYLON.Axis.Y,
     BABYLON.Tools.ToRadians(actualMomentum.y / 4),
     BABYLON.Space.LOCAL
   );
-  if(carModel){
+
+  if (carModel) {
     carModel.rotation.x = actualMomentum.x / 80;
     carModel.rotation.z = actualMomentum.y / 50;
+    const liftRatio = 0.025;
+    const flameRatio = 0.1;
+
+    if(deltaX || deltaY){
+      carLift.actual = carLift.actual + (carLift.up - carLift.actual) * liftRatio;
+      flameScale.actual = flameScale.actual + (flameScale.up - flameScale.actual) * flameRatio;
+    }else{
+      carLift.actual = carLift.actual + (carLift.down - carLift.actual) * liftRatio;
+      flameScale.actual = flameScale.actual + (flameScale.down - flameScale.actual) * flameRatio;
+    }
+    carModel.position.y = carLift.actual;
+    if(flames){
+      flames.forEach((flame: BABYLON.Nullable<BABYLON.AbstractMesh>) => {
+        if(flame){
+          flame.scaling = new BABYLON.Vector3(flameScale.actual + Math.random() * 0.08, 1, 1);
+        }
+      })
+    }
   }
-  
+
   carMesh.movePOV(0, 0, actualMomentum.x / -500);
+
+
 
   // envMap.update();
   camera.updateFrame();
   scene.render();
 });
+
+// scene.debugLayer.show();
