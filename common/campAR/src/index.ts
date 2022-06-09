@@ -32,6 +32,8 @@ document.body.appendChild(canvas);
 const engine = new BABYLON.Engine(canvas, true);
 
 const scene = new BABYLON.Scene(engine);
+BABYLON.RenderingManager.MIN_RENDERINGGROUPS = -1;
+
 // eslint-disable-next-line no-unused-vars
 const light = new BABYLON.DirectionalLight(
   "dir02",
@@ -82,6 +84,7 @@ let readyToShowModel = false;
 
 const ground = BABYLON.Mesh.CreatePlane("ground", 2, scene);
 ground.rotation.x = Math.PI / 2;
+ground.renderingGroupId = -1;
 
 const shadowMaterial = new MATERIALS.ShadowOnlyMaterial(
   "shadowOnly",
@@ -125,9 +128,10 @@ BABYLON.SceneLoader.ImportMesh(null, "", model, scene, (meshes) => {
   const scale = 0.2;
   mesh.scaling = new BABYLON.Vector3(scale, scale, scale);
   mesh.parent = carMesh;
+  
   carModel = mesh;
+  // carModel.renderingGroupId = 1;
   carMesh.parent = trackerTransformNode;
-
   wheels = [
     scene.getTransformNodeByName("NOZZLE F L"),
     scene.getTransformNodeByName("NOZZLE F R"),
@@ -385,6 +389,7 @@ const getFlameParticleSystem = (
 
   particleSystem.isLocal = true;
 
+  // particleSystem.renderingGroupId = 1;
   particleSystem.start();
   return particleSystem;
 };
