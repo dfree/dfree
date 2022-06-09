@@ -6,6 +6,8 @@ import * as MATERIALS from "babylonjs-materials";
 import model from "../assets/van_b.glb";
 import "babylonjs-loaders";
 import "./index.sass";
+import flareImg from "../assets/Flare.png";
+
 // Model from https://sketchfab.com/3d-models/vw-bus-t1-558aa0e9c3d24232a7d62180fa0aa1d6
 
 // The SDK is supported on many different browsers, but there are some that
@@ -61,14 +63,14 @@ light.parent = trackerTransformNode;
 const carLift = {
   down: 0.24,
   up: 0.34,
-  actual: 0.24,
-}
+  actual: 0,
+};
 
 const flameScale = {
-  down: 0.6,
-  up: 1,
-  actual: 0.5,
-}
+  down: {min: 2, max: 3},
+  up: {min: 4, max: 5},
+  actual: {min: 0, max: 0},
+};
 
 let carModel: BABYLON.AbstractMesh | undefined;
 const carMesh = new BABYLON.Mesh("car", scene);
@@ -78,11 +80,13 @@ carMesh.setEnabled(false);
 
 let readyToShowModel = false;
 
-
-const ground = BABYLON.Mesh.CreatePlane('ground', 2, scene);
+const ground = BABYLON.Mesh.CreatePlane("ground", 2, scene);
 ground.rotation.x = Math.PI / 2;
 
-const shadowMaterial = new MATERIALS.ShadowOnlyMaterial('shadowOnly', scene as any);
+const shadowMaterial = new MATERIALS.ShadowOnlyMaterial(
+  "shadowOnly",
+  scene as any
+);
 (ground as any).material = shadowMaterial;
 ground.receiveShadows = true;
 ground.parent = carMesh;
@@ -106,6 +110,8 @@ let deltaY = 0;
 
 let wheels: BABYLON.Nullable<BABYLON.TransformNode>[] = [];
 let flames: BABYLON.Nullable<BABYLON.AbstractMesh>[] = [];
+let flameParticles: BABYLON.ParticleSystem[] = [];
+
 const baseWheelRotation = new BABYLON.Vector3(Math.PI, Math.PI, Math.PI / 2);
 
 BABYLON.SceneLoader.ImportMesh(null, "", model, scene, (meshes) => {
@@ -144,12 +150,20 @@ BABYLON.SceneLoader.ImportMesh(null, "", model, scene, (meshes) => {
     scene.getMeshByName("FLAME R R"),
   ];
 
-  flames.forEach((node: BABYLON.Nullable<BABYLON.AbstractMesh>) => {
-    if (node && node.material) {
-      node.material = flameMaterial;
+  flames.forEach(
+    (node: BABYLON.Nullable<BABYLON.AbstractMesh>, idx: number) => {
+      if (node) {
+        const newParticleSystem = getFlameParticleSystem(node);
+        if(idx >= 2){
+          newParticleSystem.minEmitBox.x = 0.15;
+          newParticleSystem.maxEmitBox.x = 0.15;
+        }
+        flameParticles.push(newParticleSystem);
+        node.visibility = 0;
+      }
     }
-  });
-  
+  );
+
   // wait one second to get the car model in position
   setTimeout(() => (readyToShowModel = true), 1000);
 });
@@ -286,32 +300,93 @@ engine.runRenderLoop(() => {
     carModel.rotation.x = actualMomentum.x / 80;
     carModel.rotation.z = actualMomentum.y / 50;
     const liftRatio = 0.025;
-    const flameRatio = 0.1;
+    const flameRatio = 1;
 
-    if(deltaX || deltaY){
-      carLift.actual = carLift.actual + (carLift.up - carLift.actual) * liftRatio;
-      flameScale.actual = flameScale.actual + (flameScale.up - flameScale.actual) * flameRatio;
-    }else{
-      carLift.actual = carLift.actual + (carLift.down - carLift.actual) * liftRatio;
-      flameScale.actual = flameScale.actual + (flameScale.down - flameScale.actual) * flameRatio;
+    if (deltaX || deltaY) {
+      carLift.actual =
+        carLift.actual + (carLift.up - carLift.actual) * liftRatio;
+        flameScale.actual.min = flameScale.up.min;
+        flameScale.actual.max = flameScale.up.max;
+    } else {
+      carLift.actual =
+        carLift.actual + (carLift.down - carLift.actual) * liftRatio;
+        flameScale.actual.min = flameScale.down.min;
+        flameScale.actual.max = flameScale.down.max;
     }
     carModel.position.y = carLift.actual;
-    if(flames){
-      flames.forEach((flame: BABYLON.Nullable<BABYLON.AbstractMesh>) => {
+    if(flameParticles){
+
+      flameParticles.forEach((flame: BABYLON.ParticleSystem) => {
+        
         if(flame){
-          flame.scaling = new BABYLON.Vector3(flameScale.actual + Math.random() * 0.08, 1, 1);
+          flame.minEmitPower = flameScale.actual.min;
+          flame.maxEmitPower = flameScale.actual.max;
         }
-      })
+      });
+      //console.log(flameScale.actual.max)
     }
   }
 
   carMesh.movePOV(0, 0, actualMomentum.x / -500);
 
-
-
   // envMap.update();
   camera.updateFrame();
   scene.render();
 });
+
+const getFlameParticleSystem = (
+  emitter: BABYLON.Nullable<BABYLON.AbstractMesh>
+) => {
+  // Create a particle system
+  var particleSystem = new BABYLON.ParticleSystem("particles", 500, scene);
+
+  //Texture of each particle
+  particleSystem.particleTexture = new BABYLON.Texture(flareImg, scene);
+
+  // Where the particles come from
+  particleSystem.emitter = emitter; // the starting object, the emitter
+  particleSystem.minEmitBox = new BABYLON.Vector3(0, 0, -0.15); // Starting all from
+  particleSystem.maxEmitBox = new BABYLON.Vector3(0, 0, 0.15); // To...
+
+  // Colors of all particles
+  particleSystem.color1 = new BABYLON.Color4(0.561, 0.427, 0.816, 0.118);
+  particleSystem.color2 = new BABYLON.Color4(0.565, 0.412, 0.820, 0.118);
+  particleSystem.colorDead = new BABYLON.Color4(0.529, 0.302, 0.604, 0);
+
+  // Size of each particle (random between...
+  particleSystem.minSize = 0.06;
+  particleSystem.maxSize = 0.09;
+
+  // Life time of each particle (random between...
+  particleSystem.minLifeTime = 0.1;
+  particleSystem.maxLifeTime = 0.2;
+
+  // Emission rate
+  particleSystem.emitRate = 2500;
+
+  // Blend mode : BLENDMODE_ONEONE, or BLENDMODE_STANDARD
+  particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_MULTIPLYADD;
+
+  // Set the gravity of all particles
+  // particleSystem.gravity = new BABYLON.Vector3(0, -9.81, 0);
+
+  // Direction of each particle after it has been emitted
+  particleSystem.direction1 = new BABYLON.Vector3(1, 0, 0);
+  particleSystem.direction2 = new BABYLON.Vector3(1, 0, 0);
+
+  // Angular speed, in radians
+  particleSystem.minAngularSpeed = 0;
+  particleSystem.maxAngularSpeed = Math.PI;
+
+  // Speed
+  particleSystem.minEmitPower = 2;
+  particleSystem.maxEmitPower = 3;
+  particleSystem.updateSpeed = 0.005;
+
+  particleSystem.isLocal = true;
+
+  particleSystem.start();
+  return particleSystem;
+};
 
 // scene.debugLayer.show();
