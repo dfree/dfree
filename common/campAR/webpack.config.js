@@ -21,7 +21,7 @@ module.exports = {
       template: './src/index.html',
       filename: 'index.html',
       favicon: 'assets/favicon.ico',
-      title: 'campAR',
+      title: 'CampAR',
       minify: {
         collapseWhitespace: true,
         minifyCSS: true,

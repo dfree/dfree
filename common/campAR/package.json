@@ -29,7 +29,7 @@
     "webpack-dev-server": "^4.7.3"
   },
   "dependencies": {
-    "@zappar/zappar-babylonjs": "^0.3.30",
+    "@zappar/zappar-babylonjs": "^0.4.0-beta.6",
     "babylonjs": "^4.2.1",
     "babylonjs-loaders": "^4.2.1",
     "babylonjs-materials": "^4.2.1"

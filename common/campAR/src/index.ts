@@ -69,9 +69,9 @@ const carLift = {
 };
 
 const flameScale = {
-  down: {min: 2, max: 3},
-  up: {min: 4, max: 5},
-  actual: {min: 0, max: 0},
+  down: { min: 2, max: 3 },
+  up: { min: 4, max: 5 },
+  actual: { min: 0, max: 0 },
 };
 
 let carModel: BABYLON.AbstractMesh | undefined;
@@ -113,7 +113,7 @@ let deltaY = 0;
 
 let wheels: BABYLON.Nullable<BABYLON.TransformNode>[] = [];
 let flames: BABYLON.Nullable<BABYLON.AbstractMesh>[] = [];
-let flameParticles: BABYLON.ParticleSystem[] = [];
+const flameParticles: BABYLON.ParticleSystem[] = [];
 
 const baseWheelRotation = new BABYLON.Vector3(Math.PI, Math.PI, Math.PI / 2);
 
@@ -128,7 +128,7 @@ BABYLON.SceneLoader.ImportMesh(null, "", model, scene, (meshes) => {
   const scale = 0.2;
   mesh.scaling = new BABYLON.Vector3(scale, scale, scale);
   mesh.parent = carMesh;
-  
+
   carModel = mesh;
   // carModel.renderingGroupId = 1;
   carMesh.parent = trackerTransformNode;
@@ -158,7 +158,7 @@ BABYLON.SceneLoader.ImportMesh(null, "", model, scene, (meshes) => {
     (node: BABYLON.Nullable<BABYLON.AbstractMesh>, idx: number) => {
       if (node) {
         const newParticleSystem = getFlameParticleSystem(node);
-        if(idx >= 2){
+        if (idx >= 2) {
           newParticleSystem.minEmitBox.x = 0.15;
           newParticleSystem.maxEmitBox.x = 0.15;
         }
@@ -243,12 +243,13 @@ engine.runRenderLoop(() => {
   if (!hasPlaced) {
     instantTracker.setAnchorPoseFromCameraOffset(0, 0, -3);
   }
+
   let targetRotationZ = 0;
   let targetWheelRotationZ = 0;
   let targetRotationX = 0;
   let targetWheelRotationX = 0;
 
-  let targetMomentum = new BABYLON.Vector2(0, 0);
+  const targetMomentum = new BABYLON.Vector2(0, 0);
 
   if (deltaX) {
     targetRotationZ =
@@ -307,33 +308,28 @@ engine.runRenderLoop(() => {
     const flameRatio = 1;
 
     if (deltaX || deltaY) {
-      carLift.actual =
-        carLift.actual + (carLift.up - carLift.actual) * liftRatio;
-        flameScale.actual.min = flameScale.up.min;
-        flameScale.actual.max = flameScale.up.max;
+      carLift.actual += (carLift.up - carLift.actual) * liftRatio;
+      flameScale.actual.min = flameScale.up.min;
+      flameScale.actual.max = flameScale.up.max;
     } else {
-      carLift.actual =
-        carLift.actual + (carLift.down - carLift.actual) * liftRatio;
-        flameScale.actual.min = flameScale.down.min;
-        flameScale.actual.max = flameScale.down.max;
+      carLift.actual += (carLift.down - carLift.actual) * liftRatio;
+      flameScale.actual.min = flameScale.down.min;
+      flameScale.actual.max = flameScale.down.max;
     }
     carModel.position.y = carLift.actual;
-    if(flameParticles){
-
+    if (flameParticles) {
       flameParticles.forEach((flame: BABYLON.ParticleSystem) => {
-        
-        if(flame){
+        if (flame) {
           flame.minEmitPower = flameScale.actual.min;
           flame.maxEmitPower = flameScale.actual.max;
         }
       });
-      //console.log(flameScale.actual.max)
+      // console.log(flameScale.actual.max)
     }
   }
 
   carMesh.movePOV(0, 0, actualMomentum.x / -500);
 
-  // envMap.update();
   camera.updateFrame();
   scene.render();
 });
@@ -342,9 +338,9 @@ const getFlameParticleSystem = (
   emitter: BABYLON.Nullable<BABYLON.AbstractMesh>
 ) => {
   // Create a particle system
-  var particleSystem = new BABYLON.ParticleSystem("particles", 500, scene);
+  const particleSystem = new BABYLON.ParticleSystem("particles", 500, scene);
 
-  //Texture of each particle
+  // Texture of each particle
   particleSystem.particleTexture = new BABYLON.Texture(flareImg, scene);
 
   // Where the particles come from
@@ -354,7 +350,7 @@ const getFlameParticleSystem = (
 
   // Colors of all particles
   particleSystem.color1 = new BABYLON.Color4(0.561, 0.427, 0.816, 0.118);
-  particleSystem.color2 = new BABYLON.Color4(0.565, 0.412, 0.820, 0.118);
+  particleSystem.color2 = new BABYLON.Color4(0.565, 0.412, 0.82, 0.118);
   particleSystem.colorDead = new BABYLON.Color4(0.529, 0.302, 0.604, 0);
 
   // Size of each particle (random between...
