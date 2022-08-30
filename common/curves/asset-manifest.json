@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/common/curves/static/css/main.f4613f84.css",
-    "main.js": "/common/curves/static/js/main.037b5b79.js",
+    "main.js": "/common/curves/static/js/main.cf286c1f.js",
     "index.html": "/common/curves/index.html",
     "main.f4613f84.css.map": "/common/curves/static/css/main.f4613f84.css.map",
-    "main.037b5b79.js.map": "/common/curves/static/js/main.037b5b79.js.map"
+    "main.cf286c1f.js.map": "/common/curves/static/js/main.cf286c1f.js.map"
   },
   "entrypoints": [
     "static/css/main.f4613f84.css",
-    "static/js/main.037b5b79.js"
+    "static/js/main.cf286c1f.js"
   ]
 }
