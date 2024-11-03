@@ -4,6 +4,13 @@ html {
   margin: 0;
   padding: 0;
   background-color: #1E1C26;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 body,
@@ -50,6 +57,7 @@ button {
   border: none;
   outline: none;
 }
+
 .rec-button {
   font-family: "Chakra Petch", sans-serif;
   background: white;
