@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!image.classList.contains("half-screen-image")) {
         const randomX = Math.random() * (window.innerWidth - image.width);
         const randomY = Math.random() * (window.innerHeight - image.height);
-        const randomScale = Math.random() * 0.5 + 1.5; // Scale between 1.5 and 2
+        const randomScale = Math.random() * 0.5 + 0.5; // Scale between 1.5 and 2
         const randomZ = Math.floor(Math.random() * 100); // Random z-index
         image.style.transform = `translate(${randomX}px, ${randomY}px) scale(${randomScale})`;
         image.style.zIndex = randomZ;
@@ -92,8 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // random placements
   toggleImageMovement();
 
-  // spacepress
   document.addEventListener("click", () => {
       toggleImageMovement();
   });
+
 });

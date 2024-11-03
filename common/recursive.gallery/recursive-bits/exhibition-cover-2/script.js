@@ -18,12 +18,20 @@ var animItem = bodymovin.loadAnimation({
   path: 'https://labs.nearpod.com/bodymovin/demo/markus/isometric/markus2.json'
 });
 
-
-svgContainer.addEventListener('mousemove', function(event) {
-  const rect = this.getBoundingClientRect();
+const onMouseMove = (event) => {
+  const rect = document.body.getBoundingClientRect();
   const mouseX = event.clientX - rect.left;
   const percentage = mouseX / rect.width; 
 
   const frame = percentage * animItem.totalFrames;
   animItem.goToAndStop(frame, true);
-});
+}
+
+const onTouchMove = (event) => {
+  if (event.touches.length >= 1) {
+    onMouseMove(event.touches[0]);
+  }
+}
+
+document.addEventListener('mousemove', onMouseMove);
+document.addEventListener("touchmove", onTouchMove);

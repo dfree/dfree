@@ -110,9 +110,28 @@ class CreateParticles {
     document.addEventListener("mousedown", this.onMouseDown.bind(this));
     document.addEventListener("mousemove", this.onMouseMove.bind(this));
     document.addEventListener("mouseup", this.onMouseUp.bind(this));
+    document.addEventListener("touchstart", this.onTouchDown.bind(this));
+    document.addEventListener("touchmove", this.onTouchMove.bind(this));
+    document.addEventListener("touchend", this.onTouchUp.bind(this));
   }
 
-  onMouseDown() {
+  onTouchDown(event) {
+    if (event.touches.length === 1) {
+      this.onMouseDown(event.touches[0]);
+    }
+  }
+
+  onTouchUp() {
+    this.onMouseUp();
+  }
+
+  onTouchMove(event) {
+    if (event.touches.length >= 1) {
+      this.onMouseMove(event.touches[0]);
+    }
+  }
+
+  onMouseDown(event) {
     this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
@@ -132,13 +151,13 @@ class CreateParticles {
     this.data.ease = 0.05;
   }
 
-  onMouseMove() {
+  onMouseMove(event) {
     this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
   }
 
   render(level) {
-    if(paused) return;
+    if (paused) return;
     const time = ((0.001 * performance.now()) % 12) / 12;
     const zigzagTime = (1 + Math.sin(time * 2 * Math.PI)) / 6;
 

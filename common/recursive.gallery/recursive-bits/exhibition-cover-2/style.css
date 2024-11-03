@@ -26,12 +26,14 @@ html {
   right: 0;
   bottom: 0;
   margin: auto;
+  pointer-events: none;
 }
 
 .rec-info {
   position: absolute;
   bottom: 100px;
   left: 60px;
+  pointer-events: none;
 }
 
 .rec-title {
