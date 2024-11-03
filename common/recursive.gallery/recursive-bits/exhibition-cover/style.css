@@ -9,7 +9,9 @@ body {
   font-family: 'Roboto' !important;
   color: white;
   font-size: 9px;
+}
 
+* {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -17,6 +19,7 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+
 
 #magic {
 

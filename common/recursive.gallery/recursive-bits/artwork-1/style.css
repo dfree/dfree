@@ -4,7 +4,9 @@ html {
   padding: 0;
   overflow: hidden;
   background-color: #000;
+}
 
+* {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
