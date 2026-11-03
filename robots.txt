@@ -1,2 +1,13 @@
+# Link-preview bots may read /cv/ for its title, summary and card image (the CV itself is encrypted)
+User-agent: facebookexternalhit
+User-agent: WhatsApp
+User-agent: Twitterbot
+User-agent: LinkedInBot
+User-agent: Slackbot
+User-agent: TelegramBot
+User-agent: Discordbot
+Allow: /
+
+# Everyone else, search engines included, stays out of /cv/
 User-agent: *
 Disallow: /cv/
