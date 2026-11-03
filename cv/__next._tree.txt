@@ -1,0 +1,8 @@
+:HL["/cv/_next/static/chunks/10tpa0vowm8jw.css","style"]
+:HL["/cv/_next/static/media/Switzer_Bold-s.p.01bpkkycy6f83.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/cv/_next/static/media/Switzer_Extrabold-s.p.1f9bfps7axq-z.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/cv/_next/static/media/Switzer_Medium-s.p.0gt58k1nzn0ap.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/cv/_next/static/media/Switzer_Regular-s.p.1x2d0gkk9ka9t.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/cv/_next/static/chunks/19h3y2ecu6jkm.css","style"]
+1:[["children",{"s":"__PAGE__","h":160}]]
+0:{"b":"ZdPB-KPuJjW_lrF490OCc","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
